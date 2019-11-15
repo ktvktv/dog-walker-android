@@ -1,10 +1,8 @@
 package com.example.dogwalker.data
 
-data class Post(
+data class Comment(
     val image: String,
     val name: String,
-    val type: String,
-    val title: String,
     val content: String,
-    val comment: List<Comment>
+    val date: String
 )

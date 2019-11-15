@@ -13,10 +13,17 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_dashboardActivity"
+            app:destination="@id/dashboardActivity" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.dogwalker.view.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register"/>
+    <activity
+        android:id="@+id/dashboardActivity"
+        android:name="com.example.dogwalker.DashboardActivity"
+        android:label="DashboardActivity" />
 </navigation>
