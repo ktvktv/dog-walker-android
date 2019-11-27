@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.example.dogwalker.R
 import com.example.dogwalker.data.CommonResponse
 import com.example.dogwalker.data.Register
 import com.example.dogwalker.databinding.FragmentRegisterBinding
@@ -26,7 +28,7 @@ class RegisterFragment : Fragment() {
     private val REGISTER = "register"
 
     private val isRegisterSuccess = MutableLiveData<Boolean>(false)
-    private var errorMessage = ""
+    private var errorMessage: String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,9 +48,9 @@ class RegisterFragment : Fragment() {
 
         isRegisterSuccess.observe(this, Observer {
             if(it) {
-                //Return to login page.
+                findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
             } else {
-                Toast.makeText(context, "Error: ${errorMessage}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -62,6 +64,7 @@ class RegisterFragment : Fragment() {
         val gender = if(binding.maleRadio.isChecked) "Male" else "Female"
         val registerData = Register(
             phoneNumber = binding.phoneEditText.text.toString(),
+            email = binding.emailEditText.text.toString(),
             password =  binding.passwordEditText.text.toString(),
             name = binding.nameEditText.text.toString(),
             address = binding.addressEditText.text.toString(),

@@ -30,6 +30,8 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
 
+    private var errorMessage :String? = ""
+
     private val CHECK_CREDENTIALS = "checkCredential"
 
     override fun onCreateView(
@@ -52,13 +54,9 @@ class LoginFragment : Fragment() {
             if(it) {
                 findNavController().navigate(R.id.action_loginFragment_to_dashboardActivity)
             } else {
-                Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
             }
         })
-
-//        if(isLogin) {
-//            it.findNavController().navigate(R.id.action_loginFragment_to_dashboardActivity)
-//        }
 
         binding.registerButton.setOnClickListener {
             it.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -83,9 +81,13 @@ class LoginFragment : Fragment() {
         }
 
         Log.i(CHECK_CREDENTIALS, "Result value: ${result}}")
-        if (result != null && result.message.equals(LOGIN_SUCCESSFUL)) {
-            isLogin.value = true
-            return
+        if (result != null) {
+            if (result.message.equals(LOGIN_SUCCESSFUL)) {
+                isLogin.value = true
+                return
+            } else {
+                errorMessage = result.message
+            }
         }
 
         isLogin.value = false

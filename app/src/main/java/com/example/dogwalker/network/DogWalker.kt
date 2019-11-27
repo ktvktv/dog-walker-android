@@ -1,17 +1,19 @@
 package com.example.dogwalker.network
 
 import com.example.dogwalker.data.CommonResponse
+import com.example.dogwalker.data.Dog
 import com.example.dogwalker.data.Login
 import com.example.dogwalker.data.Register
+import com.google.android.gms.common.internal.service.Common
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 val BASE_URL = "http://35.240.229.20/"
 
@@ -31,6 +33,10 @@ interface DogWalker {
 
     @POST("user/login")
     fun login(@Body login: Login): Deferred<CommonResponse>?
+
+    @Multipart
+    @POST("dog/register")
+    fun registerDog(@Part dogData: MultipartBody.Part ): Deferred<CommonResponse>?
 }
 
 object DogWalkerServiceApi {

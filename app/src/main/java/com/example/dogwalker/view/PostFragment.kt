@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dogwalker.SinglePost
+import com.example.dogwalker.SinglePostActivity
 import com.example.dogwalker.adapter.PostViewAdapter
 import com.example.dogwalker.data.Comment
 import com.example.dogwalker.data.Post
@@ -58,7 +58,7 @@ class PostFragment : Fragment(), PostViewAdapter.PostViewAdapterClickListener {
     }
 
     override fun postViewClickListener(position: Int) {
-        val intent = Intent(context, SinglePost::class.java)
+        val intent = Intent(context, SinglePostActivity::class.java)
 
         intent.putExtra("PostFragment", position)
 

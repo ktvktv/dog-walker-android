@@ -1,19 +1,12 @@
 package com.example.dogwalker.adapter
 
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.MenuView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dogwalker.R
-import com.example.dogwalker.SinglePost
 import com.example.dogwalker.data.Post
 import kotlinx.android.synthetic.main.post_item.view.*
 

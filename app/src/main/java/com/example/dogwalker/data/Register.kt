@@ -1,9 +1,8 @@
 package com.example.dogwalker.data
 
-import com.squareup.moshi.Json
-
 data class Register (
     val phoneNumber: String,
+    val email: String,
     val password: String,
     val name: String,
     val address: String,
