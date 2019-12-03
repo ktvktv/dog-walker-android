@@ -1,10 +1,14 @@
 package com.example.dogwalker
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -17,12 +21,15 @@ import androidx.viewpager.widget.ViewPager
 import com.example.dogwalker.animation.PageTransformer
 import com.example.dogwalker.view.DashboardFragment
 import com.example.dogwalker.view.InfoFragment
+import com.example.dogwalker.view.MapsFragment
 import com.example.dogwalker.view.PostFragment
+import com.example.dogwalker.viewmodel.InfoViewModel
 import com.google.android.material.tabs.TabLayout
 
 class DashboardActivity: AppCompatActivity() {
 
     private val NUM_PAGES = 3
+    private val TAG = DashboardActivity::class.java.simpleName
 
     private lateinit var viewPager: ViewPager
 
@@ -57,6 +64,7 @@ class DashboardActivity: AppCompatActivity() {
             return when(position) {
                 0 -> InfoFragment()
                 1 -> DashboardFragment()
+//                2 -> MapsFragment()
                 else -> PostFragment()
             }
         }
@@ -65,8 +73,34 @@ class DashboardActivity: AppCompatActivity() {
             return when(position) {
                 0 -> "Information"
                 1 -> "Dashboard"
+//                2 -> "Tracker"
                 else -> "Post"
             }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when(requestCode) {
+            InfoFragment.READ_WRITE_STORAGE_PERMISSION -> {
+                // If request is cancelled, the result arrays are empty.
+                Log.d(TAG, "Request permission result for Info Fragment")
+
+                //Read and write file to storage device
+                if (grantResults.size > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    InfoFragment.uploadImageFirstTimePermission.value = true
+                } else {
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            else -> {}
         }
     }
 }

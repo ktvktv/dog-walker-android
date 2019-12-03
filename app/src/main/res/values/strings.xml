@@ -24,4 +24,9 @@
     <string name="firebase_email" translatable="false">kevintigravictor30@gmail.com</string>
     <string name="firebase_password" translatable="false">ktvktv</string>
 
+    <!-- Dialog -->
+    <string name="read_permission">We need read permission to run this app</string>
+    <string name="positive_permission">OK</string>
+    <string name="negative_permission">Cancel</string>
+
 </resources>
