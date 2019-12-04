@@ -50,6 +50,10 @@ class DashboardActivity: AppCompatActivity() {
 
         tabLayout.setupWithViewPager(viewPager)
         tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
+
+        tabLayout.getTabAt(0)?.setIcon(R.drawable.man_user)
+        tabLayout.getTabAt(1)?.setIcon(R.drawable.man_carry_dog)
+        tabLayout.getTabAt(2)?.setIcon(R.drawable.post_it)
     }
 
     /**
@@ -66,15 +70,6 @@ class DashboardActivity: AppCompatActivity() {
                 1 -> DashboardFragment()
 //                2 -> MapsFragment()
                 else -> PostFragment()
-            }
-        }
-
-        override fun getPageTitle(position: Int): CharSequence? {
-            return when(position) {
-                0 -> "Information"
-                1 -> "Dashboard"
-//                2 -> "Tracker"
-                else -> "Post"
             }
         }
     }

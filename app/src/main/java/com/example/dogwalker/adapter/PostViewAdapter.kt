@@ -27,7 +27,7 @@ class PostViewAdapter(val list: List<Post>, val listener: PostViewAdapterClickLi
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.name_view.text = list[position].name
         holder.itemView.title_view.text = list[position].title
-        holder.itemView.content_view.text = list[position].content
+        holder.itemView.description_view.text = list[position].content
 
         val imgUri = list[position].image.toUri().buildUpon().scheme("https").build()
         val imageView = holder.itemView.image_post

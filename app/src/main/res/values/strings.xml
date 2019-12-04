@@ -29,4 +29,8 @@
     <string name="positive_permission">OK</string>
     <string name="negative_permission">Cancel</string>
 
+    <!-- Info Page -->
+    <string name="profile_button">Profile</string>
+    <string name="role_button">Change Role</string>
+
 </resources>

@@ -5,30 +5,41 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:background="@drawable/park_walker">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/dog_dashboard_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="112dp"
-            android:background="#0A0A0A"
+            android:layout_marginBottom="84dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.783"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:srcCompat="@drawable/walking_dog" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="96dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/dogwalkers" />
+            app:srcCompat="@drawable/paw_print_64"
+            tools:srcCompat="@drawable/paw_print_64" />
 
-        <Button
-            android:id="@+id/find_walker_button"
+        <TextView
+            android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:text="Find Your Walker"
+            android:layout_marginTop="36dp"
+            android:fontFamily="@font/delius"
+            android:text="Dog Walker"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView7" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

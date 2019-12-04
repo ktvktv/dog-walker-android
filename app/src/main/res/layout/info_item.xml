@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CA888C"
-    android:orientation="horizontal"
-    tools:background="#CA888C">
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/dog_image_info"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginStart="16dp"
         android:background="#EDE7E8"
         android:foregroundGravity="center"
@@ -28,9 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginTop="28dp"
-        android:text="TextView"
+        android:fontFamily="@font/delius"
         app:layout_constraintStart_toEndOf="@+id/dog_image_info"
-        app:layout_constraintTop_toTopOf="@+id/dog_image_info" />
+        app:layout_constraintTop_toTopOf="@+id/dog_image_info"
+        tools:text="Darren Cavell" />
 
     <TextView
         android:id="@+id/dog_age_info"
@@ -39,9 +38,11 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="31dp"
         android:layout_marginBottom="28dp"
+        android:fontFamily="@font/delius"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/dog_image_info"
         app:layout_constraintStart_toEndOf="@+id/dog_image_info"
-        app:layout_constraintTop_toBottomOf="@+id/dog_name_info" />
+        app:layout_constraintTop_toBottomOf="@+id/dog_name_info"
+        tools:text="20" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

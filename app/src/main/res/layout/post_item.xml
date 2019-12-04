@@ -8,65 +8,89 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="#9E9898">
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="#F3E8E8">
 
         <ImageView
             android:id="@+id/image_post"
-            android:layout_width="43dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/name_view"
-            android:layout_width="40dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="10dp"
-            android:text="Names"
-            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/delius"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/image_post"
-            app:layout_constraintTop_toTopOf="@+id/image_post" />
+            app:layout_constraintTop_toTopOf="@+id/image_post"
+            tools:text="Kevin Tigravictor" />
 
         <TextView
             android:id="@+id/type_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:text="Type"
-            android:textSize="10sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/delius"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_post"
             app:layout_constraintStart_toEndOf="@+id/image_post"
-            app:layout_constraintTop_toBottomOf="@+id/name_view" />
+            app:layout_constraintTop_toBottomOf="@+id/name_view"
+            tools:text="Customer" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="41dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/paw_print_64"
+            tools:srcCompat="@drawable/paw_print_64" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="202dp">
+        android:layout_height="0dp"
+        android:layout_weight="9">
 
         <TextView
             android:id="@+id/title_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Titles"
+            android:fontFamily="@font/delius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Why dog walking is healthy?" />
 
         <TextView
-            android:id="@+id/content_view"
-            android:layout_width="wrap_content"
+            android:id="@+id/description_view"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="37dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/delius"
             android:text="Contents"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_view" />
+            app:layout_constraintTop_toBottomOf="@+id/title_view"
+            tools:text="Dog walking is healty...." />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -72,13 +72,21 @@ class InfoFragment : Fragment() {
     ): View? {
         binding = FragmentInfoBinding.inflate(inflater)
 
-        binding.button.setOnClickListener {
+        binding.pictureInfoButton.setOnClickListener {
             Log.d(TAG, "Button clicked")
             uploadImage()
         }
 
+        binding.nameInfoText.text = "Kevin Tigravictor"
+        binding.addressInfoText.text = "Jl. Barleria VI B1/H5"
+        binding.birthdateInfoText.text = "09 September 1998"
+        binding.emailInfoText.text = "kevin.victor30@yahoo.com"
+        binding.phoneInfoText.text = "+6281290001998"
+        binding.genderInfoImage.setImageResource(R.drawable.male_icon)
+        binding.roleInfoText.text = "Customer"
+
         //Dummy data
-        val dogData = listOf<Dog>(
+        val dogData = listOf(
             Dog(
                 ownerId = 1,
                 breedId = 1,
