@@ -18,5 +18,18 @@
         android:id="@+id/listOrderFragment"
         android:name="com.example.dogwalker.view.ListOrderFragment"
         android:label="ListOrderFragment"
-        tools:layout="@layout/fragment_list_order"/>
+        tools:layout="@layout/fragment_list_order">
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+        <argument
+            android:name="hours"
+            app:argType="integer" />
+        <argument
+            android:name="breed_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

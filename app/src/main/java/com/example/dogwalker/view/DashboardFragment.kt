@@ -32,20 +32,21 @@ class DashboardFragment: Fragment() {
         binding.dogDashboardImage.setImageResource(R.drawable.walking_dog)
 
         binding.dogDashboardImage.setOnClickListener {
+//            dogTimers.cancel()
             startActivity(Intent(context, WalkerOrderActivity::class.java))
         }
 
-        dogTimers = dogTimer(dogVisible, activity!!)
+//        dogTimers = dogTimer(dogVisible, activity!!)
 
-        dogVisible.observe(this, androidx.lifecycle.Observer {
-            if(it) {
-                binding.dogDashboardImage.visibility = View.INVISIBLE
-            } else {
-                binding.dogDashboardImage.visibility = View.VISIBLE
-            }
-        })
+//        dogVisible.observe(this, androidx.lifecycle.Observer {
+//            if(it) {
+//                binding.dogDashboardImage.visibility = View.INVISIBLE
+//            } else {
+//                binding.dogDashboardImage.visibility = View.VISIBLE
+//            }
+//        })
 
-        Timer().scheduleAtFixedRate(dogTimers, 0, 2000)
+//        Timer().scheduleAtFixedRate(dogTimers, 0, 2000)
 
         return binding.root
     }
@@ -57,13 +58,13 @@ class DashboardFragment: Fragment() {
     }
 
     override fun onStop() {
-        dogTimers.cancel()
+//        dogTimers.cancel()
 
         super.onStop()
     }
 
     override fun onDestroy() {
-        dogTimers.cancel()
+//        dogTimers.cancel()
 
         super.onDestroy()
     }

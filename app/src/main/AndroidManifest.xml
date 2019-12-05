@@ -38,7 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WalkerOrderActivity">
+        <activity android:name=".WalkerOrderActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity android:name=".SinglePostActivity">
         </activity>
