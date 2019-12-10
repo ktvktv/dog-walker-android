@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
+import com.example.dogwalker.MapsActivity
 import com.example.dogwalker.data.Location
 import com.google.android.gms.location.*
 
@@ -31,6 +32,7 @@ class DogWalkerService : Service() {
 
     private lateinit var locationCallBack: LocationCallback
     private lateinit var client: FusedLocationProviderClient
+    private lateinit var phone: String
 
     protected var stopReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -51,6 +53,11 @@ class DogWalkerService : Service() {
         client = LocationServices.getFusedLocationProviderClient(this)
         buildNotification()
         requestLocationUpdates()
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        phone = intent!!.extras.get(MapsActivity.PHONE_EXTRA) as String
+        return super.onStartCommand(intent, flags, startId)
     }
 
     private fun buildNotification() {

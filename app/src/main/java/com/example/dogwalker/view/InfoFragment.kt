@@ -32,15 +32,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.dogwalker.DashboardActivity
 import com.example.dogwalker.R
 import com.example.dogwalker.RegisterDogActivity
+import com.example.dogwalker.WalkerDashboard
 import com.example.dogwalker.adapter.InfoAdapter
 import com.example.dogwalker.data.DogRequest
 import com.example.dogwalker.viewmodel.InfoViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.info_item.view.*
 
-class InfoFragment : Fragment() {
+class InfoFragment(val userType: String) : Fragment() {
 
     private val TAG = InfoFragment::class.java.simpleName
 
@@ -76,6 +78,17 @@ class InfoFragment : Fragment() {
 
         binding.addDogImage.setOnClickListener {
             val intent = Intent(context, RegisterDogActivity::class.java)
+
+            startActivity(intent)
+        }
+
+        binding.changeInfoButton.setOnClickListener{
+            var intent = Intent(context, DashboardActivity::class.java)
+            if(userType.equals("Customer")) {
+                intent = Intent(context, WalkerDashboard::class.java)
+            }
+
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
             startActivity(intent)
         }

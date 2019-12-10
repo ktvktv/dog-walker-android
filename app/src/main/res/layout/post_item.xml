@@ -77,20 +77,35 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Why dog walking is healthy?" />
 
-        <TextView
-            android:id="@+id/description_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="37dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/delius"
-            android:text="Contents"
-            app:autoSizeTextType="uniform"
+        <ScrollView
+            android:id="@+id/description_scroll"
+            android:layout_width="359dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_view"
-            tools:text="Dog walking is healty...." />
+            app:layout_constraintTop_toBottomOf="@+id/title_view">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/description_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/delius"
+                    android:text="Contents"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    tools:layout_editor_absoluteY="74dp"
+                    tools:text="Dog walking is healty...." />
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -11,8 +11,8 @@
             android:id="@+id/profile_post"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -46,9 +46,9 @@
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text">
@@ -70,7 +70,7 @@
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/delius"
             android:text="Why dog walking is important?"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,21 +81,26 @@
             android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:clickable="true"
             android:focusable="auto"
+            android:src="@drawable/ic_add_circle_black_24dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:srcCompat="@tools:sample/avatars"
-            android:src="@drawable/ic_add_circle_black_24dp"/>
+            app:layout_constraintTop_toBottomOf="@+id/comment_view"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/comment_view"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
         </androidx.recyclerview.widget.RecyclerView>

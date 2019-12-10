@@ -32,22 +32,23 @@
         <activity android:name=".MainActivity">
         </activity>
         <activity android:name=".DashboardActivity">
+        </activity>
+        <activity android:name=".WalkerOrderActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+        </activity>
+        <activity android:name=".SinglePostActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WalkerOrderActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden">
-        </activity>
-        <activity android:name=".SinglePostActivity">
-        </activity>
         <activity android:name=".MapsActivity">
         </activity>
         <activity android:name=".RegisterDogActivity"
             android:windowSoftInputMode="adjustPan|adjustResize">
         </activity>
+        <activity android:name=".WalkerDashboard"/>
         <service
             android:name=".service.DogWalkerService"
             android:exported="true"

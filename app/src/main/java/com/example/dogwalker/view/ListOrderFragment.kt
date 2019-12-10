@@ -54,6 +54,6 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener 
         //Send message
         Log.d(TAG, "Message has been fired, position: $position")
 
-        activity?.onBackPressed()
+        activity?.finish()
     }
 }

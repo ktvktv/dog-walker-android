@@ -16,10 +16,4 @@
         android:layout_weight="1"
         tools:context=".MapsActivity" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="8"
-        android:text="End the walk"
-        android:id="@+id/end_button"/>
 </LinearLayout>

@@ -19,17 +19,16 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager.widget.ViewPager
 import com.example.dogwalker.animation.PageTransformer
-import com.example.dogwalker.view.DashboardFragment
-import com.example.dogwalker.view.InfoFragment
-import com.example.dogwalker.view.MapsFragment
-import com.example.dogwalker.view.PostFragment
+import com.example.dogwalker.view.*
 import com.example.dogwalker.viewmodel.InfoViewModel
 import com.google.android.material.tabs.TabLayout
 
 class DashboardActivity: AppCompatActivity() {
 
-    private val NUM_PAGES = 3
+    private val NUM_PAGES = 4
     private val TAG = DashboardActivity::class.java.simpleName
+
+    private lateinit var userType: String
 
     private lateinit var viewPager: ViewPager
 
@@ -38,6 +37,8 @@ class DashboardActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+        userType = "Customer"
 
         viewPager = findViewById(R.id.view_pager)
         tabLayout = findViewById(R.id.tab_layout_dashboard)
@@ -53,7 +54,8 @@ class DashboardActivity: AppCompatActivity() {
 
         tabLayout.getTabAt(0)?.setIcon(R.drawable.man_user)
         tabLayout.getTabAt(1)?.setIcon(R.drawable.man_carry_dog)
-        tabLayout.getTabAt(2)?.setIcon(R.drawable.post_it)
+        tabLayout.getTabAt(2)?.setIcon(R.drawable.order)
+        tabLayout.getTabAt(3)?.setIcon(R.drawable.post_it)
     }
 
     /**
@@ -66,10 +68,10 @@ class DashboardActivity: AppCompatActivity() {
 
         override fun getItem(position: Int): Fragment {
             return when(position) {
-                0 -> InfoFragment()
+                0 -> InfoFragment(userType)
                 1 -> DashboardFragment()
-//                2 -> MapsFragment()
-                else -> PostFragment()
+                2 -> OngoingOrderFragment(userType)
+                else -> PostFragment(userType)
             }
         }
     }

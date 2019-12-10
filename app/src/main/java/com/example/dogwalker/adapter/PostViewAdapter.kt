@@ -17,6 +17,14 @@ class PostViewAdapter(val list: List<Post>, val listener: PostViewAdapterClickLi
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.post_item, parent, false)
 
+        view.description_scroll.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+
+            v.onTouchEvent(event)
+
+            true
+        }
+
         return ViewHolder(view, listener)
     }
 

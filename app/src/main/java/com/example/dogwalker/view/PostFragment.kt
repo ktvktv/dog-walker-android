@@ -14,7 +14,7 @@ import com.example.dogwalker.data.Comment
 import com.example.dogwalker.data.Post
 import com.example.dogwalker.databinding.FragmentPostBinding
 
-class PostFragment : Fragment(), PostViewAdapter.PostViewAdapterClickListener {
+class PostFragment(val userType: String) : Fragment(), PostViewAdapter.PostViewAdapterClickListener {
 
     private lateinit var binding: FragmentPostBinding
 

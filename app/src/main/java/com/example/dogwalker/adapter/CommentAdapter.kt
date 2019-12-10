@@ -1,5 +1,6 @@
 package com.example.dogwalker.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,14 @@ import kotlinx.android.synthetic.main.info_item.view.*
 class CommentAdapter(val commentData: List<Comment>) : RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item, parent, false)
+        
+        view.comment_scroll_view.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+
+            v.onTouchEvent(event)
+
+            true
+        }
 
         return ViewHolder(view)
     }
