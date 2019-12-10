@@ -100,7 +100,7 @@ class DogWalkerService : Service() {
         val request = LocationRequest()
         request.interval = 5000
         request.fastestInterval = 1000
-        request.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        request.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
 //        request.smallestDisplacement = 50.toFloat()
         val path = getString(R.string.firebase_path) + "/" + getString(R.string.transport_id)
         val permission = ContextCompat.checkSelfPermission(

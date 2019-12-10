@@ -3,10 +3,7 @@ package com.example.dogwalker.view
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.database.Cursor
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -24,23 +21,24 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 import java.lang.Exception
-import android.net.Uri
-import android.provider.OpenableColumns
-import kotlinx.coroutines.launch
 import androidx.core.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.dogwalker.R
+import com.example.dogwalker.RegisterDogActivity
 import com.example.dogwalker.adapter.InfoAdapter
-import com.example.dogwalker.data.Dog
+import com.example.dogwalker.data.DogRequest
 import com.example.dogwalker.viewmodel.InfoViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.info_item.view.*
 
 class InfoFragment : Fragment() {
 
@@ -73,39 +71,34 @@ class InfoFragment : Fragment() {
         binding = FragmentInfoBinding.inflate(inflater)
 
         binding.pictureInfoButton.setOnClickListener {
-            Log.d(TAG, "Button clicked")
             uploadImage()
         }
 
-        binding.nameInfoText.text = "Kevin Tigravictor"
-        binding.addressInfoText.text = "Jl. Barleria VI B1/H5"
-        binding.birthdateInfoText.text = "09 September 1998"
-        binding.emailInfoText.text = "kevin.victor30@yahoo.com"
-        binding.phoneInfoText.text = "+6281290001998"
+        binding.addDogImage.setOnClickListener {
+            val intent = Intent(context, RegisterDogActivity::class.java)
+
+            startActivity(intent)
+        }
+
+        val userData = infoViewModel.getInfo()
+
+        binding.nameInfoText.text = userData.name
+        binding.addressInfoText.text = userData.address
+        binding.birthdateInfoText.text = userData.birthDate
+        binding.emailInfoText.text = userData.email
+        binding.phoneInfoText.text = userData.phoneNumber
         binding.genderInfoImage.setImageResource(R.drawable.male_icon)
         binding.roleInfoText.text = "Customer"
 
+        val imgUri = userData.userImageUrl.toUri().buildUpon().scheme("https").build()
+        val imageView = binding.userPicture
+
+        Glide.with(imageView.context)
+            .load(imgUri)
+            .into(imageView)
+
         //Dummy data
-        val dogData = listOf(
-            Dog(
-                ownerId = 1,
-                breedId = 1,
-                age = 10,
-                weight = 100,
-                gender = "Male",
-                name = "Willy",
-                specialNeeds = "",
-                photo = null),
-            Dog(
-                ownerId = 2,
-                breedId = 2,
-                age = 15,
-                weight = 150,
-                gender = "Female",
-                name = "Darren",
-                specialNeeds = "",
-                photo = null)
-        )
+        val dogData = userData.dog
 
         binding.infoRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.infoRecyclerView.adapter = InfoAdapter(dogData, context!!)
@@ -245,7 +238,7 @@ class InfoFragment : Fragment() {
 
     private suspend fun hitAPI(file: File) {
 
-//        val dogsData = Dog(
+//        val dogsData = DogRequest(
 //            ownerId = 1,
 //            breedId = 1,
 //            age = 1,

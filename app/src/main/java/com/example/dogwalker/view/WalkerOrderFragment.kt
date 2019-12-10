@@ -2,6 +2,7 @@ package com.example.dogwalker.view
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,22 +56,19 @@ class WalkerOrderFragment : Fragment() {
         }
 
         binding.walkerOrderButton.setOnClickListener {
-            try {
-                val hours = Integer.parseInt(binding.hoursText.text.toString())
+           navigateToList(it)
+        }
 
-                val linearLayoutManager = binding.walkerOrderRecyclerView.layoutManager as LinearLayoutManager
-
-                val action = WalkerOrderFragmentDirections.actionWalkerOrderFragmentToListOrderFragment(
-                    date = binding.dogCalendarOrder.text.toString(),
-                    time = binding.timeOrderWalker.text.toString(),
-                    hours = hours,
-                    breedId = linearLayoutManager.findFirstVisibleItemPosition()
-                )
-
-                it.findNavController().navigate(action)
-            } catch(e :Exception) {
-                Toast.makeText(context, "Hours must be numeric", Toast.LENGTH_SHORT).show()
-            }
+        binding.hoursText.setOnKeyListener { v, keyCode, event ->
+            if(event.action == KeyEvent.ACTION_DOWN) {
+                when(keyCode) {
+                    KeyEvent.KEYCODE_ENTER -> {
+                        navigateToList(v)
+                        true
+                    }
+                    else -> false
+                }
+            } else false
         }
 
         val listData = listOf(R.drawable.man_carry_dog, R.drawable.man_user)
@@ -79,5 +77,26 @@ class WalkerOrderFragment : Fragment() {
         binding.walkerOrderRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         return binding.root
+    }
+
+    fun navigateToList(it: View) {
+        try {
+            val hours = Integer.parseInt(binding.hoursText.text.toString())
+
+            val linearLayoutManager =
+                binding.walkerOrderRecyclerView.layoutManager as LinearLayoutManager
+
+            val action = WalkerOrderFragmentDirections.actionWalkerOrderFragmentToListOrderFragment(
+                date = binding.dogCalendarOrder.text.toString(),
+                time = binding.timeOrderWalker.text.toString(),
+                hours = hours,
+                breedId = linearLayoutManager.findFirstVisibleItemPosition()
+            )
+
+            it.findNavController().navigate(action)
+        }
+        catch(e :Exception) {
+            Toast.makeText(context, "Hours must be numeric", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="#4D4751">
 
-        <!--<a href="https://www.freepik.com/free-photos-vectors/dog">Dog vector created by studiogstock - www.freepik.com</a>-->
+        <!--<a href="https://www.freepik.com/free-photos-vectors/dog">DogRequest vector created by studiogstock - www.freepik.com</a>-->
 
         <ImageView
             android:id="@+id/imageView"

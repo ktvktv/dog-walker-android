@@ -12,6 +12,8 @@ import android.util.Log
 
 
 class WalkerOrderActivity: AppCompatActivity() {
+    val TAG = WalkerOrderActivity::class.java.simpleName
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_walker_order)

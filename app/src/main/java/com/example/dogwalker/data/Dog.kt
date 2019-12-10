@@ -1,6 +1,5 @@
 package com.example.dogwalker.data
 
-import okhttp3.RequestBody
 import retrofit2.http.Part
 
 data class Dog(
@@ -11,5 +10,5 @@ data class Dog(
     @Part("gender") val gender: String,
     @Part("name") val name: String,
     @Part("special_needs") val specialNeeds: String,
-    @Part("photo") val photo: RequestBody?
+    @Part("photo") val photo: String
 )

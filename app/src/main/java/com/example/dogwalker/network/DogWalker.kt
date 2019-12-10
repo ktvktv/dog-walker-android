@@ -1,15 +1,10 @@
 package com.example.dogwalker.network
 
-import com.example.dogwalker.data.CommonResponse
-import com.example.dogwalker.data.Dog
-import com.example.dogwalker.data.Login
-import com.example.dogwalker.data.Register
-import com.google.android.gms.common.internal.service.Common
+import com.example.dogwalker.data.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -46,6 +41,9 @@ interface DogWalker {
                     @Part("name") name: String,
                     @Part("special_needs") specialNeeds: String,
                     @Part("photo") photo: RequestBody): Deferred<CommonResponse>?
+
+    @GET("breed/")
+    fun getAllBreed() : Deferred<BreedResponse>?
 }
 
 object DogWalkerServiceApi {

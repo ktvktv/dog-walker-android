@@ -9,5 +9,6 @@ data class User(
     val address: String,
     val birthDate: String,
     val birthPlace: String,
-    val userImageUrl: String
+    val userImageUrl: String,
+    val dog: List<Dog>
 )

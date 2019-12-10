@@ -19,7 +19,7 @@ class MapsFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.maps_recycler_view)
 
-        recyclerView.adapter =
+//        recyclerView.adapter =
 
         return view
     }

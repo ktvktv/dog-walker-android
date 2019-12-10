@@ -15,6 +15,8 @@ import com.example.dogwalker.WalkerOrderActivity
 import com.example.dogwalker.databinding.FragmentDashboardBinding
 import java.util.*
 
+
+
 class DashboardFragment: Fragment() {
 
     private lateinit var binding: FragmentDashboardBinding
@@ -33,7 +35,9 @@ class DashboardFragment: Fragment() {
 
         binding.dogDashboardImage.setOnClickListener {
 //            dogTimers.cancel()
-            startActivity(Intent(context, WalkerOrderActivity::class.java))
+            val intent = Intent(context, WalkerOrderActivity::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
 
 //        dogTimers = dogTimer(dogVisible, activity!!)
