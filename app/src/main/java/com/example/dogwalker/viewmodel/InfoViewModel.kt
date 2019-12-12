@@ -15,20 +15,33 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dogwalker.R
+import com.example.dogwalker.data.CommonResponse
 import com.example.dogwalker.data.Dog
 import com.example.dogwalker.data.DogRequest
 import com.example.dogwalker.data.User
+import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.view.InfoFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
+import java.lang.Exception
 
 class InfoViewModel() : ViewModel() {
 
     private val TAG = InfoViewModel::class.java.simpleName
     private val _user = MutableLiveData<User>()
 
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+
     val user: LiveData<User>
         get() = _user
 
     init {
+        //TODO:Network operation for info data.
+
         //Dummy data
         _user.value = User(
             name = "Kevin Tigravictor",
@@ -65,5 +78,49 @@ class InfoViewModel() : ViewModel() {
 
     fun getInfo() :User {
         return _user.value!!
+    }
+
+    private suspend fun hitAPI(file: File) {
+
+//        val dogsData = DogRequest(
+//            ownerId = 1,
+//            breedId = 1,
+//            age = 1,
+//            weight = 1,
+//            specialNeeds = "1",
+//            name = "1",
+//            gender = "1",
+//            photo = RequestBody.create(MultipartBody.FORM, file)
+//        )
+
+//        val dogData = MultipartBody.Builder()
+//            .addFormDataPart("owner_id", "1")
+//            .addFormDataPart("breed_id", "1")
+//            .addFormDataPart("age", "1")
+//            .addFormDataPart("weight", "1")
+//            .addFormDataPart("special_needs", "1")
+//            .addFormDataPart("name", "1")
+//            .addFormDataPart("gender", "1")
+//            .addFormDataPart("photo", "dog.jpg", RequestBody.create(MultipartBody.FORM, file))
+//            .setType(MultipartBody.FORM)
+//            .build()
+
+        var result: CommonResponse? = null
+        try {
+            result = DogWalkerServiceApi.DogWalkerService.registerDog(ownerId = 1,
+                breedId = 1,
+                age = 1,
+                weight = 1,
+                specialNeeds = "1",
+                name = "1",
+                gender = "1",
+                photo = RequestBody.create(MultipartBody.FORM, file))!!.await()
+        } catch(e: Exception) {
+            Log.e("hitAPI", e.message)
+            e.printStackTrace()
+            return
+        }
+
+        Log.d("hitAPI", result.toString())
     }
 }

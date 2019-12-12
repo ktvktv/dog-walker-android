@@ -5,6 +5,5 @@ data class Post(
     val name: String,
     val type: String,
     val title: String,
-    val content: String,
-    val comment: List<Comment>
+    val content: String
 )

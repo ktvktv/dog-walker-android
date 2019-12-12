@@ -17,7 +17,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.783"
             app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@drawable/walking_dog" />
+            app:srcCompat="@drawable/walking_dog" />
 
         <ImageView
             android:id="@+id/imageView7"

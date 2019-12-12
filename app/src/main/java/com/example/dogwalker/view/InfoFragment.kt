@@ -32,24 +32,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.dogwalker.DashboardActivity
 import com.example.dogwalker.R
 import com.example.dogwalker.RegisterDogActivity
 import com.example.dogwalker.WalkerDashboard
 import com.example.dogwalker.adapter.InfoAdapter
-import com.example.dogwalker.data.DogRequest
+import com.example.dogwalker.data.User
 import com.example.dogwalker.viewmodel.InfoViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.info_item.view.*
 
-class InfoFragment(val userType: String) : Fragment() {
+class InfoFragment : Fragment() {
 
     private val TAG = InfoFragment::class.java.simpleName
 
     //Static Value
     companion object Constants {
         //Permission constants
-        const val READ_WRITE_STORAGE_PERMISSION = 100
+        const val READ_STORAGE_PERMISSION = 100
+
         //Intent constants
         const val PHOTO_PICKER = 1
 
@@ -58,11 +57,9 @@ class InfoFragment(val userType: String) : Fragment() {
 
     private lateinit var pickImageIntent: Intent
     private lateinit var binding: FragmentInfoBinding
-    private lateinit var alertDialog: AlertDialog
-    private lateinit var viewModelFactory: ViewModelFactory
-    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+    private var alertDialog: AlertDialog? = null
     private val infoViewModel: InfoViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(InfoViewModel::class.java)
+        ViewModelProviders.of(this, ViewModelFactory()).get(InfoViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -73,48 +70,51 @@ class InfoFragment(val userType: String) : Fragment() {
         binding = FragmentInfoBinding.inflate(inflater)
 
         binding.pictureInfoButton.setOnClickListener {
+            //Get the picture from gallery and set it.
             uploadImage()
         }
 
+        //Go to add dog page.
         binding.addDogImage.setOnClickListener {
             val intent = Intent(context, RegisterDogActivity::class.java)
 
             startActivity(intent)
         }
 
+        //Change user type
         binding.changeInfoButton.setOnClickListener{
-            var intent = Intent(context, DashboardActivity::class.java)
-            if(userType.equals("Customer")) {
-                intent = Intent(context, WalkerDashboard::class.java)
-            }
-
+            val intent = Intent(context, WalkerDashboard::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
             startActivity(intent)
         }
 
         val userData = infoViewModel.getInfo()
+        binding.user = userData
 
-        binding.nameInfoText.text = userData.name
-        binding.addressInfoText.text = userData.address
-        binding.birthdateInfoText.text = userData.birthDate
-        binding.emailInfoText.text = userData.email
-        binding.phoneInfoText.text = userData.phoneNumber
-        binding.genderInfoImage.setImageResource(R.drawable.male_icon)
-        binding.roleInfoText.text = "Customer"
+        if(userData.gender.trim() == "Male") {
+            binding.genderInfoImage.setImageResource(R.drawable.male_icon)
+        } else {
+            binding.genderInfoImage.setImageResource(R.drawable.female_icon)
+        }
 
-        val imgUri = userData.userImageUrl.toUri().buildUpon().scheme("https").build()
-        val imageView = binding.userPicture
+        //If user image is empty then don't do anything.
+        if(!userData.userImageUrl.equals("")) {
+            val imgUri = userData.userImageUrl.toUri().buildUpon().scheme("https").build()
+            val imageView = binding.userPicture
 
-        Glide.with(imageView.context)
-            .load(imgUri)
-            .into(imageView)
+            Glide.with(imageView.context)
+                .load(imgUri)
+                .into(imageView)
+        }
 
-        //Dummy data
-        val dogData = userData.dog
-
-        binding.infoRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.infoRecyclerView.adapter = InfoAdapter(dogData, context!!)
+        //If in any case context is null, then don't set adapter to the recycler view, it'll make the app crash.
+        val mContext = context
+        if(mContext != null) {
+            binding.infoRecyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.infoRecyclerView.adapter = InfoAdapter(userData.dog, mContext)
+        }
 
         return binding.root
     }
@@ -125,20 +125,16 @@ class InfoFragment(val userType: String) : Fragment() {
         pickImageIntent = Intent(Intent.ACTION_PICK)
         pickImageIntent.type = "image/*"
 
-        Log.d(TAG, "Upload image value: ${uploadImageFirstTimePermission.value}")
+        //If the user first time give permission and he accept it, then do upload intent
         uploadImageFirstTimePermission.observe(this, Observer {
-            Log.d(TAG, "Upload image value: ${uploadImageFirstTimePermission.value}")
             uploadImage()
         })
-
-        //ViewModelFactory initialize
-        viewModelFactory = ViewModelFactory()
 
         if(context == null) {
             return
         }
 
-        //Alert Dialog initialize
+        //Dialog to get the permission initialization
         alertDialog = AlertDialog.Builder(context)
             .setMessage(R.string.read_permission)
             .setPositiveButton(
@@ -175,6 +171,7 @@ class InfoFragment(val userType: String) : Fragment() {
                     //Set the picture in the page.
                     binding.userPicture.setImageDrawable(Drawable.createFromPath(file.absolutePath))
 
+                    //TODO:Network operation to upload the image into server
 //                    coroutineScope.launch {
 //                        hitAPI(file)
 //                    }
@@ -190,20 +187,21 @@ class InfoFragment(val userType: String) : Fragment() {
         val mContext = context ?: return
         val mActivity = activity ?: return
 
-        //Check permission for read and write data into device storage
+        //Check permission for read image into device storage
         if (ContextCompat.checkSelfPermission(
                 mContext,
                 Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
-                mContext,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             //If not granted, give explanation and ask it again
-            if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE) &&
-                ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 Log.d(TAG, "User denied the permission request")
-                alertDialog.show()
+
+                if(alertDialog != null) {
+                    alertDialog!!.show()
+                } else {
+                    Toast.makeText(context, R.string.read_permission, Toast.LENGTH_SHORT).show()
+                }
             } else {
                 askPermission()
             }
@@ -212,7 +210,7 @@ class InfoFragment(val userType: String) : Fragment() {
         }
     }
 
-    //Ask permission to read and write file in the device storage
+    //Ask permission to read image in the device storage
     private fun askPermission() {
         val mActivity = activity ?: return
 
@@ -220,13 +218,13 @@ class InfoFragment(val userType: String) : Fragment() {
         ActivityCompat.requestPermissions(
             mActivity,
             arrayOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE
             ),
-            READ_WRITE_STORAGE_PERMISSION
+            READ_STORAGE_PERMISSION
         )
     }
 
+    //TODO:Find out the logic behind this
     private fun getBitmapFile(data: Intent): File? {
         val mActivity = activity ?: return null
 
@@ -248,49 +246,4 @@ class InfoFragment(val userType: String) : Fragment() {
 
         return File(selectedImagePath)
     }
-
-    private suspend fun hitAPI(file: File) {
-
-//        val dogsData = DogRequest(
-//            ownerId = 1,
-//            breedId = 1,
-//            age = 1,
-//            weight = 1,
-//            specialNeeds = "1",
-//            name = "1",
-//            gender = "1",
-//            photo = RequestBody.create(MultipartBody.FORM, file)
-//        )
-
-//        val dogData = MultipartBody.Builder()
-//            .addFormDataPart("owner_id", "1")
-//            .addFormDataPart("breed_id", "1")
-//            .addFormDataPart("age", "1")
-//            .addFormDataPart("weight", "1")
-//            .addFormDataPart("special_needs", "1")
-//            .addFormDataPart("name", "1")
-//            .addFormDataPart("gender", "1")
-//            .addFormDataPart("photo", "dog.jpg", RequestBody.create(MultipartBody.FORM, file))
-//            .setType(MultipartBody.FORM)
-//            .build()
-
-        var result: CommonResponse? = null
-        try {
-            result = DogWalkerServiceApi.DogWalkerService.registerDog(ownerId = 1,
-                breedId = 1,
-                age = 1,
-                weight = 1,
-                specialNeeds = "1",
-                name = "1",
-                gender = "1",
-                photo = RequestBody.create(MultipartBody.FORM, file))!!.await()
-        } catch(e: Exception) {
-            Log.e("hitAPI", e.message)
-            e.printStackTrace()
-            return
-        }
-
-        Log.d("hitAPI", result.toString())
-    }
-
 }

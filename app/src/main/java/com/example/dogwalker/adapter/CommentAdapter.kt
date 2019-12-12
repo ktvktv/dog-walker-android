@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_single_post.view.*
 import kotlinx.android.synthetic.main.comment_item.view.*
 import kotlinx.android.synthetic.main.info_item.view.*
 
-class CommentAdapter(val commentData: List<Comment>) : RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
+class CommentAdapter(var commentData: List<Comment>) : RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item, parent, false)
         

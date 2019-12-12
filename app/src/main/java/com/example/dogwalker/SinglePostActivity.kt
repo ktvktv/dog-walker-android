@@ -11,11 +11,12 @@ import com.example.dogwalker.adapter.CommentAdapter
 import com.example.dogwalker.data.Comment
 import com.example.dogwalker.databinding.ActivitySinglePostBinding
 import com.example.dogwalker.view.CommentFragment
-import kotlinx.android.synthetic.main.comment_item.view.*
 
-class SinglePostActivity: AppCompatActivity() {
+class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition {
 
     private lateinit var binding: ActivitySinglePostBinding
+
+    private lateinit var commentAdapter: CommentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +52,8 @@ class SinglePostActivity: AppCompatActivity() {
             )
         )
 
-        binding.commentView.adapter = CommentAdapter(dummyData)
+        commentAdapter = CommentAdapter(dummyData)
+        binding.commentView.adapter = commentAdapter
         binding.commentView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.contentText.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis nisl diam, a molestie neque commodo id. Suspendisse imperdiet neque convallis varius dapibus. Quisque sodales imperdiet blandit. Cras non aliquam risus. Pellentesque et lectus tempus, dignissim ipsum a, volutpat magna. Phasellus aliquam lectus ac dui fermentum, gravida blandit lectus varius. Integer aliquam urna nec blandit bibendum. Aenean dapibus mauris auctor erat malesuada finibus." +
@@ -65,11 +67,16 @@ class SinglePostActivity: AppCompatActivity() {
 
         binding.floatingActionButton.setOnClickListener {
             Log.d("SinglePostActivity", "FAB Clicked.")
-            supportFragmentManager.beginTransaction()
-                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-                .add(CommentFragment(), null)
-                .show(CommentFragment())
-                .commit()
+
+            val fragments = CommentFragment(this)
+
+            fragments.show(supportFragmentManager, "dialog")
+
+//            supportFragmentManager.beginTransaction()
+//                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+//                .add(CommentFragment(), null)
+//                .show(CommentFragment())
+//                .commit()
         }
 
         val imgUri = dummyData[0].image.toUri().buildUpon().scheme("https").build()
@@ -80,5 +87,18 @@ class SinglePostActivity: AppCompatActivity() {
             .into(imageView)
 
         setContentView(binding.root)
+    }
+
+    override fun addNewComment(comment: String) {
+        val newComment = commentAdapter.commentData.plus(Comment(
+            image = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg",
+            name = "Kevin",
+            content = comment,
+            date = "09 september 1998"
+        ))
+
+        commentAdapter.commentData = newComment
+
+        commentAdapter.notifyDataSetChanged()
     }
 }

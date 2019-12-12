@@ -12,13 +12,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogwalker.adapter.BreedAdapter
 import com.example.dogwalker.databinding.ActivityRegisterDogBinding
 import com.example.dogwalker.view.InfoFragment
@@ -178,7 +175,7 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ),
-            InfoFragment.READ_WRITE_STORAGE_PERMISSION
+            InfoFragment.READ_STORAGE_PERMISSION
         )
     }
 

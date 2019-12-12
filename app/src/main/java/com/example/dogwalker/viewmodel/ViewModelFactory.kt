@@ -9,6 +9,8 @@ import java.lang.IllegalArgumentException
 class ViewModelFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(InfoViewModel::class.java)) return InfoViewModel() as T
+        if(modelClass.isAssignableFrom(PostViewModel::class.java)) return PostViewModel() as T
+        if(modelClass.isAssignableFrom(OngoingOrderViewModel::class.java)) return OngoingOrderViewModel() as T
 
         throw IllegalArgumentException("Unknown view model class")
     }

@@ -10,7 +10,7 @@ import com.example.dogwalker.R
 import com.example.dogwalker.data.Post
 import kotlinx.android.synthetic.main.post_item.view.*
 
-class PostViewAdapter(val list: List<Post>, val listener: PostViewAdapterClickListener)
+class PostViewAdapter(var list: List<Post>, val listener: PostViewAdapterClickListener)
     : RecyclerView.Adapter<PostViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

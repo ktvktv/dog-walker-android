@@ -55,9 +55,9 @@ class WalkerDashboard : AppCompatActivity() {
 
         override fun getItem(position: Int): Fragment {
             return when(position) {
-                0 -> InfoFragment(userType)
-                1 -> OngoingOrderFragment(userType)
-                else -> PostFragment(userType)
+                0 -> InfoFragment()
+                1 -> OngoingOrderFragment()
+                else -> PostFragment()
             }
         }
     }
