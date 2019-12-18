@@ -26,7 +26,7 @@ val retrofit = Retrofit.Builder()
 
 interface DogWalker {
     @POST("user/register")
-    fun register(@Body register: Register): Deferred<CommonResponse>?
+    fun register(@Body register: Register): Deferred<LoginResponse>?
 
     @POST("user/login")
     fun login(@Body login: LoginRequest): Deferred<LoginResponse>?

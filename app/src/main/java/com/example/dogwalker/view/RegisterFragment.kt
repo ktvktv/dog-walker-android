@@ -9,12 +9,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.dogwalker.R
 import com.example.dogwalker.data.CommonResponse
 import com.example.dogwalker.data.Register
 import com.example.dogwalker.databinding.FragmentRegisterBinding
 import com.example.dogwalker.network.DogWalkerServiceApi
+import com.example.dogwalker.viewmodel.RegisterViewModel
+import com.example.dogwalker.viewmodel.ViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -24,11 +27,10 @@ import java.text.SimpleDateFormat
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
-
-    private val REGISTER = "register"
-
-    private val isRegisterSuccess = MutableLiveData<Boolean>(false)
-    private var errorMessage: String? = ""
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+    private val registerViewModel by lazy {
+        ViewModelProviders.of(this, ViewModelFactory()).get(RegisterViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,62 +39,42 @@ class RegisterFragment : Fragment() {
     ): View? {
         binding = FragmentRegisterBinding.inflate(inflater)
 
-        val job = Job()
-        val coroutineScope = CoroutineScope(job + Dispatchers.Main)
-
         binding.registerButton.setOnClickListener {
             coroutineScope.launch {
-                register()
+                val date = binding.birthDateCalendar.date
+                val dates = SimpleDateFormat("dd-MM-yyyy").format(date)
+
+                val gender = if(binding.maleRadio.isChecked) "Male" else "Female"
+
+                registerViewModel.register(Register(
+                    address = binding.addressEditText.text.toString(),
+                    dateOfBirth = dates,
+                    email = binding.emailEditText.text.toString(),
+                    gender = gender,
+                    name = binding.nameEditText.text.toString(),
+                    nik = binding.nikEditText.text.toString(),
+                    password = binding.passwordEditText.text.toString(),
+                    phoneNumber = binding.phoneEditText.text.toString(),
+                    placeOfBirth = binding.birthplaceEditText.text.toString()
+                ))
             }
         }
 
-        isRegisterSuccess.observe(this, Observer {
+
+        registerViewModel.isRegisterSuccess.observe(this, Observer {
             if(it) {
+                Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
             } else {
-                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+                var registerMessage = registerViewModel.getRegisterMessage()?.message
+                if(registerMessage == null) {
+                    registerMessage = "Unknown error, please try it again."
+                }
+
+                Toast.makeText(context, registerMessage, Toast.LENGTH_SHORT).show()
             }
         })
 
         return binding.root
-    }
-
-    private suspend fun register() {
-        val date = binding.birthDateCalendar.date
-        val dates = SimpleDateFormat("dd-MM-yyyy").format(date)
-
-        val gender = if(binding.maleRadio.isChecked) "Male" else "Female"
-        val registerData = Register(
-            phoneNumber = binding.phoneEditText.text.toString(),
-            email = binding.emailEditText.text.toString(),
-            password =  binding.passwordEditText.text.toString(),
-            name = binding.nameEditText.text.toString(),
-            address = binding.addressEditText.text.toString(),
-            gender = gender,
-            dateOfBirth =  dates,
-            placeOfBirth = binding.birthplaceEditText.text.toString()
-        )
-
-        Log.i(REGISTER, "Register Data: ${registerData}")
-
-        var response: CommonResponse? = null
-
-        try {
-            response = DogWalkerServiceApi.DogWalkerService.register(registerData)?.await()
-        } catch(e: Exception) {
-            Log.e(REGISTER, "Error when hit register API, err: ${e.message}")
-            isRegisterSuccess.value = false
-            if(response != null) {
-                errorMessage = response.message
-            }
-            return
-        }
-
-        if(response != null) {
-            isRegisterSuccess.value = true
-            return
-        }
-
-        isRegisterSuccess.value = false
     }
 }

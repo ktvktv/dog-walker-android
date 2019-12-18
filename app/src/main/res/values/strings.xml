@@ -17,6 +17,8 @@
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="email">Email</string>
+    <string name="nik">NIK</string>
     <string name="address">Address</string>
     <string name="password">Password</string>
     <string name="phone_number">Phone Number</string>
