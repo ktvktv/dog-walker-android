@@ -3,6 +3,7 @@ package com.example.dogwalker.view
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
@@ -32,6 +33,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.dogwalker.LOGIN_SUCCESSFUL
 import com.example.dogwalker.R
 import com.example.dogwalker.RegisterDogActivity
 import com.example.dogwalker.WalkerDashboard
@@ -39,6 +41,7 @@ import com.example.dogwalker.adapter.InfoAdapter
 import com.example.dogwalker.data.User
 import com.example.dogwalker.viewmodel.InfoViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
+import kotlinx.coroutines.launch
 
 class InfoFragment : Fragment() {
 
@@ -61,6 +64,7 @@ class InfoFragment : Fragment() {
     private val infoViewModel: InfoViewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory()).get(InfoViewModel::class.java)
     }
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,6 +72,14 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentInfoBinding.inflate(inflater)
+
+        val session = context?.getSharedPreferences(getString
+            (R.string.preferences_file_key), Context.MODE_PRIVATE)
+            ?.getString(getString(R.string.session_cache), "")
+
+        coroutineScope.launch {
+            infoViewModel.getUserInformation(session!!)
+        }
 
         binding.pictureInfoButton.setOnClickListener {
             //Get the picture from gallery and set it.
@@ -89,24 +101,34 @@ class InfoFragment : Fragment() {
             startActivity(intent)
         }
 
-        val userData = infoViewModel.getInfo()
-        binding.user = userData
+        infoViewModel.infoResponse.observe(this, Observer {
+            if(it != null && it.message == LOGIN_SUCCESSFUL) {
+                val userData = it.body
 
-        if(userData.gender.trim() == "Male") {
-            binding.genderInfoImage.setImageResource(R.drawable.male_icon)
-        } else {
-            binding.genderInfoImage.setImageResource(R.drawable.female_icon)
-        }
+                if(userData == null) {
+                    Toast.makeText(context, "Network error, please refresh", Toast.LENGTH_SHORT).show()
+                    return@Observer
+                }
 
-        //If user image is empty then don't do anything.
-        if(userData.userImageUrl != null && !userData.userImageUrl.equals("")) {
-            val imgUri = userData.userImageUrl.toUri().buildUpon().scheme("https").build()
-            val imageView = binding.userPicture
+                binding.user = userData
 
-            Glide.with(imageView.context)
-                .load(imgUri)
-                .into(imageView)
-        }
+                if(userData.gender.trim() == "Male") {
+                    binding.genderInfoImage.setImageResource(R.drawable.male_icon)
+                } else {
+                    binding.genderInfoImage.setImageResource(R.drawable.female_icon)
+                }
+
+                //If user image is empty then don't do anything.
+                if(userData.userImageUrl != null && !userData.userImageUrl.equals("")) {
+                    val imgUri = userData.userImageUrl.toUri().buildUpon().scheme("https").build()
+                    val imageView = binding.userPicture
+
+                    Glide.with(imageView.context)
+                        .load(imgUri)
+                        .into(imageView)
+                }
+            }
+        })
 
         //If in any case context is null, then don't set adapter to the recycler view, it'll make the app crash.
         val mContext = context

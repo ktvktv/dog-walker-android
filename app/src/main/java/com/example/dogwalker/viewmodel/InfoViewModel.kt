@@ -14,11 +14,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.dogwalker.LOGIN_SUCCESSFUL
 import com.example.dogwalker.R
-import com.example.dogwalker.data.CommonResponse
-import com.example.dogwalker.data.Dog
-import com.example.dogwalker.data.DogRequest
-import com.example.dogwalker.data.User
+import com.example.dogwalker.data.*
 import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.view.InfoFragment
 import kotlinx.coroutines.CoroutineScope
@@ -32,53 +30,24 @@ import java.lang.Exception
 class InfoViewModel() : ViewModel() {
 
     private val TAG = InfoViewModel::class.java.simpleName
-    private val _user = MutableLiveData<User>()
+    val infoResponse = MutableLiveData<LoginResponse>()
+//    val dogResponse = MutableLiveData<>
 
-    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
-
-    val user: LiveData<User>
-        get() = _user
-
-    init {
-        //TODO:Network operation for info data.
-
-        //Dummy data
-//        _user.value = User(
-//            name = "Kevin Tigravictor",
-//            password = "Test",
-//            email = "kevin.victor30@yahoo.com",
-//            phoneNumber = "+6281290001998",
-//            gender = "Male",
-//            address = "Jl. Barleria VI B1/H5",
-//            birthDate = "09 September 1998",
-//            birthPlace = "DKI Jakarta",
-//            userImageUrl = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg"
-////            dog = listOf(
-////                Dog(
-////                    ownerId = 1,
-////                    breedId = 1,
-////                    age = 10,
-////                    weight = 100,
-////                    gender = "Male",
-////                    name = "Willy",
-////                    specialNeeds = "",
-////                    photo = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg"),
-////                Dog(
-////                    ownerId = 2,
-////                    breedId = 2,
-////                    age = 20,
-////                    weight = 150,
-////                    gender = "Female",
-////                    name = "Darren",
-////                    specialNeeds = "",
-////                    photo = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg")
-////            )
-//        )
+    suspend fun getUserInformation(session: String) {
+        try {
+            infoResponse.value = DogWalkerServiceApi.DogWalkerService.getUserInformation(session)?.await()
+        } catch (e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+            return
+        }
     }
 
-    fun getInfo() :User {
-        return _user.value!!
-    }
+//    suspend fun
+
+//    fun getUserInformation(): User? {
+//        return _user.value!!
+//    }
 
     private suspend fun hitAPI(file: File) {
 

@@ -31,6 +31,9 @@ interface DogWalker {
     @POST("user/login")
     fun login(@Body login: LoginRequest): Deferred<LoginResponse>?
 
+    @GET("user/get")
+    fun getUserInformation(@Header("session") session: String): Deferred<LoginResponse>?
+
     @Multipart
     @POST("dog/register")
     fun registerDog(@Part("owner_id") ownerId: Int,
