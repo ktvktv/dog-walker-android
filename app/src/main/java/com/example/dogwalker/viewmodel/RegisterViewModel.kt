@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 class RegisterViewModel : ViewModel() {
 
     val isRegisterSuccess = MutableLiveData<Boolean>()
-    private val registerResponse = MutableLiveData<LoginResponse>()
+    private val registerResponse = MutableLiveData<CommonResponse>()
     private val TAG = RegisterViewModel::class.java.simpleName
 
     suspend fun register(registerData: Register) {
@@ -37,7 +37,7 @@ class RegisterViewModel : ViewModel() {
         isRegisterSuccess.value = false
     }
 
-    fun getRegisterMessage() : LoginResponse? {
+    fun getRegisterMessage() : CommonResponse? {
         return registerResponse.value
     }
 }

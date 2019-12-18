@@ -1,10 +1,12 @@
 package com.example.dogwalker.network
 
 import com.example.dogwalker.data.*
+import com.google.android.gms.common.internal.service.Common
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -26,13 +28,33 @@ val retrofit = Retrofit.Builder()
 
 interface DogWalker {
     @POST("user/register")
-    fun register(@Body register: Register): Deferred<LoginResponse>?
+    fun register(@Body register: Register): Deferred<CommonResponse>?
 
     @POST("user/login")
     fun login(@Body login: LoginRequest): Deferred<LoginResponse>?
 
     @GET("user/get")
-    fun getUserInformation(@Header("session") session: String): Deferred<LoginResponse>?
+    fun getUserInformation(@Header("session") session: String): Deferred<CommonResponse>?
+
+    @GET("dog/get")
+    fun getDogInformation(@Header("session") session: String): Deferred<DogResponse>?
+
+    @Multipart
+    @POST("user/update")
+    fun updateUserInformation(
+        @Header("session") session: String,
+        @Part("address") address: String = "",
+        @Part("dateOfBirth") birthdate: String = "",
+        @Part("email") email: String = "",
+        @Part("gender") gender: String = "",
+        @Part("name") name: String = "",
+        @Part("nik") nik: String = "",
+        @Part("password") password: String = "",
+        @Part("phoneNumber") phoneNumber: String = "",
+        @Part photo: MultipartBody.Part? = null,
+        @Part("placeOfBirth") birthplace: String = "",
+        @Part("type") type: String = ""
+    ): Deferred<CommonResponse>?
 
     @Multipart
     @POST("dog/register")

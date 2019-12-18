@@ -3,7 +3,7 @@ package com.example.dogwalker.data
 import okhttp3.RequestBody
 import retrofit2.http.Part
 
-data class DogRequest(
+data class RegisterDogRequest(
     @Part("owner_id") val ownerId: Int,
     @Part("breed_id") val breedId: Int,
     @Part("age") val age: Int,

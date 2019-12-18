@@ -19,19 +19,21 @@ import com.example.dogwalker.R
 import com.example.dogwalker.data.*
 import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.view.InfoFragment
+import com.google.android.gms.common.internal.service.Common
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 import java.lang.Exception
 
-class InfoViewModel() : ViewModel() {
+class InfoViewModel : ViewModel() {
 
     private val TAG = InfoViewModel::class.java.simpleName
-    val infoResponse = MutableLiveData<LoginResponse>()
-//    val dogResponse = MutableLiveData<>
+    val infoResponse = MutableLiveData<CommonResponse>()
+    val dogResponse = MutableLiveData<DogResponse>()
 
     suspend fun getUserInformation(session: String) {
         try {
@@ -41,15 +43,23 @@ class InfoViewModel() : ViewModel() {
             e.printStackTrace()
             return
         }
+
+        Log.d(TAG, "${infoResponse.value}")
     }
 
-//    suspend fun
+    suspend fun getDogInformation(session: String) {
+        try {
+            dogResponse.value = DogWalkerServiceApi.DogWalkerService.getDogInformation(session)?.await()
+        } catch (e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+            return
+        }
 
-//    fun getUserInformation(): User? {
-//        return _user.value!!
-//    }
+        Log.d(TAG, "${dogResponse.value}")
+    }
 
-    private suspend fun hitAPI(file: File) {
+    suspend fun uploadImage(file: File, session: String) {
 
 //        val dogsData = DogRequest(
 //            ownerId = 1,
@@ -74,22 +84,20 @@ class InfoViewModel() : ViewModel() {
 //            .setType(MultipartBody.FORM)
 //            .build()
 
-        var result: CommonResponse? = null
+        Log.d(TAG, session)
+
         try {
-            result = DogWalkerServiceApi.DogWalkerService.registerDog(ownerId = 1,
-                breedId = 1,
-                age = 1,
-                weight = 1,
-                specialNeeds = "1",
-                name = "1",
-                gender = "1",
-                photo = RequestBody.create(MultipartBody.FORM, file))!!.await()
+            val fileReqBody = RequestBody.create(MediaType.parse("image/*"), file)
+            val photo = MultipartBody.Part.createFormData("photo", file.name, fileReqBody)
+            infoResponse.value = DogWalkerServiceApi.DogWalkerService.updateUserInformation(
+                session = session,
+                photo = photo)!!.await()
         } catch(e: Exception) {
-            Log.e("hitAPI", e.message)
+            Log.e(TAG, e.message)
             e.printStackTrace()
             return
         }
 
-        Log.d("hitAPI", result.toString())
+        Log.d(TAG, "${infoResponse.value}")
     }
 }

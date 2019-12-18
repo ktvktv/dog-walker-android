@@ -46,6 +46,7 @@ import kotlinx.coroutines.launch
 class InfoFragment : Fragment() {
 
     private val TAG = InfoFragment::class.java.simpleName
+    private lateinit var infoAdapter: InfoAdapter
 
     //Static Value
     companion object Constants {
@@ -79,6 +80,7 @@ class InfoFragment : Fragment() {
 
         coroutineScope.launch {
             infoViewModel.getUserInformation(session!!)
+            infoViewModel.getDogInformation(session!!)
         }
 
         binding.pictureInfoButton.setOnClickListener {
@@ -100,6 +102,18 @@ class InfoFragment : Fragment() {
 
             startActivity(intent)
         }
+
+        infoViewModel.dogResponse.observe(this, Observer {
+            val dogData = it.body
+
+            if(dogData == null) {
+                Toast.makeText(context, "Network error, please refresh", Toast.LENGTH_SHORT).show()
+                return@Observer
+            }
+
+            infoAdapter.listData = dogData
+            infoAdapter.notifyDataSetChanged()
+        })
 
         infoViewModel.infoResponse.observe(this, Observer {
             if(it != null && it.message == LOGIN_SUCCESSFUL) {
@@ -135,7 +149,8 @@ class InfoFragment : Fragment() {
         if(mContext != null) {
             binding.infoRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-//            binding.infoRecyclerView.adapter = InfoAdapter(userData.dog, mContext)
+            infoAdapter = InfoAdapter(listOf(), mContext)
+            binding.infoRecyclerView.adapter = infoAdapter
         }
 
         return binding.root
@@ -193,10 +208,13 @@ class InfoFragment : Fragment() {
                     //Set the picture in the page.
                     binding.userPicture.setImageDrawable(Drawable.createFromPath(file.absolutePath))
 
+                    val session = context?.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+                        ?.getString(getString(R.string.session_cache), "")
+
                     //TODO:Network operation to upload the image into server
-//                    coroutineScope.launch {
-//                        hitAPI(file)
-//                    }
+                    coroutineScope.launch {
+                        infoViewModel.uploadImage(file, session!!)
+                    }
                 } else {
                     Toast.makeText(context, "Cancelled get the picture", Toast.LENGTH_SHORT).show()
                 }

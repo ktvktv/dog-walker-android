@@ -1,14 +1,11 @@
 package com.example.dogwalker.data
 
-import retrofit2.http.Part
-
-data class Dog(
-    @Part("owner_id") val ownerId: Int,
-    @Part("breed_id") val breedId: Int,
-    @Part("age") val age: Int,
-    @Part("weight") val weight: Int,
-    @Part("gender") val gender: String,
-    @Part("name") val name: String,
-    @Part("special_needs") val specialNeeds: String,
-    @Part("photo") val photo: String
+class Dog (
+    val id: Int,
+    val name: String,
+    val age: Int,
+    val gender: String,
+    val photo: String?,
+    val specialNeeds: String?,
+    val breedName: String
 )
