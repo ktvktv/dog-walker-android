@@ -58,14 +58,16 @@ interface DogWalker {
 
     @Multipart
     @POST("dog/register")
-    fun registerDog(@Part("owner_id") ownerId: Int,
-                    @Part("breed_id") breedId: Int,
+    fun registerDog(@Header("session") session: String,
+                    @Part("breedId") breedId: Int,
                     @Part("age") age: Int,
                     @Part("weight") weight: Int,
                     @Part("gender") gender: String,
                     @Part("name") name: String,
-                    @Part("special_needs") specialNeeds: String,
-                    @Part("photo") photo: RequestBody): Deferred<CommonResponse>?
+                    @Part("specialNeeds") specialNeeds: String,
+                    @Part photo: MultipartBody.Part): Deferred<CommonResponse>?
+
+    /*@*/
 
     @GET("breed/")
     fun getAllBreed() : Deferred<BreedResponse>?

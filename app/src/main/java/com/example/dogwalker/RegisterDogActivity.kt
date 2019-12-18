@@ -3,6 +3,7 @@ package com.example.dogwalker
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -16,10 +17,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.dogwalker.adapter.BreedAdapter
+import com.example.dogwalker.data.RegisterDogRequest
 import com.example.dogwalker.databinding.ActivityRegisterDogBinding
 import com.example.dogwalker.view.InfoFragment
 import com.example.dogwalker.viewmodel.RegisterDogViewModel
+import com.example.dogwalker.viewmodel.ViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.io.File
 import java.lang.Exception
 
@@ -29,8 +38,9 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
     private val PHOTO_PICKER = 100
 
     private val registerDogViewModel: RegisterDogViewModel by lazy {
-        RegisterDogViewModel(this, breedAdapter)
+        ViewModelProviders.of(this, ViewModelFactory()).get(RegisterDogViewModel::class.java)
     }
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
 
     private lateinit var binding: ActivityRegisterDogBinding
     private lateinit var alertDialog: AlertDialog
@@ -38,6 +48,9 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
     private lateinit var breedAdapter: BreedAdapter
 
     private var breedId = 1
+    private var age = 0
+    private var weight = 0
+    private var file: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,12 +64,12 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
         binding.breedSpinnerView.adapter = breedAdapter
         binding.breedSpinnerView.onItemSelectedListener = this
 
-        //Only trigger, will change it later
-        registerDogViewModel.getBreedList()
-//        if(breedData != null) {
-//            breedAdapter.addAll(breedData)
-//            breedAdapter.notifyDataSetChanged()
-//        }
+        registerDogViewModel.listBreed.observe(this, Observer {
+            if(it != null) {
+                breedAdapter.addAll(it)
+                breedAdapter.notifyDataSetChanged()
+            }
+        })
 
         pickImageIntent = Intent(Intent.ACTION_PICK)
         pickImageIntent.type = "image/*"
@@ -85,14 +98,46 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
             uploadImage()
         }
 
+        registerDogViewModel.registerResponse.observe(this, Observer {
+            var isSuccess = false
+            var message = "Unknown error, please try again."
+            if(it != null) {
+                if(it.message == LOGIN_SUCCESSFUL) {
+                    message = "Register Success!"
+                    isSuccess = true
+                } else {
+                    message = it.message ?: "Unknown error, please try again"
+                }
+            }
+
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+            if(isSuccess) {
+                finish()
+            }
+        })
+
         binding.registerDogButton.setOnClickListener {
             val errorMessage = checkValidity()
+
+            val gender = if(binding.maleRadioButton.isChecked) "Male" else "Female"
+
+            val session = getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+                .getString(getString(R.string.session_cache), "")
             if(errorMessage.equals("")) {
-                //Call server
-
-                //Insert DB
-
-                //Back to info page.
+                coroutineScope.launch {
+                    registerDogViewModel.registerDog(
+                        RegisterDogRequest(
+                            breedId = breedId,
+                            age = age,
+                            weight = weight,
+                            gender = gender,
+                            name = binding.nameView.text.toString(),
+                            specialNeeds = binding.specialNeedText.text.toString(),
+                            photo = null
+                        ), file!!, session
+                    )
+                }
             } else {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                 Log.d(TAG, errorMessage)
@@ -111,7 +156,7 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
             return "Age must be filled"
         } else {
              try {
-                 Integer.parseInt(binding.ageView.text.toString())
+                 age = Integer.parseInt(binding.ageView.text.toString())
              } catch(e: Exception) {
                  return "Age must be numeric"
              }
@@ -121,7 +166,7 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
             return "Weight must be filled"
         } else {
             try {
-                Integer.parseInt(binding.weightView.text.toString())
+                weight = Integer.parseInt(binding.weightView.text.toString())
             } catch(e: Exception) {
                 return "Weight must be numeric"
             }
@@ -133,6 +178,10 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
         if(binding.dogImage.drawable == null) {
             return "Image must be filled"
+        }
+
+        if(file == null) {
+            return "Please input dog photo"
         }
 
         return ""
@@ -215,10 +264,10 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
                     }
 
                     //Get the file from the device
-                    val file = getBitmapFile(data) ?: return
+                    file = getBitmapFile(data) ?: return
 
                     //Set the picture in the page.
-                    binding.dogImage.setImageDrawable(Drawable.createFromPath(file.absolutePath))
+                    binding.dogImage.setImageDrawable(Drawable.createFromPath(file!!.absolutePath))
 
                     //Send the image to the server
 //                    coroutineScope.launch {
