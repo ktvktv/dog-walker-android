@@ -43,37 +43,37 @@ class InfoViewModel() : ViewModel() {
         //TODO:Network operation for info data.
 
         //Dummy data
-        _user.value = User(
-            name = "Kevin Tigravictor",
-            password = "Test",
-            email = "kevin.victor30@yahoo.com",
-            phoneNumber = "+6281290001998",
-            gender = "Male",
-            address = "Jl. Barleria VI B1/H5",
-            birthDate = "09 September 1998",
-            birthPlace = "DKI Jakarta",
-            userImageUrl = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg",
-            dog = listOf(
-                Dog(
-                    ownerId = 1,
-                    breedId = 1,
-                    age = 10,
-                    weight = 100,
-                    gender = "Male",
-                    name = "Willy",
-                    specialNeeds = "",
-                    photo = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg"),
-                Dog(
-                    ownerId = 2,
-                    breedId = 2,
-                    age = 20,
-                    weight = 150,
-                    gender = "Female",
-                    name = "Darren",
-                    specialNeeds = "",
-                    photo = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg")
-            )
-        )
+//        _user.value = User(
+//            name = "Kevin Tigravictor",
+//            password = "Test",
+//            email = "kevin.victor30@yahoo.com",
+//            phoneNumber = "+6281290001998",
+//            gender = "Male",
+//            address = "Jl. Barleria VI B1/H5",
+//            birthDate = "09 September 1998",
+//            birthPlace = "DKI Jakarta",
+//            userImageUrl = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg"
+////            dog = listOf(
+////                Dog(
+////                    ownerId = 1,
+////                    breedId = 1,
+////                    age = 10,
+////                    weight = 100,
+////                    gender = "Male",
+////                    name = "Willy",
+////                    specialNeeds = "",
+////                    photo = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg"),
+////                Dog(
+////                    ownerId = 2,
+////                    breedId = 2,
+////                    age = 20,
+////                    weight = 150,
+////                    gender = "Female",
+////                    name = "Darren",
+////                    specialNeeds = "",
+////                    photo = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg")
+////            )
+//        )
     }
 
     fun getInfo() :User {

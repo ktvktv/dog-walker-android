@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">Dog Walker</string>
 
-    <!-- Login -->
+    <!-- LoginRequest -->
     <string name="login_description">Enter your registered phone number and password</string>
     <string name="login_button">Login</string>
     <string name="register_button">Register Now</string>
+
+    <string name="preferences_file_key">com.example.dogwalker.PREFERENCES_FILE</string>
+    <string name="session_cache">Session</string>
+    <string name="name_cache">Name</string>
+    <string name="type_cache">Type</string>
 
     <!--Registration-->
     <string name="register_title">Registration</string>

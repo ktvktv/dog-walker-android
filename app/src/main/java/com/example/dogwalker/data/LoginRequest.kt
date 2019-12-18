@@ -1,6 +1,6 @@
 package com.example.dogwalker.data
 
-data class Login (
+data class LoginRequest (
     val phoneNumber: String,
     val password: String
 )

@@ -99,7 +99,7 @@ class InfoFragment : Fragment() {
         }
 
         //If user image is empty then don't do anything.
-        if(!userData.userImageUrl.equals("")) {
+        if(userData.userImageUrl != null && !userData.userImageUrl.equals("")) {
             val imgUri = userData.userImageUrl.toUri().buildUpon().scheme("https").build()
             val imageView = binding.userPicture
 
@@ -113,7 +113,7 @@ class InfoFragment : Fragment() {
         if(mContext != null) {
             binding.infoRecyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            binding.infoRecyclerView.adapter = InfoAdapter(userData.dog, mContext)
+//            binding.infoRecyclerView.adapter = InfoAdapter(userData.dog, mContext)
         }
 
         return binding.root

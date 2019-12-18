@@ -29,7 +29,7 @@ interface DogWalker {
     fun register(@Body register: Register): Deferred<CommonResponse>?
 
     @POST("user/login")
-    fun login(@Body login: Login): Deferred<CommonResponse>?
+    fun login(@Body login: LoginRequest): Deferred<LoginResponse>?
 
     @Multipart
     @POST("dog/register")

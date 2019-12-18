@@ -1,14 +1,19 @@
 package com.example.dogwalker.data
 
+import com.squareup.moshi.Json
+
 data class User(
-    val name: String,
-    val password: String,
+    val id: Int,
     val email: String,
     val phoneNumber: String,
+    val password: String,
+    val name: String,
+    val nik: String,
     val gender: String,
     val address: String,
-    val birthDate: String,
-    val birthPlace: String,
-    val userImageUrl: String,
-    val dog: List<Dog>
+    val isWalker: Boolean,
+    val type: String,
+    @Json(name = "dateOfBirth") val birthDate: String,
+    @Json(name = "placeOfBirth") val birthPlace: String,
+    @Json(name = "photo") val userImageUrl: String?
 )
