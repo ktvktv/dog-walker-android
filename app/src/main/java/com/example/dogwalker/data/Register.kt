@@ -1,12 +1,13 @@
 package com.example.dogwalker.data
 
 data class Register (
-    val phoneNumber: String,
-    val email: String,
-    val password: String,
-    val name: String,
     val address: String,
-    val gender: String,
     val dateOfBirth: String,
+    val email: String,
+    val gender: String,
+    val name: String,
+    val nik: String,
+    val password: String,
+    val phoneNumber: String,
     val placeOfBirth: String
 )
