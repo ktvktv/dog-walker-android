@@ -25,8 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/post_cancel_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_post_text">
@@ -41,6 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:fontFamily="@font/delius"
                 android:hint="Your Content"
                 android:inputType="textLongMessage|textMultiLine|textPersonName"
                 android:textColor="#FFFFFF"
@@ -52,12 +53,13 @@
         android:id="@+id/post_ok_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:background="#343875"
+        android:fontFamily="@font/delius"
         android:text="@android:string/ok"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/post_cancel_button"
         app:layout_constraintEnd_toEndOf="@+id/scrollView4"
+        app:layout_constraintStart_toEndOf="@+id/view3"
         app:layout_constraintTop_toTopOf="@+id/post_cancel_button"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -65,22 +67,24 @@
         android:id="@+id/post_cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:background="#343875"
+        android:fontFamily="@font/delius"
         android:text="@android:string/cancel"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/scrollView4"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
+        app:layout_constraintEnd_toStartOf="@+id/view3"
+        app:layout_constraintStart_toStartOf="@+id/scrollView4" />
 
     <EditText
         android:id="@+id/title_post_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:fontFamily="@font/delius"
         android:hint="Title"
         android:inputType="textShortMessage"
         android:textColor="#FFFFFF"
@@ -88,5 +92,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

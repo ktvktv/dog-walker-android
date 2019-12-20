@@ -37,15 +37,17 @@ class PostViewAdapter(var list: List<Post>, val listener: PostViewAdapterClickLi
         holder.itemView.title_view.text = list[position].title
         holder.itemView.description_view.text = list[position].content
 
-        val imgUri = list[position].image.toUri().buildUpon().scheme("https").build()
-        val imageView = holder.itemView.image_post
+        if(list[position].photo != null) {
+            val imgUri = list[position].photo!!.toUri().buildUpon().scheme("https").build()
+            val imageView = holder.itemView.image_post
 
-        Glide.with(imageView.context)
-            .load(imgUri)
-            .into(imageView)
+            Glide.with(imageView.context)
+                .load(imgUri)
+                .into(imageView)
+        }
     }
 
-    class ViewHolder(itemView: View,
+    inner class ViewHolder(itemView: View,
                      val listener: PostViewAdapterClickListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         init {
@@ -53,11 +55,11 @@ class PostViewAdapter(var list: List<Post>, val listener: PostViewAdapterClickLi
         }
 
         override fun onClick(v: View?) {
-            listener.postViewClickListener(this.layoutPosition)
+            listener.postViewClickListener(list[this.layoutPosition].id)
         }
     }
 
     interface PostViewAdapterClickListener {
-        public fun postViewClickListener(position: Int)
+        fun postViewClickListener(position: Int)
     }
 }

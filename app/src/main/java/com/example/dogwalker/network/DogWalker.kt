@@ -67,7 +67,12 @@ interface DogWalker {
                     @Part("specialNeeds") specialNeeds: String,
                     @Part photo: MultipartBody.Part): Deferred<CommonResponse>?
 
-    /*@*/
+    @POST("post/upload")
+    fun insertPost(@Header("session") session: String,
+                   @Body postRequest: InsertPostRequest): Deferred<CommonResponse>?
+
+    @GET("post/global")
+    fun getPost(@Header("session") session: String) : Deferred<PostResponse>?
 
     @GET("breed/")
     fun getAllBreed() : Deferred<BreedResponse>?

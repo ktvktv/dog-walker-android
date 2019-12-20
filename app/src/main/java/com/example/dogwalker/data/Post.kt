@@ -1,9 +1,12 @@
 package com.example.dogwalker.data
 
+import com.squareup.moshi.Json
+
 data class Post(
-    val image: String,
-    val name: String,
-    val type: String,
+    val id: Int,
     val title: String,
-    val content: String
+    val content: String,
+    @Json(name="createdAt") val date: String,
+    val name: String,
+    val photo: String?
 )
