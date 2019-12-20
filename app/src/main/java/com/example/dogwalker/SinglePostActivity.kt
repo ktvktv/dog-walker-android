@@ -1,74 +1,90 @@
 package com.example.dogwalker
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.dogwalker.adapter.CommentAdapter
 import com.example.dogwalker.data.Comment
+import com.example.dogwalker.data.InsertCommentRequest
 import com.example.dogwalker.databinding.ActivitySinglePostBinding
 import com.example.dogwalker.view.CommentFragment
+import com.example.dogwalker.viewmodel.SinglePostViewModel
+import com.example.dogwalker.viewmodel.ViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition {
 
     private lateinit var binding: ActivitySinglePostBinding
-
     private lateinit var commentAdapter: CommentAdapter
+    private val singlePostViewModel by lazy {
+        ViewModelProviders.of(this, ViewModelFactory()).get(SinglePostViewModel::class.java)
+    }
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySinglePostBinding.inflate(LayoutInflater.from(this))
 
-        val dummyData = listOf(
-            Comment(
-                image = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg",
-                name = "Kevin",
-                content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis nisl diam, a molestie neque commodo id. Suspendisse imperdiet neque convallis varius dapibus. Quisque sodales imperdiet blandit. Cras non aliquam risus. Pellentesque et lectus tempus, dignissim ipsum a, volutpat magna. Phasellus aliquam lectus ac dui fermentum, gravida blandit lectus varius. Integer aliquam urna nec blandit bibendum. Aenean dapibus mauris auctor erat malesuada finibus." +
-                        "Nunc finibus mauris non interdum luctus. Morbi euismod elit ipsum, vitae bibendum diam mattis et. Nulla dignissim, libero nec aliquet varius, felis turpis porttitor lacus, aliquam blandit justo mi finibus magna. Sed elementum scelerisque erat ac blandit. Aliquam vulputate sagittis ante at tempor. Sed eleifend molestie lacus vitae commodo. Fusce non tincidunt mauris. Pellentesque tempus dolor sit amet facilisis venenatis. Praesent aliquet gravida lacus, quis scelerisque velit mattis nec. Phasellus eros ex, faucibus a diam et, eleifend rhoncus arcu. Maecenas congue ante vel felis venenatis, in gravida mi vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent ac sapien et metus mollis vulputate id sed massa. Aenean blandit nulla vel aliquet consectetur." +
-                        "" +
-                        "Maecenas bibendum non enim a porta. Praesent malesuada lectus ullamcorper ex posuere tempor. Nulla ipsum lacus, vulputate non sollicitudin et, lobortis quis lectus. Maecenas pellentesque tempus condimentum. Nunc ac risus justo. Donec scelerisque tortor nisl, ut hendrerit nibh vulputate id. Donec sapien lorem, bibendum ac massa non, eleifend feugiat erat." +
-                        "" +
-                        "Aenean imperdiet diam ac justo pharetra venenatis. Suspendisse dapibus nulla lorem. Nullam id tellus eget nibh vehicula cursus. Sed posuere turpis et enim euismod accumsan. Cras sem ex, blandit viverra luctus et, accumsan ac dolor. Duis vel felis vitae nisl maximus porttitor. Donec at enim aliquet, tincidunt lorem eget, commodo diam. Nunc orci nisl, placerat a imperdiet eu, malesuada blandit enim. Sed placerat gravida justo in lobortis. Praesent elit augue, pharetra ac maximus non, feugiat ac lectus. Donec ullamcorper, turpis at imperdiet mattis, elit turpis mollis nibh, non venenatis velit diam id tellus. Curabitur id vestibulum ipsum, ac congue sapien. Vestibulum dolor ligula, tempor consequat elementum in, feugiat quis dui. Etiam sed ex congue, elementum neque at, viverra mi. Aenean eu condimentum purus, at sollicitudin odio. Maecenas sit amet ultrices mi." +
-                        "" +
-                        "Sed ex tortor, tempor eu tortor eu, faucibus dictum ligula. Duis ultrices ut urna sed bibendum. Donec consequat lectus a sapien tristique, eu rhoncus urna hendrerit. Etiam rutrum lorem nunc, vitae fringilla ex dapibus eu. Nunc ex risus, scelerisque pulvinar dolor in, feugiat faucibus velit. Integer ullamcorper laoreet arcu, et aliquam ligula. Aenean quis vehicula purus, a rhoncus ex. Vestibulum semper tincidunt magna, ac posuere risus rutrum eget. Duis eu bibendum ligula. Cras eleifend eget orci nec mollis. Integer condimentum bibendum felis at mattis. In tristique, nibh sit amet dictum auctor, augue nibh lacinia urna, id placerat nisl orci a sem. Maecenas ut suscipit quam. Nunc porttitor vestibulum elit ac condimentum. Nulla facilisi.",
-                date = "09 september 1998"
-            ),
-            Comment(
-                image = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg",
-                name = "Kevin",
-                content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis nisl diam, a molestie neque commodo id. Suspendisse imperdiet neque convallis varius dapibus. Quisque sodales imperdiet blandit. Cras non aliquam risus. Pellentesque et lectus tempus, dignissim ipsum a, volutpat magna. Phasellus aliquam lectus ac dui fermentum, gravida blandit lectus varius. Integer aliquam urna nec blandit bibendum. Aenean dapibus mauris auctor erat malesuada finibus." +
-                        "Nunc finibus mauris non interdum luctus. Morbi euismod elit ipsum, vitae bibendum diam mattis et. Nulla dignissim, libero nec aliquet varius, felis turpis porttitor lacus, aliquam blandit justo mi finibus magna. Sed elementum scelerisque erat ac blandit. Aliquam vulputate sagittis ante at tempor. Sed eleifend molestie lacus vitae commodo. Fusce non tincidunt mauris. Pellentesque tempus dolor sit amet facilisis venenatis. Praesent aliquet gravida lacus, quis scelerisque velit mattis nec. Phasellus eros ex, faucibus a diam et, eleifend rhoncus arcu. Maecenas congue ante vel felis venenatis, in gravida mi vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent ac sapien et metus mollis vulputate id sed massa. Aenean blandit nulla vel aliquet consectetur." +
-                        "" +
-                        "Maecenas bibendum non enim a porta. Praesent malesuada lectus ullamcorper ex posuere tempor. Nulla ipsum lacus, vulputate non sollicitudin et, lobortis quis lectus. Maecenas pellentesque tempus condimentum. Nunc ac risus justo. Donec scelerisque tortor nisl, ut hendrerit nibh vulputate id. Donec sapien lorem, bibendum ac massa non, eleifend feugiat erat." +
-                        "" +
-                        "Aenean imperdiet diam ac justo pharetra venenatis. Suspendisse dapibus nulla lorem. Nullam id tellus eget nibh vehicula cursus. Sed posuere turpis et enim euismod accumsan. Cras sem ex, blandit viverra luctus et, accumsan ac dolor. Duis vel felis vitae nisl maximus porttitor. Donec at enim aliquet, tincidunt lorem eget, commodo diam. Nunc orci nisl, placerat a imperdiet eu, malesuada blandit enim. Sed placerat gravida justo in lobortis. Praesent elit augue, pharetra ac maximus non, feugiat ac lectus. Donec ullamcorper, turpis at imperdiet mattis, elit turpis mollis nibh, non venenatis velit diam id tellus. Curabitur id vestibulum ipsum, ac congue sapien. Vestibulum dolor ligula, tempor consequat elementum in, feugiat quis dui. Etiam sed ex congue, elementum neque at, viverra mi. Aenean eu condimentum purus, at sollicitudin odio. Maecenas sit amet ultrices mi." +
-                        "" +
-                        "Sed ex tortor, tempor eu tortor eu, faucibus dictum ligula. Duis ultrices ut urna sed bibendum. Donec consequat lectus a sapien tristique, eu rhoncus urna hendrerit. Etiam rutrum lorem nunc, vitae fringilla ex dapibus eu. Nunc ex risus, scelerisque pulvinar dolor in, feugiat faucibus velit. Integer ullamcorper laoreet arcu, et aliquam ligula. Aenean quis vehicula purus, a rhoncus ex. Vestibulum semper tincidunt magna, ac posuere risus rutrum eget. Duis eu bibendum ligula. Cras eleifend eget orci nec mollis. Integer condimentum bibendum felis at mattis. In tristique, nibh sit amet dictum auctor, augue nibh lacinia urna, id placerat nisl orci a sem. Maecenas ut suscipit quam. Nunc porttitor vestibulum elit ac condimentum. Nulla facilisi.",
-                date = "09 september 1998"
-            )
-        )
+        val session = getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+            .getString(getString(R.string.session_cache), "")
 
-        commentAdapter = CommentAdapter(dummyData)
+        val postId = intent.extras.getInt("PostFragment")
+
+        coroutineScope.launch {
+            singlePostViewModel.getPostDetail(session, postId)
+            singlePostViewModel.getCommentDetail(session, postId)
+        }
+
+        commentAdapter = CommentAdapter(listOf())
         binding.commentView.adapter = commentAdapter
         binding.commentView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        binding.contentText.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sagittis nisl diam, a molestie neque commodo id. Suspendisse imperdiet neque convallis varius dapibus. Quisque sodales imperdiet blandit. Cras non aliquam risus. Pellentesque et lectus tempus, dignissim ipsum a, volutpat magna. Phasellus aliquam lectus ac dui fermentum, gravida blandit lectus varius. Integer aliquam urna nec blandit bibendum. Aenean dapibus mauris auctor erat malesuada finibus." +
-                "Nunc finibus mauris non interdum luctus. Morbi euismod elit ipsum, vitae bibendum diam mattis et. Nulla dignissim, libero nec aliquet varius, felis turpis porttitor lacus, aliquam blandit justo mi finibus magna. Sed elementum scelerisque erat ac blandit. Aliquam vulputate sagittis ante at tempor. Sed eleifend molestie lacus vitae commodo. Fusce non tincidunt mauris. Pellentesque tempus dolor sit amet facilisis venenatis. Praesent aliquet gravida lacus, quis scelerisque velit mattis nec. Phasellus eros ex, faucibus a diam et, eleifend rhoncus arcu. Maecenas congue ante vel felis venenatis, in gravida mi vestibulum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent ac sapien et metus mollis vulputate id sed massa. Aenean blandit nulla vel aliquet consectetur." +
-                "" +
-                "Maecenas bibendum non enim a porta. Praesent malesuada lectus ullamcorper ex posuere tempor. Nulla ipsum lacus, vulputate non sollicitudin et, lobortis quis lectus. Maecenas pellentesque tempus condimentum. Nunc ac risus justo. Donec scelerisque tortor nisl, ut hendrerit nibh vulputate id. Donec sapien lorem, bibendum ac massa non, eleifend feugiat erat." +
-                "" +
-                "Aenean imperdiet diam ac justo pharetra venenatis. Suspendisse dapibus nulla lorem. Nullam id tellus eget nibh vehicula cursus. Sed posuere turpis et enim euismod accumsan. Cras sem ex, blandit viverra luctus et, accumsan ac dolor. Duis vel felis vitae nisl maximus porttitor. Donec at enim aliquet, tincidunt lorem eget, commodo diam. Nunc orci nisl, placerat a imperdiet eu, malesuada blandit enim. Sed placerat gravida justo in lobortis. Praesent elit augue, pharetra ac maximus non, feugiat ac lectus. Donec ullamcorper, turpis at imperdiet mattis, elit turpis mollis nibh, non venenatis velit diam id tellus. Curabitur id vestibulum ipsum, ac congue sapien. Vestibulum dolor ligula, tempor consequat elementum in, feugiat quis dui. Etiam sed ex congue, elementum neque at, viverra mi. Aenean eu condimentum purus, at sollicitudin odio. Maecenas sit amet ultrices mi." +
-                "" +
-                "Sed ex tortor, tempor eu tortor eu, faucibus dictum ligula. Duis ultrices ut urna sed bibendum. Donec consequat lectus a sapien tristique, eu rhoncus urna hendrerit. Etiam rutrum lorem nunc, vitae fringilla ex dapibus eu. Nunc ex risus, scelerisque pulvinar dolor in, feugiat faucibus velit. Integer ullamcorper laoreet arcu, et aliquam ligula. Aenean quis vehicula purus, a rhoncus ex. Vestibulum semper tincidunt magna, ac posuere risus rutrum eget. Duis eu bibendum ligula. Cras eleifend eget orci nec mollis. Integer condimentum bibendum felis at mattis. In tristique, nibh sit amet dictum auctor, augue nibh lacinia urna, id placerat nisl orci a sem. Maecenas ut suscipit quam. Nunc porttitor vestibulum elit ac condimentum. Nulla facilisi."
+        singlePostViewModel.postDetail.observe(this, Observer{
+            if(it != null) {
+                if(it.photo != null) {
+                    val imgUri = it.photo.toUri().buildUpon().scheme("https").build()
+                    val imageView = binding.profilePost
+
+                    Glide.with(imageView.context)
+                        .load(imgUri)
+                        .into(imageView)
+                }
+
+                binding.contentText.text = it.content
+                binding.titleText.text = it.title
+                binding.namePostView.text = it.name
+            }
+        })
+
+        singlePostViewModel.commentDetail.observe(this, Observer {
+            if(it != null) {
+                commentAdapter.commentData = it
+                commentAdapter.notifyDataSetChanged()
+            }
+        })
+
+        singlePostViewModel.message.observe(this, Observer {
+            if(it != null) {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
 
         binding.floatingActionButton.setOnClickListener {
             Log.d("SinglePostActivity", "FAB Clicked.")
 
-            val fragments = CommentFragment(this)
+            val fragments = CommentFragment(this, intent.extras.getInt("PostFragment"))
 
             fragments.show(supportFragmentManager, "dialog")
 
@@ -79,26 +95,21 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition {
 //                .commit()
         }
 
-        val imgUri = dummyData[0].image.toUri().buildUpon().scheme("https").build()
-        val imageView = binding.profilePost
-
-        Glide.with(imageView.context)
-            .load(imgUri)
-            .into(imageView)
-
         setContentView(binding.root)
     }
 
-    override fun addNewComment(comment: String) {
-        val newComment = commentAdapter.commentData.plus(Comment(
-            image = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg",
-            name = "Kevin",
-            content = comment,
-            date = "09 september 1998"
-        ))
+    override fun addNewComment(comment: String, postId: Int) {
+        val newComment = InsertCommentRequest(
+            postId = postId,
+            comment = comment
+        )
 
-        commentAdapter.commentData = newComment
+        val session = getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+            .getString(getString(R.string.session_cache), "")
 
-        commentAdapter.notifyDataSetChanged()
+        coroutineScope.launch {
+            singlePostViewModel.insertComment(session, newComment)
+            singlePostViewModel.getCommentDetail(session, postId)
+        }
     }
 }

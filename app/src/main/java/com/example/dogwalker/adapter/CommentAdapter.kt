@@ -34,15 +34,17 @@ class CommentAdapter(var commentData: List<Comment>) : RecyclerView.Adapter<Comm
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.name_comment.text = commentData[position].name
-        holder.itemView.content_comment.text = commentData[position].content
+        holder.itemView.content_comment.text = commentData[position].comment
         holder.itemView.date_comment.text = commentData[position].date
 
-        val imgUri = commentData[position].image.toUri().buildUpon().scheme("https").build()
-        val imageView = holder.itemView.image_comment
+        if(commentData[position].photo != null) {
+            val imgUri = commentData[position].photo!!.toUri().buildUpon().scheme("https").build()
+            val imageView = holder.itemView.image_comment
 
-        Glide.with(imageView.context)
-            .load(imgUri)
-            .into(imageView)
+            Glide.with(imageView.context)
+                .load(imgUri)
+                .into(imageView)
+        }
     }
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)

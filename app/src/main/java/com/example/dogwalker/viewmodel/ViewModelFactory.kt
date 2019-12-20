@@ -14,6 +14,7 @@ class ViewModelFactory() : ViewModelProvider.Factory {
         if(modelClass.isAssignableFrom(LoginViewModel::class.java)) return LoginViewModel() as T
         if(modelClass.isAssignableFrom(RegisterViewModel::class.java)) return RegisterViewModel() as T
         if(modelClass.isAssignableFrom(RegisterDogViewModel::class.java)) return RegisterDogViewModel() as T
+        if(modelClass.isAssignableFrom(SinglePostViewModel::class.java)) return SinglePostViewModel() as T
 
         throw IllegalArgumentException("Unknown view model class")
     }

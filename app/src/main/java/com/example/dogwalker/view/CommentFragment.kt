@@ -9,7 +9,8 @@ import androidx.fragment.app.DialogFragment
 import com.example.dogwalker.R
 import kotlinx.android.synthetic.main.fragment_comment.view.*
 
-class CommentFragment(val commentAddition: CommentAddition) : DialogFragment() {
+class CommentFragment(val commentAddition: CommentAddition,
+                      val postId: Int) : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +25,7 @@ class CommentFragment(val commentAddition: CommentAddition) : DialogFragment() {
             if(textContent.equals("")) {
                 Toast.makeText(context, "Comment should not be empty", Toast.LENGTH_SHORT).show()
             } else {
-                commentAddition.addNewComment(textContent)
+                commentAddition.addNewComment(textContent, postId)
                 dismiss()
             }
         }
@@ -37,6 +38,6 @@ class CommentFragment(val commentAddition: CommentAddition) : DialogFragment() {
     }
 
     interface CommentAddition {
-        fun addNewComment(comment: String)
+        fun addNewComment(comment: String, postId: Int)
     }
 }

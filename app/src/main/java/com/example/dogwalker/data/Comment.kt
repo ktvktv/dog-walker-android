@@ -1,8 +1,12 @@
 package com.example.dogwalker.data
 
+import com.squareup.moshi.Json
+
 data class Comment(
-    val image: String,
+    val id: Int,
+    val postId: Int,
+    val photo: String?,
     val name: String,
-    val content: String,
-    val date: String
+    val comment: String,
+    @Json(name="createdAt") val date: String
 )
