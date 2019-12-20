@@ -25,6 +25,11 @@
     <string name="phone_number">Phone Number</string>
     <string name="birthplace">Birthplace</string>
     <string name="birth_date">Birth date</string>
+    <string name="kg">Kilo Gram</string>
+    <string name="km">Kilo Metre</string>
+    <string name="hr">Hour</string>
+    <string name="rp">Rupiah</string>
+
 
     <string name="notification_text">Tracking, tap to cancel</string>
     <string name="transport_id" translatable="false">123</string>

@@ -76,6 +76,16 @@ class InfoFragment : Fragment() {
             uploadImage()
         }
 
+        //Get user and its dog data
+        val session = context?.getSharedPreferences(getString
+            (R.string.preferences_file_key), Context.MODE_PRIVATE)
+            ?.getString(getString(R.string.session_cache), "")
+
+        coroutineScope.launch {
+            infoViewModel.getUserInformation(session!!)
+            infoViewModel.getDogInformation(session!!)
+        }
+
         //Go to add dog page.
         binding.addDogImage.setOnClickListener {
             val intent = Intent(context, RegisterDogActivity::class.java)
