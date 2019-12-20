@@ -3,6 +3,7 @@ package com.example.dogwalker.view
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,19 +42,20 @@ class LoginFragment : Fragment() {
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater)
 
-        binding.loginButton.setOnClickListener {
-            val phoneNumber = binding.phoneNumber.text.toString().trim()
-            val password = binding.passwordEditText.text.toString().trim()
-            if(phoneNumber == "" || password == "") {
-                Toast.makeText(context, "Phone number and password must be filled", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+        binding.passwordEditText.setOnKeyListener { v, keyCode, event ->
+            if(event.action == KeyEvent.ACTION_DOWN) {
+                when(keyCode) {
+                    KeyEvent.KEYCODE_ENTER -> {
+                        doLogin()
+                        true
+                    }
+                    else -> false
+                }
+            } else false
+        }
 
-            coroutineScope.launch {
-                loginViewModel.checkCredential(LoginRequest(
-                    phoneNumber, password
-                ))
-            }
+        binding.loginButton.setOnClickListener {
+            doLogin()
         }
 
         loginViewModel.isLoginSuccess.observe(this, Observer{
@@ -80,5 +82,20 @@ class LoginFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    fun doLogin() {
+        val phoneNumber = binding.phoneNumber.text.toString().trim()
+        val password = binding.passwordEditText.text.toString().trim()
+        if(phoneNumber == "" || password == "") {
+            Toast.makeText(context, "Phone number and password must be filled", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        coroutineScope.launch {
+            loginViewModel.checkCredential(LoginRequest(
+                phoneNumber, password
+            ))
+        }
     }
 }

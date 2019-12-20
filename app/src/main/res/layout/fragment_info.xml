@@ -134,8 +134,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/delius"
-                android:text="Customer"
+                android:text="@{user.type}"
                 android:textSize="18sp"
+                tools:text="Customer"
                 app:layout_constraintBottom_toBottomOf="@+id/gender_info_image"
                 app:layout_constraintEnd_toEndOf="@+id/user_picture"
                 app:layout_constraintStart_toEndOf="@+id/gender_info_image"
@@ -168,6 +169,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="@+id/phone_info_text"
                 app:layout_constraintTop_toBottomOf="@+id/phone_info_text"
+                android:text="@{user.nik}"
                 tools:text="1111111111111111" />
 
             <TextView

@@ -16,7 +16,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#4D4751"
             android:orientation="vertical">
 
             <TextView
@@ -26,7 +25,6 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/delius"
                 android:text="@string/register_title"
-                android:textColor="#E8E4E4"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
@@ -37,14 +35,12 @@
                 android:id="@+id/name_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="48dp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:fontFamily="@font/delius"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
-                android:textColor="#E8E4E4"
-                android:textColorHint="#E8E4E4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -59,8 +55,6 @@
                 android:fontFamily="@font/delius"
                 android:hint="@string/email"
                 android:inputType="textPersonName"
-                android:textColor="#E8E4E4"
-                android:textColorHint="#E8E4E4"
                 app:layout_constraintEnd_toEndOf="@+id/name_edit_text"
                 app:layout_constraintStart_toStartOf="@+id/name_edit_text"
                 app:layout_constraintTop_toBottomOf="@+id/name_edit_text" />
@@ -76,8 +70,6 @@
                 android:gravity="start|top"
                 android:hint="@string/address"
                 android:inputType="textMultiLine"
-                android:textColor="#E8E4E4"
-                android:textColorHint="#E8E4E4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nik_edit_text" />
@@ -92,8 +84,6 @@
                 android:fontFamily="@font/delius"
                 android:hint="@string/phone_number"
                 android:inputType="phone"
-                android:textColor="#E8E4E4"
-                android:textColorHint="#E8E4E4"
                 app:layout_constraintEnd_toEndOf="@+id/radioGroup2"
                 app:layout_constraintStart_toStartOf="@+id/radioGroup2"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
@@ -108,8 +98,6 @@
                 android:fontFamily="@font/delius"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textColor="#E8E4E4"
-                android:textColorHint="#E8E4E4"
                 app:layout_constraintEnd_toEndOf="@+id/emailEditText"
                 app:layout_constraintStart_toStartOf="@+id/emailEditText"
                 app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
@@ -124,8 +112,6 @@
                 android:fontFamily="@font/delius"
                 android:hint="@string/birthplace"
                 android:inputType="textPersonName"
-                android:textColor="#E8E4E4"
-                android:textColorHint="#E8E4E4"
                 app:layout_constraintEnd_toEndOf="@+id/address_edit_text"
                 app:layout_constraintStart_toStartOf="@+id/address_edit_text"
                 app:layout_constraintTop_toBottomOf="@+id/address_edit_text" />
@@ -134,7 +120,7 @@
                 android:id="@+id/birth_date_calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
                 app:layout_constraintBottom_toTopOf="@+id/register_button"
@@ -158,18 +144,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/male"
-                    android:textColor="#E8E4E4"
-                    android:textColorHint="#E8E4E4" />
+                    android:text="@string/male" />
 
                 <RadioButton
                     android:id="@+id/female_radio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/female"
-                    android:textColor="#E8E4E4"
-                    android:textColorHint="#E8E4E4" />
+                    android:text="@string/female" />
             </RadioGroup>
 
             <Button
@@ -187,10 +169,9 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:fontFamily="@font/delius"
                 android:text="@string/birth_date"
-                android:textColor="#E8E4E4"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/birthplace_edit_text"
                 app:layout_constraintStart_toStartOf="@+id/birthplace_edit_text"
@@ -205,8 +186,6 @@
                 android:fontFamily="@font/delius"
                 android:hint="@string/nik"
                 android:inputType="textPersonName"
-                android:textColor="#E8E4E4"
-                android:textColorHint="#E8E4E4"
                 app:layout_constraintEnd_toEndOf="@+id/phone_edit_text"
                 app:layout_constraintStart_toStartOf="@+id/phone_edit_text"
                 app:layout_constraintTop_toBottomOf="@+id/phone_edit_text" />

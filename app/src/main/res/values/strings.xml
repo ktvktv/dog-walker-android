@@ -12,6 +12,7 @@
     <string name="type_cache">Type</string>
 
     <!--Registration-->
+    <string name="register_invitation">Don\'t have an account?</string>
     <string name="register_title">Registration</string>
     <string name="name">Name</string>
     <string name="gender">Gender</string>
