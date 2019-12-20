@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/delius"
+                android:text="Register Walker"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/weight_text"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:fontFamily="@font/delius"
+                android:hint="Max Weight"
+                android:inputType="textPersonName"
+                android:numeric="integer"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/textView5"
+                app:layout_constraintStart_toStartOf="@+id/textView5"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <EditText
+                android:id="@+id/max_distance_text"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:fontFamily="@font/delius"
+                android:hint="Max Distance"
+                android:inputType="textPersonName"
+                android:numeric="integer"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/weight_text"
+                app:layout_constraintStart_toStartOf="@+id/weight_text"
+                app:layout_constraintTop_toBottomOf="@+id/weight_text" />
+
+            <EditText
+                android:id="@+id/max_duration_text"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:fontFamily="@font/delius"
+                android:hint="Max Walk Duration"
+                android:inputType="textPersonName"
+                android:numeric="decimal"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/max_distance_text"
+                app:layout_constraintStart_toStartOf="@+id/max_distance_text"
+                app:layout_constraintTop_toBottomOf="@+id/max_distance_text" />
+
+            <EditText
+                android:id="@+id/pricing_text"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:fontFamily="@font/delius"
+                android:hint="Pricing"
+                android:inputType="textPersonName"
+                android:numeric="integer"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/max_duration_text"
+                app:layout_constraintStart_toStartOf="@+id/max_duration_text"
+                app:layout_constraintTop_toBottomOf="@+id/max_duration_text" />
+
+            <Button
+                android:id="@+id/register_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/register_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/scrollView5"
+                app:layout_constraintStart_toStartOf="@+id/scrollView5"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView5" />
+
+            <ScrollView
+                android:id="@+id/scrollView5"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/pricing_text"
+                app:layout_constraintStart_toStartOf="@+id/pricing_text"
+                app:layout_constraintTop_toBottomOf="@+id/pricing_text">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/description_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:fontFamily="@font/delius"
+                        android:hint="Description"
+                        android:inputType="textLongMessage|textMultiLine|textPersonName"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

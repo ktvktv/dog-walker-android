@@ -33,10 +33,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.dogwalker.LOGIN_SUCCESSFUL
-import com.example.dogwalker.R
-import com.example.dogwalker.RegisterDogActivity
-import com.example.dogwalker.WalkerDashboard
+import com.example.dogwalker.*
 import com.example.dogwalker.adapter.InfoAdapter
 import com.example.dogwalker.data.User
 import com.example.dogwalker.viewmodel.InfoViewModel
@@ -83,7 +80,7 @@ class InfoFragment : Fragment() {
             infoViewModel.getDogInformation(session!!)
         }
 
-        binding.pictureInfoButton.setOnClickListener {
+        binding.userPicture.setOnClickListener {
             //Get the picture from gallery and set it.
             uploadImage()
         }
@@ -99,6 +96,12 @@ class InfoFragment : Fragment() {
         binding.changeInfoButton.setOnClickListener{
             val intent = Intent(context, WalkerDashboard::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+            startActivity(intent)
+        }
+
+        binding.registerWalkerButton.setOnClickListener {
+            val intent = Intent(context, RegisterWalkerActivity::class.java)
 
             startActivity(intent)
         }
@@ -130,6 +133,16 @@ class InfoFragment : Fragment() {
                     binding.genderInfoImage.setImageResource(R.drawable.male_icon)
                 } else {
                     binding.genderInfoImage.setImageResource(R.drawable.female_icon)
+                }
+
+                if(userData.isWalker) {
+                    binding.registerWalkerButton.visibility = View.GONE
+                    binding.walkerRegistrationText.visibility = View.GONE
+                    binding.changeInfoButton.visibility = View.VISIBLE
+                } else {
+                    binding.registerWalkerButton.visibility = View.VISIBLE
+                    binding.walkerRegistrationText.visibility = View.VISIBLE
+                    binding.changeInfoButton.visibility = View.GONE
                 }
 
                 //If user image is empty then don't do anything.

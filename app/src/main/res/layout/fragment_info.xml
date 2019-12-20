@@ -9,179 +9,180 @@
             type="com.example.dogwalker.data.User" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/picture_info_button"
-            android:layout_width="85dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="3dp"
-            android:fontFamily="@font/delius"
-            android:text="@string/profile_button"
-            app:layout_constraintEnd_toEndOf="@+id/user_picture"
-            app:layout_constraintHorizontal_bias="0.474"
-            app:layout_constraintStart_toStartOf="@+id/user_picture"
-            app:layout_constraintTop_toBottomOf="@+id/user_picture" />
-
-        <ImageView
-            android:id="@+id/user_picture"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/profile_picture"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/profile_picture" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/info_recycler_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="8dp"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView17"
-            tools:layout="@layout/info_item" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/name_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/delius"
-            app:layout_constraintStart_toEndOf="@+id/user_picture"
-            app:layout_constraintTop_toTopOf="@+id/user_picture"
-            android:text="@{user.name}"
-            tools:text="Kevin Tigravictor" />
+            <ImageView
+                android:id="@+id/user_picture"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/profile_picture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/profile_picture" />
 
-        <TextView
-            android:id="@+id/address_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/delius"
-            app:layout_constraintStart_toStartOf="@+id/name_info_text"
-            app:layout_constraintTop_toBottomOf="@+id/name_info_text"
-            android:text="@{user.address}"
-            tools:text="Jl. Barleria VI B1/H5" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/info_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView17"
+                tools:layout="@layout/info_item" />
 
-        <TextView
-            android:id="@+id/birthdate_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/delius"
-            app:layout_constraintStart_toStartOf="@+id/address_info_text"
-            app:layout_constraintTop_toBottomOf="@+id/address_info_text"
-            android:text="@{user.birthDate}"
-            tools:text="09 September 1998" />
+            <TextView
+                android:id="@+id/name_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/delius"
+                app:layout_constraintStart_toEndOf="@+id/user_picture"
+                app:layout_constraintTop_toTopOf="@+id/user_picture"
+                android:text="@{user.name}"
+                tools:text="Kevin Tigravictor" />
 
-        <ImageView
-            android:id="@+id/gender_info_image"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/picture_info_button"
-            app:layout_constraintTop_toBottomOf="@+id/phone_info_text"
-            tools:srcCompat="@drawable/male_icon" />
+            <TextView
+                android:id="@+id/address_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/delius"
+                android:text="@{user.address}"
+                app:layout_constraintStart_toStartOf="@+id/name_info_text"
+                app:layout_constraintTop_toBottomOf="@+id/name_info_text"
+                tools:text="Jl. Barleria VI B1/H5" />
 
-        <TextView
-            android:id="@+id/email_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/delius"
-            android:text="@{user.email}"
-            app:layout_constraintStart_toStartOf="@+id/birthdate_info_text"
-            app:layout_constraintTop_toBottomOf="@+id/birthdate_info_text"
-            tools:text="kevin.victor30@yahoo.com" />
+            <TextView
+                android:id="@+id/birthdate_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/delius"
+                android:text="@{user.birthDate}"
+                app:layout_constraintStart_toStartOf="@+id/address_info_text"
+                app:layout_constraintTop_toBottomOf="@+id/address_info_text"
+                tools:text="09 September 1998" />
 
-        <TextView
-            android:id="@+id/phone_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/delius"
-            android:text="@{user.phoneNumber}"
-            app:layout_constraintStart_toStartOf="@+id/email_info_text"
-            app:layout_constraintTop_toBottomOf="@+id/email_info_text"
-            tools:text="+6281290001998" />
+            <ImageView
+                android:id="@+id/gender_info_image"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/user_picture"
+                app:layout_constraintTop_toBottomOf="@+id/user_picture"
+                tools:srcCompat="@drawable/male_icon" />
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/delius"
-            android:text="Your Dogs"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/picture_info_button" />
+            <TextView
+                android:id="@+id/email_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/delius"
+                android:text="@{user.email}"
+                app:layout_constraintStart_toStartOf="@+id/birthdate_info_text"
+                app:layout_constraintTop_toBottomOf="@+id/birthdate_info_text"
+                tools:text="kevin.victor30@yahoo.com" />
 
-        <Button
-            android:id="@+id/change_info_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/delius"
-            android:text="@string/role_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/phone_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/delius"
+                android:text="@{user.phoneNumber}"
+                app:layout_constraintStart_toStartOf="@+id/email_info_text"
+                app:layout_constraintTop_toBottomOf="@+id/email_info_text"
+                tools:text="+6281290001998" />
 
-        <TextView
-            android:id="@+id/role_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/delius"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/change_info_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_recycler_view"
-            android:text="Customer" />
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/delius"
+                android:text="Your Dogs"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gender_info_image" />
 
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/role_info_text"
-            app:layout_constraintEnd_toStartOf="@+id/role_info_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/role_info_text"
-            app:srcCompat="@drawable/paw_print_64"
-            tools:srcCompat="@drawable/paw_print_64" />
+            <Button
+                android:id="@+id/change_info_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:fontFamily="@font/delius"
+                android:text="@string/role_button"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/info_recycler_view" />
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/role_info_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/role_info_text"
-            app:layout_constraintTop_toTopOf="@+id/role_info_text"
-            app:srcCompat="@drawable/paw_print_64"
-            tools:srcCompat="@drawable/paw_print_64" />
+            <TextView
+                android:id="@+id/role_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/delius"
+                android:text="Customer"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/gender_info_image"
+                app:layout_constraintEnd_toEndOf="@+id/user_picture"
+                app:layout_constraintStart_toEndOf="@+id/gender_info_image"
+                app:layout_constraintTop_toTopOf="@+id/gender_info_image" />
 
-        <ImageView
-            android:id="@+id/add_dog_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/info_recycler_view"
-            app:layout_constraintStart_toEndOf="@+id/textView17"
-            app:srcCompat="@drawable/ic_add_circle_black_24dp" />
+            <ImageView
+                android:id="@+id/add_dog_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                app:layout_constraintStart_toEndOf="@+id/textView17"
+                app:layout_constraintTop_toTopOf="@+id/textView17"
+                app:srcCompat="@drawable/ic_add_circle_black_24dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/register_walker_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="@string/register_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/info_recycler_view" />
+
+            <TextView
+                android:id="@+id/nik_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/phone_info_text"
+                app:layout_constraintTop_toBottomOf="@+id/phone_info_text"
+                tools:text="1111111111111111" />
+
+            <TextView
+                android:id="@+id/walker_registration_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/delius"
+                android:text="Want to be a walker?"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/register_walker_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>
