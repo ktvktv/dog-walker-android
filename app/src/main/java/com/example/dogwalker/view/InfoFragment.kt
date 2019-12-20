@@ -71,15 +71,6 @@ class InfoFragment : Fragment() {
     ): View? {
         binding = FragmentInfoBinding.inflate(inflater)
 
-        val session = context?.getSharedPreferences(getString
-            (R.string.preferences_file_key), Context.MODE_PRIVATE)
-            ?.getString(getString(R.string.session_cache), "")
-
-        coroutineScope.launch {
-            infoViewModel.getUserInformation(session!!)
-            infoViewModel.getDogInformation(session!!)
-        }
-
         binding.userPicture.setOnClickListener {
             //Get the picture from gallery and set it.
             uploadImage()
@@ -202,6 +193,18 @@ class InfoFragment : Fragment() {
                 Log.d(TAG, "Negative permission clicked.")
                 dialog.dismiss()
             }.create()
+    }
+
+    override fun onResume() {
+        val session = context?.getSharedPreferences(getString
+            (R.string.preferences_file_key), Context.MODE_PRIVATE)
+            ?.getString(getString(R.string.session_cache), "")
+
+        coroutineScope.launch {
+            infoViewModel.getUserInformation(session!!)
+            infoViewModel.getDogInformation(session!!)
+        }
+        super.onResume()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
