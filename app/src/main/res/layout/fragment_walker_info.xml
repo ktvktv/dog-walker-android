@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="walker"
+            type="com.example.dogwalker.data.Walker" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/profile_walker"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/profile_picture" />
+
+            <TextView
+                android:id="@+id/name_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/delius"
+                android:text="@{walker.name}"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gender_walker_picture" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="180dp" />
+
+            <TextView
+                android:id="@+id/phone_number_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="@font/delius"
+                android:text="@{walker.phoneNumber}"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/name_walker_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/name_walker_text" />
+
+            <TextView
+                android:id="@+id/email_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/delius"
+                android:text="@{walker.email}"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name_walker_text" />
+
+            <TextView
+                android:id="@+id/address_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/delius"
+                android:text="@{walker.address}"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/email_walker_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/email_walker_text" />
+
+            <TextView
+                android:id="@+id/birthdate_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/delius"
+                android:text="@{walker.dateOfBirth}"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email_walker_text" />
+
+            <TextView
+                android:id="@+id/birthplace_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="11dp"
+                android:fontFamily="@font/delius"
+                android:text="@{walker.placeOfBirth}"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/birthdate_walker_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/birthdate_walker_text" />
+
+            <ImageView
+                android:id="@+id/gender_walker_picture"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/profile_walker"
+                app:layout_constraintStart_toStartOf="@+id/profile_walker"
+                app:layout_constraintTop_toBottomOf="@+id/profile_walker"
+                tools:srcCompat="@drawable/male_icon" />
+
+            <ImageView
+                android:id="@+id/verified_picture"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/gender_walker_picture"
+                app:layout_constraintStart_toEndOf="@+id/gender_walker_picture"
+                app:layout_constraintTop_toTopOf="@+id/gender_walker_picture"
+                app:srcCompat="@drawable/check" />
+
+            <ImageView
+                android:id="@+id/recommended_picture"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/gender_walker_picture"
+                app:layout_constraintEnd_toStartOf="@+id/gender_walker_picture"
+                app:layout_constraintTop_toTopOf="@+id/gender_walker_picture"
+                app:srcCompat="@drawable/recommended" />
+
+            <TextView
+                android:id="@+id/max_distance_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/delius"
+                android:text="Max Distance: 10 km"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view7" />
+
+            <TextView
+                android:id="@+id/max_duration_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/delius"
+                android:text="Max Duration: 5 hour"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/max_distance_walker_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/max_distance_walker_text" />
+
+            <TextView
+                android:id="@+id/max_dog_weight_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/delius"
+                android:text="Max Dog Weight: 10 kg"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/max_distance_walker_text" />
+
+            <RatingBar
+                android:id="@+id/rating_walker"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/max_dog_weight_walker_text" />
+
+            <TextView
+                android:id="@+id/pricing_walker_text"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/delius"
+                android:text="Pricing: Rp. 100.000/hr"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/max_dog_weight_walker_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/max_dog_weight_walker_text" />
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="#000000"
+                app:layout_constraintEnd_toEndOf="@+id/birthplace_walker_text"
+                app:layout_constraintStart_toStartOf="@+id/birthdate_walker_text"
+                app:layout_constraintTop_toBottomOf="@+id/birthdate_walker_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
