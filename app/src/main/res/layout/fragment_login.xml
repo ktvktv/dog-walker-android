@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="120dp"
                 android:fontFamily="@font/delius"
                 android:text="@string/login_button"
                 app:layout_constraintBottom_toTopOf="@+id/textView2"

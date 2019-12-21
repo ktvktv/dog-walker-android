@@ -10,12 +10,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogwalker.MapsActivity
 import com.example.dogwalker.adapter.OngoingOrderAdapter
+import com.example.dogwalker.data.NotifyData
 import com.example.dogwalker.data.Order
 import com.example.dogwalker.databinding.FragmentOngoingOrderBinding
 import com.example.dogwalker.viewmodel.OngoingOrderViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
 
-class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListener {
+class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListener, OngoingOrderAdapter.PendingClickListener{
 
     private val ongoingOrderViewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory()).get(OngoingOrderViewModel::class.java)
@@ -35,7 +36,7 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
 
         val orderList = ongoingOrderViewModel.getOrderList()
 
-        binding.ongoingOrderRecycler.adapter = OngoingOrderAdapter("Customer", orderList, this)
+        binding.ongoingOrderRecycler.adapter = OngoingOrderAdapter("Customer", orderList, this, this)
         binding.ongoingOrderRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         return binding.root
@@ -47,5 +48,13 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
         intent.putExtra(USER_TYPE, userType)
 
         startActivity(intent)
+    }
+
+    override fun pendingClick(pendingData: NotifyData) {
+        val newFragment = OrderDecisionFragment(pendingData)
+
+//        newFragment.dialog!!.window.setLayout(300, 350)
+
+        newFragment.show(activity!!.supportFragmentManager, "Dialog")
     }
 }

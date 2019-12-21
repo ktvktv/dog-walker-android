@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogwalker.R
+import com.example.dogwalker.data.NotifyData
 import com.example.dogwalker.data.Order
 import kotlinx.android.synthetic.main.ongoing_order_item.view.*
 
 class OngoingOrderAdapter(val userType: String, val listOrder: List<Order>,
-                          val ongoingClickListener: OngoingClickListener
+                          val ongoingClickListener: OngoingClickListener,
+                          val pendingClickListener: PendingClickListener
 ) : RecyclerView.Adapter<OngoingOrderAdapter.ViewHolder>() {
 
     private val TAG = OngoingOrderAdapter::class.java.simpleName
@@ -48,17 +50,27 @@ class OngoingOrderAdapter(val userType: String, val listOrder: List<Order>,
             Log.d(TAG, "view holder position: $layoutPosition")
             //Using shared preferences to store the data.
             var phone = "081293312313"
-            if(listOrder[layoutPosition].status.equals("On Going")) {
-                if(this@OngoingOrderAdapter.userType.equals("Customer")) {
-                    phone = listOrder[layoutPosition].phone
-                }
 
-                ongoingClickListener.onClick(
-                    phone,
-                    this@OngoingOrderAdapter.userType
-                )
-            } else {
-                Toast.makeText(v!!.context, "Tracking only for current order", Toast.LENGTH_SHORT).show()
+            val order = listOrder[layoutPosition]
+            when {
+                order.status == "On Going" -> {
+                    if(this@OngoingOrderAdapter.userType.equals("Customer")) {
+                        phone = listOrder[layoutPosition].phone
+                    }
+
+                    ongoingClickListener.onClick(
+                        phone,
+                        this@OngoingOrderAdapter.userType
+                    )
+                }
+                order.status == "Pending" -> {
+                    pendingClickListener.pendingClick(NotifyData(
+                        order.userImageUrl,
+                        "${order.name} want you to walk ${order.name}'s dog",
+                        order.date
+                    ))
+                }
+                else -> Toast.makeText(v!!.context, "Tracking only for current order", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -66,5 +78,9 @@ class OngoingOrderAdapter(val userType: String, val listOrder: List<Order>,
 
     interface OngoingClickListener {
         fun onClick(phone: String, walkerType: String)
+    }
+
+    interface PendingClickListener {
+        fun pendingClick(pendingData: NotifyData)
     }
 }

@@ -3,71 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:background="#B6BD65">
+    android:layout_height="300dp">
 
     <TextView
         android:id="@+id/name_ongoing_order"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_marginTop="64dp"
         android:fontFamily="@font/delius"
-        android:text="TextView"
+        android:text="Kevin Tigravictor"
         android:textAlignment="center"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/status_ongoing_order"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:background="#0A0A0A"
         android:fontFamily="@font/delius"
-        android:text="TextView"
+        android:text="Pending"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/name_ongoing_order"
-        app:layout_constraintStart_toStartOf="@+id/name_ongoing_order"
-        app:layout_constraintTop_toBottomOf="@+id/name_ongoing_order" />
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_ongoing_order" />
 
     <TextView
         android:id="@+id/date_ongoing_order"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:fontFamily="@font/delius"
-        android:text="TextView"
+        android:text="18:00 - 19:00 09/09/1998"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/status_ongoing_order"
-        app:layout_constraintStart_toStartOf="@+id/status_ongoing_order"
-        app:layout_constraintTop_toBottomOf="@+id/status_ongoing_order" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/address_text_view"
+        app:layout_constraintStart_toStartOf="@+id/address_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/address_text_view" />
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="#586948"
+        android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/address_text_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="TextView"
+        android:fontFamily="@font/delius"
+        android:text="Jl. Barleria VI B1/H5"
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_ongoing_order" />
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/name_ongoing_order"
+        app:layout_constraintStart_toStartOf="@+id/name_ongoing_order"
+        app:layout_constraintTop_toBottomOf="@+id/name_ongoing_order" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

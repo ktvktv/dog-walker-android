@@ -5,5 +5,6 @@ data class Order(
     val phone: String,
     val status: String,
     val date: String,
-    val address: String
+    val address: String,
+    val userImageUrl: String
 )
