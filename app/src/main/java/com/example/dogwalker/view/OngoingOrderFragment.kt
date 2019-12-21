@@ -1,5 +1,6 @@
 package com.example.dogwalker.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogwalker.MapsActivity
+import com.example.dogwalker.R
 import com.example.dogwalker.adapter.OngoingOrderAdapter
 import com.example.dogwalker.data.NotifyData
 import com.example.dogwalker.data.Order
@@ -36,7 +38,10 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
 
         val orderList = ongoingOrderViewModel.getOrderList()
 
-        binding.ongoingOrderRecycler.adapter = OngoingOrderAdapter("Customer", orderList, this, this)
+        val phoneNumber = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+            .getString(getString(R.string.phone_number_cache), "")
+
+        binding.ongoingOrderRecycler.adapter = OngoingOrderAdapter("Customer", orderList, this, this, phoneNumber)
         binding.ongoingOrderRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         return binding.root

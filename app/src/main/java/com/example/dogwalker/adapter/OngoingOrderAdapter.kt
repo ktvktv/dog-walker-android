@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.ongoing_order_item.view.*
 
 class OngoingOrderAdapter(val userType: String, val listOrder: List<Order>,
                           val ongoingClickListener: OngoingClickListener,
-                          val pendingClickListener: PendingClickListener
+                          val pendingClickListener: PendingClickListener,
+                          val userPhone: String
 ) : RecyclerView.Adapter<OngoingOrderAdapter.ViewHolder>() {
 
     private val TAG = OngoingOrderAdapter::class.java.simpleName
@@ -30,8 +31,40 @@ class OngoingOrderAdapter(val userType: String, val listOrder: List<Order>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.name_ongoing_order.text = listOrder[position].name
-        holder.itemView.status_ongoing_order.text = listOrder[position].status
+        holder.itemView.status_ongoing_order_button.text = listOrder[position].status
         holder.itemView.date_ongoing_order.text = listOrder[position].date
+
+        holder.itemView.status_ongoing_order_button.setOnClickListener {
+            val order = listOrder[position]
+            when(it.status_ongoing_order_button.text) {
+                "On Going" -> {
+                    var phone = userPhone
+                    if(userType == "Customer") {
+                        phone = order.phone
+                    }
+
+                    ongoingClickListener.onClick(
+                        phone,
+                        userType
+                    )
+                }
+
+                "Pending" -> {
+                    if(userType == "Walker") {
+                        pendingClickListener.pendingClick(
+                            NotifyData(
+                                order.userImageUrl,
+                                "${order.name} want you to walk ${order.name}'s dog",
+                                order.date
+                            )
+                        )
+                    }
+                }
+
+                else -> Toast.makeText(holder.itemView.context, "Tracking only for current order", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
         if(!userType.equals("Walker")) {
             holder.itemView.address_text_view.visibility = View.GONE
@@ -40,41 +73,7 @@ class OngoingOrderAdapter(val userType: String, val listOrder: List<Order>,
         }
     }
 
-    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
-
-        init {
-            view.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            Log.d(TAG, "view holder position: $layoutPosition")
-            //Using shared preferences to store the data.
-            var phone = "081293312313"
-
-            val order = listOrder[layoutPosition]
-            when {
-                order.status == "On Going" -> {
-                    if(this@OngoingOrderAdapter.userType.equals("Customer")) {
-                        phone = listOrder[layoutPosition].phone
-                    }
-
-                    ongoingClickListener.onClick(
-                        phone,
-                        this@OngoingOrderAdapter.userType
-                    )
-                }
-                order.status == "Pending" -> {
-                    pendingClickListener.pendingClick(NotifyData(
-                        order.userImageUrl,
-                        "${order.name} want you to walk ${order.name}'s dog",
-                        order.date
-                    ))
-                }
-                else -> Toast.makeText(v!!.context, "Tracking only for current order", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-    }
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     interface OngoingClickListener {
         fun onClick(phone: String, walkerType: String)

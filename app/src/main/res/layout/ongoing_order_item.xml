@@ -18,11 +18,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/status_ongoing_order"
+    <Button
+        android:id="@+id/status_ongoing_order_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#0A0A0A"
+        android:background="#645E5E"
         android:fontFamily="@font/delius"
         android:text="Pending"
         android:textAlignment="center"

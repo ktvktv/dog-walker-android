@@ -68,6 +68,7 @@ class LoginFragment : Fragment() {
                     putString(getString(R.string.session_cache), userCache?.session)
                     putString(getString(R.string.name_cache), userCache?.body?.name)
                     putString(getString(R.string.type_cache), userCache?.body?.type)
+                    putString(getString(R.string.phone_number_cache), userCache?.body?.phoneNumber)
                     apply()
                 }
 

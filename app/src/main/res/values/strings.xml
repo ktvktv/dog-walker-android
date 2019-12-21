@@ -10,6 +10,7 @@
     <string name="session_cache">Session</string>
     <string name="name_cache">Name</string>
     <string name="type_cache">Type</string>
+    <string name="phone_number_cache">PhoneNumber</string>
 
     <!--Registration-->
     <string name="register_invitation">Don\'t have an account?</string>
