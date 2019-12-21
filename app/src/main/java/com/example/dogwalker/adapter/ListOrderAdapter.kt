@@ -25,16 +25,22 @@ class ListOrderAdapter(val listOrder: List<Walker>, val context: Context,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.rating_bar_order.rating = listOrder[position].rating
+        val rating = if(listOrder[position].raters != 0) {
+            listOrder[position].rating/listOrder[position].raters
+        } else 0
+
+        holder.itemView.rating_bar_order.rating = rating.toFloat()
         holder.itemView.description_order_text.text = listOrder[position].description
         holder.itemView.name_order_text.text = listOrder[position].name
 
-        val imgUri = listOrder[position].imageUrl.toUri().buildUpon().scheme("https").build()
-        val imageView = holder.itemView.profile_order_image
+        if(listOrder[position].photo != null && listOrder[position].photo != "") {
+            val imgUri = listOrder[position].photo!!.toUri().buildUpon().scheme("https").build()
+            val imageView = holder.itemView.profile_order_image
 
-        Glide.with(imageView.context)
-            .load(imgUri)
-            .into(imageView)
+            Glide.with(imageView.context)
+                .load(imgUri)
+                .into(imageView)
+        }
     }
 
     class ViewHolder(val view: View, val listOrderOnClickListener: ListOrderOnClickListener) : RecyclerView.ViewHolder(view) {

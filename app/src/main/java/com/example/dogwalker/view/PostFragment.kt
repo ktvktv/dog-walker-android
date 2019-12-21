@@ -100,7 +100,6 @@ class PostFragment : Fragment(), PostViewAdapter.PostViewAdapterClickListener, N
     }
 
     override fun addNewPost(content: String, title: String) {
-        //TODO:Using session for image, name, type.
         val newPost = InsertPostRequest(title, content)
 
         val session = context!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)

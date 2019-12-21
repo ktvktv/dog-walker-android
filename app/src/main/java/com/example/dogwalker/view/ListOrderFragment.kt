@@ -26,25 +26,10 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener 
         savedInstanceState: Bundle?
     ): View? {
         Log.d(TAG, "${args.breedId}/${args.date}/${args.hours}/${args.time}")
-
         val view = inflater.inflate(R.layout.fragment_list_order, container, false)
-
         val recyclerView = view.findViewById<RecyclerView>(R.id.list_order_recycler)
 
-        val dummyData = listOf(
-            Walker(
-                imageUrl = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg",
-                name = "Darren Cavell",
-                description = "I'm darren cavell.",
-                rating = 5f),
-            Walker(
-                imageUrl = "https://pbs.twimg.com/profile_images/378800000110177275/c441ab64d2e233d63eeed78d5b116571_400x400.jpeg",
-                name = "Willy Setiawan",
-                description = "Hello, my name is Willy Setiawan. I have a passion to walking a dog, it's really fun and exciting. Nice to meet you! Happy to be here, meeting you guys. Lorem Ipsum wkwkwkkwkwkwkwkwkwkwkwk",
-                rating = 2.6f)
-        )
-
-        recyclerView.adapter = ListOrderAdapter(dummyData, context!!, this)
+        recyclerView.adapter = ListOrderAdapter(listOf(), context!!, this)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         return view

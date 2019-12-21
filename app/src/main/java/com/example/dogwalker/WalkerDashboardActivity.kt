@@ -8,28 +8,22 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.dogwalker.animation.PageTransformer
-import com.example.dogwalker.view.DashboardFragment
 import com.example.dogwalker.view.InfoFragment
 import com.example.dogwalker.view.OngoingOrderFragment
 import com.example.dogwalker.view.PostFragment
+import com.example.dogwalker.view.WalkerInfoFragment
 import com.google.android.material.tabs.TabLayout
 
-class WalkerDashboard : AppCompatActivity() {
+class WalkerDashboardActivity : AppCompatActivity() {
 
     private val NUM_PAGES = 3
-    private val TAG = WalkerDashboard::class.java.simpleName
-
-    private lateinit var userType: String
-
+    private val TAG = WalkerDashboardActivity::class.java.simpleName
     private lateinit var viewPager: ViewPager
-
     private lateinit var tabLayout: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-
-        userType = "Walker"
 
         viewPager = findViewById(R.id.view_pager)
         tabLayout = findViewById(R.id.tab_layout_dashboard)
@@ -55,7 +49,7 @@ class WalkerDashboard : AppCompatActivity() {
 
         override fun getItem(position: Int): Fragment {
             return when(position) {
-                0 -> InfoFragment()
+                0 -> WalkerInfoFragment()
                 1 -> OngoingOrderFragment()
                 else -> PostFragment()
             }

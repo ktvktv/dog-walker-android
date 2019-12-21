@@ -60,6 +60,9 @@ interface DogWalker {
     fun registerWalker(@Header("session") session: String,
                        @Body walkerData: RegisterWalkerRequest) : Deferred<CommonResponse>?
 
+    @GET("walker/get")
+    fun getWalkerData(@Header("session") session: String) : Deferred<WalkerResponse>?
+
     @Multipart
     @POST("dog/register")
     fun registerDog(@Header("session") session: String,

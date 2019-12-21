@@ -12,16 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.dogwalker.data.CommonResponse
 import com.example.dogwalker.databinding.FragmentInfoBinding
-import com.example.dogwalker.network.DogWalkerServiceApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import java.io.File
-import java.lang.Exception
 import androidx.core.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
@@ -35,7 +30,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.dogwalker.*
 import com.example.dogwalker.adapter.InfoAdapter
-import com.example.dogwalker.data.User
 import com.example.dogwalker.viewmodel.InfoViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
@@ -95,9 +89,10 @@ class InfoFragment : Fragment() {
 
         //Change user type
         binding.changeInfoButton.setOnClickListener{
-            val intent = Intent(context, WalkerDashboard::class.java)
+            val intent = Intent(context, WalkerDashboardActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
+            //TODO:Call api to change the type
             startActivity(intent)
         }
 
@@ -129,6 +124,7 @@ class InfoFragment : Fragment() {
                 }
 
                 binding.user = userData
+                binding.notifyChange()
 
                 if(userData.gender.trim() == "Male") {
                     binding.genderInfoImage.setImageResource(R.drawable.male_icon)
@@ -237,7 +233,6 @@ class InfoFragment : Fragment() {
                     val session = context?.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
                         ?.getString(getString(R.string.session_cache), "")
 
-                    //TODO:Network operation to upload the image into server
                     coroutineScope.launch {
                         infoViewModel.uploadImage(file, session!!)
                     }

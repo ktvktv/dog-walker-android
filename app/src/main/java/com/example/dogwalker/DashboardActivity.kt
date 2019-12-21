@@ -20,16 +20,12 @@ class DashboardActivity: AppCompatActivity() {
 
     private val TAG = DashboardActivity::class.java.simpleName
 
-    private lateinit var userType: String
     private lateinit var viewPager: ViewPager
     private lateinit var tabLayout: TabLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
-
-        //TODO: create session for 1 week
-        userType = "Customer"
 
         viewPager = findViewById(R.id.view_pager)
         tabLayout = findViewById(R.id.tab_layout_dashboard)

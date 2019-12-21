@@ -283,7 +283,7 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //Not implemented right now
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

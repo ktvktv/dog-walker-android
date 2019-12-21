@@ -51,7 +51,7 @@
         <activity android:name=".RegisterDogActivity"
             android:windowSoftInputMode="adjustPan|adjustResize">
         </activity>
-        <activity android:name=".WalkerDashboard"/>
+        <activity android:name=".WalkerDashboardActivity"/>
         <service
             android:name=".service.DogWalkerService"
             android:exported="true"
