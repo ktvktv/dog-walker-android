@@ -71,9 +71,9 @@ class InfoFragment : Fragment() {
         }
 
         //Get user and its dog data
-        val session = context?.getSharedPreferences(getString
+        val sharedPreferences = context!!.getSharedPreferences(getString
             (R.string.preferences_file_key), Context.MODE_PRIVATE)
-            ?.getString(getString(R.string.session_cache), "")
+        val session = sharedPreferences.getString(getString(R.string.session_cache), "")
 
         coroutineScope.launch {
             infoViewModel.getUserInformation(session!!)
@@ -92,7 +92,12 @@ class InfoFragment : Fragment() {
             val intent = Intent(context, WalkerDashboardActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-            //TODO:Call api to change the type
+            //TODO:Call api to change the type cache
+            with (sharedPreferences.edit()) {
+                putString(getString(R.string.type_cache), "Walker")
+                apply()
+            }
+
             startActivity(intent)
         }
 

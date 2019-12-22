@@ -31,5 +31,16 @@
         <argument
             android:name="breed_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_listOrderFragment_to_walkerInfoFragment"
+            app:destination="@id/walkerInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/walkerInfoFragment"
+        android:name="com.example.dogwalker.view.WalkerInfoFragment"
+        android:label="WalkerInfoFragment" >
+        <argument
+            android:name="walkerId"
+            app:argType="integer" />
     </fragment>
 </navigation>

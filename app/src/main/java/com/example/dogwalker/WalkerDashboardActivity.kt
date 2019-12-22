@@ -48,8 +48,12 @@ class WalkerDashboardActivity : AppCompatActivity() {
         override fun getCount(): Int = NUM_PAGES
 
         override fun getItem(position: Int): Fragment {
+            val walkerInfo = WalkerInfoFragment()
+            walkerInfo.arguments = Bundle()
+            walkerInfo.arguments!!.putInt("walkerId", -1)
+
             return when(position) {
-                0 -> WalkerInfoFragment()
+                0 -> walkerInfo
                 1 -> OngoingOrderFragment()
                 else -> PostFragment()
             }

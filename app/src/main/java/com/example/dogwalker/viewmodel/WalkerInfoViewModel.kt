@@ -14,10 +14,10 @@ class WalkerInfoViewModel : ViewModel() {
     val walkerInfoData = MutableLiveData<Walker>()
     var walkerErrorMessage: String? = null
 
-    suspend fun getWalkerData(session: String) {
+    suspend fun getWalkerData(session: String, walkerId: String) {
         var walkerResponse: WalkerResponse?
         try {
-            walkerResponse = DogWalkerServiceApi.DogWalkerService.getWalkerData(session)?.await()
+            walkerResponse = DogWalkerServiceApi.DogWalkerService.getWalkerData(session, walkerId)?.await()
         } catch(e: Exception) {
             Log.e(TAG, e.message)
             e.printStackTrace()

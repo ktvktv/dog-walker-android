@@ -119,8 +119,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/profile_walker"
                 app:layout_constraintStart_toStartOf="@+id/profile_walker"
-                app:layout_constraintTop_toBottomOf="@+id/profile_walker"
-                tools:srcCompat="@drawable/male_icon" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_walker" />
 
             <ImageView
                 android:id="@+id/verified_picture"
@@ -129,8 +128,7 @@
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/gender_walker_picture"
                 app:layout_constraintStart_toEndOf="@+id/gender_walker_picture"
-                app:layout_constraintTop_toTopOf="@+id/gender_walker_picture"
-                app:srcCompat="@drawable/check" />
+                app:layout_constraintTop_toTopOf="@+id/gender_walker_picture" />
 
             <ImageView
                 android:id="@+id/recommended_picture"
@@ -139,8 +137,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/gender_walker_picture"
                 app:layout_constraintEnd_toStartOf="@+id/gender_walker_picture"
-                app:layout_constraintTop_toTopOf="@+id/gender_walker_picture"
-                app:srcCompat="@drawable/recommended" />
+                app:layout_constraintTop_toTopOf="@+id/gender_walker_picture" />
 
             <TextView
                 android:id="@+id/max_distance_walker_text"
@@ -148,7 +145,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/delius"
-                android:text="Max Distance: 10 km"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +155,6 @@
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/delius"
-                android:text="Max Duration: 5 hour"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/max_distance_walker_text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -172,7 +167,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/delius"
-                android:text="Max Dog Weight: 10 kg"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="parent"
@@ -183,8 +177,8 @@
                 style="@style/Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +189,6 @@
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/delius"
-                android:text="Pricing: Rp. 100.000/hr"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/max_dog_weight_walker_text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -213,6 +206,17 @@
                 app:layout_constraintEnd_toEndOf="@+id/birthplace_walker_text"
                 app:layout_constraintStart_toStartOf="@+id/birthdate_walker_text"
                 app:layout_constraintTop_toBottomOf="@+id/birthdate_walker_text" />
+
+            <Button
+                android:id="@+id/change_role_walker_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/delius"
+                android:text="@string/role_button"
+                app:layout_constraintEnd_toEndOf="@+id/rating_walker"
+                app:layout_constraintStart_toStartOf="@+id/rating_walker"
+                app:layout_constraintTop_toBottomOf="@+id/rating_walker" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
