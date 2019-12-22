@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="275dp">
+    android:layout_height="300dp">
 
     <ImageView
         android:id="@+id/profile_order_image"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,41 +17,60 @@
 
     <RatingBar
         android:id="@+id/rating_bar_order"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:isIndicator="true"
         android:numStars="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_order_image" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <LinearLayout
-        android:layout_width="179dp"
-        android:layout_height="125dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_order_image"
+    <ScrollView
+        android:id="@+id/order_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/rating_bar_order"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile_order_image"
-        app:layout_constraintTop_toTopOf="@+id/profile_order_image">
-
-        <TextView
-            android:id="@+id/name_order_text"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/delius"
-            android:text="TextView" />
-
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_order_image">
 
         <TextView
             android:id="@+id/description_order_text"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/delius"
-            android:text="TextView"
-            android:textSize="14sp" />
+            android:textSize="18sp"
+            tools:text="Hello, my name is Kevin!" />
+    </ScrollView>
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/name_order_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/delius"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile_order_image"
+        app:layout_constraintTop_toTopOf="@+id/profile_order_image"
+        tools:text="Kevin Tigravictor" />
+
+    <TextView
+        android:id="@+id/phone_number_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/delius"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/name_order_text"
+        app:layout_constraintStart_toStartOf="@+id/name_order_text"
+        app:layout_constraintTop_toBottomOf="@+id/name_order_text"
+        tools:text="+6281290001998"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

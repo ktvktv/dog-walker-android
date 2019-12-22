@@ -24,6 +24,8 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener,
     val TAG = ListOrderFragment::class.java.simpleName
     val args: ListOrderFragmentArgs by navArgs()
 
+    //TODO:Create View Model
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,7 +51,7 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener,
             "https://cbbinus.files.wordpress.com/2017/05/p_20170504_092501_bf1.jpg?w=700",
             true,
             true,
-            "",
+            "Hello guys aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             1,
             1,
             1,

@@ -85,7 +85,7 @@ class WalkerInfoFragment : Fragment() {
                     Glide.with(imageView.context)
                         .load(imgUri)
                         .into(imageView)
-                } 
+                }
 
                 val rating = if(it.raters != 0) {
                     it.rating/it.raters

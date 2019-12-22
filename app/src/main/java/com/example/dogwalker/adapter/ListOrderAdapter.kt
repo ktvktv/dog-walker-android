@@ -22,6 +22,14 @@ class ListOrderAdapter(val listOrder: List<Walker>, val context: Context,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.order_item, parent, false)
 
+        view.order_scroll.setOnTouchListener { v, event ->
+            v.parent.requestDisallowInterceptTouchEvent(true)
+
+            v.onTouchEvent(event)
+
+            true
+        }
+
         return ViewHolder(view)
     }
 
