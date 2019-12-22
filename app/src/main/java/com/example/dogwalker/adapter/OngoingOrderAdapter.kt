@@ -39,7 +39,7 @@ class OngoingOrderAdapter(val userType: String, val listOrder: List<Order>,
             when(it.status_ongoing_order_button.text) {
                 "On Going" -> {
                     var phone = userPhone
-                    if(userType == "Customer") {
+                    if(userType.toLowerCase() == "customer") {
                         phone = order.phone
                     }
 
@@ -50,7 +50,7 @@ class OngoingOrderAdapter(val userType: String, val listOrder: List<Order>,
                 }
 
                 "Pending" -> {
-                    if(userType == "Walker") {
+                    if(userType.toLowerCase() == "walker") {
                         pendingClickListener.pendingClick(
                             NotifyData(
                                 order.userImageUrl,

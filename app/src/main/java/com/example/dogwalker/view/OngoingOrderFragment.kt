@@ -38,10 +38,24 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
 
         val orderList = ongoingOrderViewModel.getOrderList()
 
-        val phoneNumber = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
-            .getString(getString(R.string.phone_number_cache), "")
+        val sharedPreferences = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+        val phoneNumber = sharedPreferences.getString(getString(R.string.phone_number_cache), "")
+        val type = sharedPreferences.getString(getString(R.string.type_cache), "")
 
-        binding.ongoingOrderRecycler.adapter = OngoingOrderAdapter("Customer", orderList, this, this, phoneNumber)
+        val intent = activity!!.intent
+        val isFromNotify = intent.getBooleanExtra("isFromNotify", false)
+
+        if(type != "" && type.toLowerCase() == "walker" && isFromNotify) {
+            pendingClick(
+                NotifyData(
+                    intent.getStringExtra("photo"),
+                    intent.getStringExtra("description"),
+                    intent.getStringExtra("date")
+                )
+            )
+        }
+
+        binding.ongoingOrderRecycler.adapter = OngoingOrderAdapter(type, orderList, this, this, phoneNumber)
         binding.ongoingOrderRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         return binding.root

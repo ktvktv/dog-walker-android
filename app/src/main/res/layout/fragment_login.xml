@@ -9,12 +9,9 @@
             type="com.example.dogwalker.view.LoginFragment" />
     </data>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <!--<a href="https://www.freepik.com/free-photos-vectors/dog">DogRequest vector created by studiogstock - www.freepik.com</a>-->
 
@@ -34,7 +31,7 @@
                 android:id="@+id/phone_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="72dp"
+                android:layout_marginTop="48dp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:fontFamily="@font/delius"
@@ -63,10 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="120dp"
                 android:fontFamily="@font/delius"
                 android:text="@string/login_button"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="@+id/password_edit_text"
                 app:layout_constraintStart_toStartOf="@+id/password_edit_text"
                 app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
@@ -115,5 +110,4 @@
                 app:srcCompat="@drawable/paw_print_64" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 </layout>

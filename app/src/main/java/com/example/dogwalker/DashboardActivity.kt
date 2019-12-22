@@ -12,7 +12,9 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.dogwalker.animation.PageTransformer
 import com.example.dogwalker.view.*
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.iid.FirebaseInstanceId
 
 class DashboardActivity: AppCompatActivity() {
 
@@ -34,7 +36,7 @@ class DashboardActivity: AppCompatActivity() {
 
         viewPager.adapter = ScreenSlidePagerAdapter(supportFragmentManager)
         viewPager.setPageTransformer(true, PageTransformer())
-        viewPager.currentItem = 1
+        viewPager.currentItem = intent.getIntExtra("isNotified", 1)
 
         tabLayout.setupWithViewPager(viewPager)
         tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
@@ -44,6 +46,22 @@ class DashboardActivity: AppCompatActivity() {
         tabLayout.getTabAt(1)?.setIcon(R.drawable.man_carry_dog)
         tabLayout.getTabAt(2)?.setIcon(R.drawable.order)
         tabLayout.getTabAt(3)?.setIcon(R.drawable.post_it)
+
+//        FirebaseInstanceId.getInstance().instanceId
+//            .addOnCompleteListener(OnCompleteListener { task ->
+//                if (!task.isSuccessful) {
+//                    Log.w(TAG, "getInstanceId failed", task.exception)
+//                    return@OnCompleteListener
+//                }
+//
+//                // Get new Instance ID token
+//                val token = task.result?.token
+//
+//                // Log and toast
+//                val msg = "Here's your token: $token"
+//                Log.d(TAG, msg)
+//                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+//            })
     }
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm,

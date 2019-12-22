@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "654643777664-31chbp9o1tb76cjifqh9kgs6udt5glu5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dogwalker",
+            "certificate_hash": "7c1f036ffeaccf389a017bb6fa519cdee703f957"
+          }
+        },
+        {
           "client_id": "654643777664-pnuki4tgg1u11h1uuttb2c2igprlj75d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

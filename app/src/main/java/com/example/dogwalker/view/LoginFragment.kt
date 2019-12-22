@@ -1,6 +1,7 @@
 package com.example.dogwalker.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -14,8 +15,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.dogwalker.DashboardActivity
 import com.example.dogwalker.LOGIN_SUCCESSFUL
 import com.example.dogwalker.R
+import com.example.dogwalker.WalkerDashboardActivity
 import com.example.dogwalker.data.CommonResponse
 import com.example.dogwalker.data.LoginRequest
 import com.example.dogwalker.databinding.FragmentLoginBinding
@@ -72,7 +75,8 @@ class LoginFragment : Fragment() {
                     apply()
                 }
 
-                findNavController().navigate(R.id.action_loginFragment_to_dashboardActivity)
+                val action = LoginFragmentDirections.actionLoginFragmentToDashboardActivity()
+                findNavController().navigate(action)
             } else {
                 Toast.makeText(context, loginViewModel.getLoginMessage(), Toast.LENGTH_SHORT).show()
             }

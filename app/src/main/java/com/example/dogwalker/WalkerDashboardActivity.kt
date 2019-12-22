@@ -1,5 +1,6 @@
 package com.example.dogwalker
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +41,16 @@ class WalkerDashboardActivity : AppCompatActivity() {
         tabLayout.getTabAt(0)?.setIcon(R.drawable.man_user)
         tabLayout.getTabAt(1)?.setIcon(R.drawable.order)
         tabLayout.getTabAt(2)?.setIcon(R.drawable.post_it)
+
+        with(
+            getSharedPreferences(getString(R.string.session_cache), Context.MODE_PRIVATE)
+                .edit()
+        ) {
+            putString(getString(R.string.session_cache), "Walker")
+            apply()
+        }
+
+        //TODO:Call API to update session
     }
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm,
