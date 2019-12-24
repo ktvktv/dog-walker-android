@@ -73,4 +73,15 @@
         app:layout_constraintTop_toBottomOf="@+id/name_order_text"
         tools:text="+6281290001998"/>
 
+    <ImageView
+        android:id="@+id/next_button"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/rating_bar_order"
+        app:layout_constraintStart_toEndOf="@+id/rating_bar_order"
+        app:layout_constraintTop_toTopOf="@+id/rating_bar_order"
+        app:srcCompat="@drawable/ic_tracker" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

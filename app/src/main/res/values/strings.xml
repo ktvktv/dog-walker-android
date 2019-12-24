@@ -8,6 +8,7 @@
 
     <string name="preferences_file_key">com.example.dogwalker.PREFERENCES_FILE</string>
     <string name="session_cache">Session</string>
+    <string name="address_cache">Address</string>
     <string name="name_cache">Name</string>
     <string name="type_cache">Type</string>
     <string name="phone_number_cache">PhoneNumber</string>

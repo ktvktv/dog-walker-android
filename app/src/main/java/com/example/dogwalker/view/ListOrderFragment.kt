@@ -31,7 +31,7 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(TAG, "${args.breedId}/${args.date}/${args.hours}/${args.time}")
+        Log.d(TAG, "${args.dogId}/${args.date}/${args.hours}/${args.time}")
         val view = inflater.inflate(R.layout.fragment_list_order, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.list_order_recycler)
 
@@ -66,11 +66,12 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener,
         return view
     }
 
-    override fun pickOrder(position: Int) {
-        //Send message
-        Log.d(TAG, "Message has been fired, position: $position")
+    override fun pickOrder(walkerId: Int, price: Int) {
+        val action = ListOrderFragmentDirections.actionListOrderFragmentToOrderDetailFragment(
+            walkerId, args.dogId, args.date, args.time, args.hours, price*args.hours
+        )
 
-        activity?.finish()
+        findNavController().navigate(action)
     }
 
     override fun checkWalker(walkerId: Int) {

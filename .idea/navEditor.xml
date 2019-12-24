@@ -131,6 +131,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_listOrderFragment_to_orderDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_listOrderFragment_to_walkerInfoFragment">
                               <value>
                                 <LayoutPositions />
@@ -141,13 +146,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="walkerInfoFragment">
+                  <entry key="orderDetailFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="474" />
-                            <option name="y" value="-68" />
+                            <option name="y" value="45" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="walkerInfoFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="258" />
+                            <option name="y" value="-283" />
                           </Point>
                         </option>
                       </LayoutPositions>

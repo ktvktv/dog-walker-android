@@ -46,6 +46,10 @@ class ListOrderAdapter(val listOrder: List<Walker>, val context: Context,
         holder.itemView.description_order_text.text = listOrder[position].description
         holder.itemView.name_order_text.text = listOrder[position].name
 
+        holder.itemView.next_button.setOnClickListener {
+            listOrderOnClickListener.pickOrder(listOrder[position].id, listOrder[position].pricing)
+        }
+
         if(listOrder[position].photo != null && listOrder[position].photo != "") {
             val imgUri = listOrder[position].photo!!.toUri().buildUpon().scheme("https").build()
             val imageView = holder.itemView.profile_order_image
@@ -56,27 +60,14 @@ class ListOrderAdapter(val listOrder: List<Walker>, val context: Context,
         }
 
         holder.itemView.profile_order_image.setOnClickListener {
-            Log.d(TAG, "Test")
             checkWalkerListener.checkWalker(listOrder[position].id)
         }
     }
 
-    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-
-//        init {
-//            view.setOnClickListener {
-//                listOrderOnClickListener.pickOrder(this.layoutPosition)
-//            }
-//        }
-
-//        override fun onClick(v: View?) {
-//            listOrderOnClickListener.pickOrder(this.layoutPosition)
-//        }
-
-    }
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     interface ListOrderOnClickListener {
-        fun pickOrder(position: Int)
+        fun pickOrder(position: Int, price: Int)
     }
 
     interface CheckWalkerListener {

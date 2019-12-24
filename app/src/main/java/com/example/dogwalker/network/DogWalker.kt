@@ -39,6 +39,9 @@ interface DogWalker {
     @GET("dog/get")
     fun getDogInformation(@Header("session") session: String): Deferred<DogResponse>?
 
+    @GET("dog/find/{id}")
+    fun getDog(@Header("session") session: String, @Path("id") id: Int) : Deferred<SoloDogResponse>?
+
     @Multipart
     @POST("user/update")
     fun updateUserInformation(
@@ -93,6 +96,10 @@ interface DogWalker {
 
     @GET("breed/")
     fun getAllBreed() : Deferred<BreedResponse>?
+
+    @POST("transaction/findawalker")
+    fun getFilteredWalker(@Header("session") session: String,
+                          @Body transactionRequest: TransactionRequest) : Deferred<List<TransactionResponse>>?
 }
 
 object DogWalkerServiceApi {

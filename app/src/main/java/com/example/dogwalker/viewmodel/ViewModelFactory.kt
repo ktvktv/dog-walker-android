@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.IllegalArgumentException
 
-class ViewModelFactory() : ViewModelProvider.Factory {
+class ViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(InfoViewModel::class.java)) return InfoViewModel() as T
         if(modelClass.isAssignableFrom(PostViewModel::class.java)) return PostViewModel() as T
@@ -17,6 +17,8 @@ class ViewModelFactory() : ViewModelProvider.Factory {
         if(modelClass.isAssignableFrom(SinglePostViewModel::class.java)) return SinglePostViewModel() as T
         if(modelClass.isAssignableFrom(RegisterWalkerViewModel::class.java)) return RegisterWalkerViewModel() as T
         if(modelClass.isAssignableFrom(WalkerInfoViewModel::class.java)) return WalkerInfoViewModel() as T
+        if(modelClass.isAssignableFrom(WalkerOrderViewModel::class.java)) return WalkerOrderViewModel() as T
+        if(modelClass.isAssignableFrom(OrderDetailViewModel::class.java)) return OrderDetailViewModel() as T
 
         throw IllegalArgumentException("Unknown view model class")
     }

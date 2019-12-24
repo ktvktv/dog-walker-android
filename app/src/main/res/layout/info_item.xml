@@ -11,14 +11,11 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
-        android:background="#EDE7E8"
         android:foregroundGravity="center"
-        android:src="@drawable/dogwalkers"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/dog_name_info"
