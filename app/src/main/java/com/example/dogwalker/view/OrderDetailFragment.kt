@@ -5,17 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.dogwalker.LOGIN_SUCCESSFUL
 import com.example.dogwalker.R
+import com.example.dogwalker.data.PostOrderRequest
 import com.example.dogwalker.databinding.FragmentDetailOrderBinding
 import com.example.dogwalker.viewmodel.OrderDetailViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.info_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -73,13 +75,37 @@ class OrderDetailFragment : Fragment() {
                         .load(imgUri)
                         .into(imageView)
                 }
+
+                binding.addressDetailOrder.text = it.address
+                binding.totalPriceText.text = "Rp. ${it.pricing * args.hours}"
             }
         })
 
-        binding.addressDetailOrder.text = sharedPreferences.getString(getString(R.string.address_cache), "")
-        binding.dateOrderText.text = args.date
-        binding.totalPriceText.text = args.totalPrice.toString()
+        binding.orderDetailButton.setOnClickListener {
+            coroutineScope.launch {
+                orderDetailView.PostOrder(session, PostOrderRequest(
+                    args.dogId,
+                    args.hours,
+                    args.date,
+                    args.walkerId
+                ))
+            }
+        }
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        orderDetailView.orderResponse.observe(this, Observer {
+            if(it != null) {
+                if(it == LOGIN_SUCCESSFUL) {
+                    //TODO:Send notif using firebase
+
+                    activity?.finish()
+                } else {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
+        binding.dateOrderText.text = args.date
+
+        return binding.root
     }
 }

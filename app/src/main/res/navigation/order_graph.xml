@@ -23,9 +23,6 @@
             android:name="date"
             app:argType="string" />
         <argument
-            android:name="time"
-            app:argType="string" />
-        <argument
             android:name="hours"
             app:argType="integer" />
         <argument
@@ -60,13 +57,7 @@
             android:name="date"
             app:argType="string" />
         <argument
-            android:name="time"
-            app:argType="string" />
-        <argument
             android:name="hours"
-            app:argType="integer" />
-        <argument
-            android:name="totalPrice"
             app:argType="integer" />
     </fragment>
 </navigation>

@@ -1,13 +1,11 @@
 package com.example.dogwalker.network
 
 import com.example.dogwalker.data.*
-import com.google.android.gms.common.internal.service.Common
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -99,7 +97,11 @@ interface DogWalker {
 
     @POST("transaction/findawalker")
     fun getFilteredWalker(@Header("session") session: String,
-                          @Body transactionRequest: TransactionRequest) : Deferred<List<TransactionResponse>>?
+                          @Body listWalkerRequest: ListWalkerRequest) : Deferred<ListWalkerResponse>?
+
+    @POST("transaction/order")
+    fun postOrder(@Header("session") session: String,
+                  @Body orderRequest: PostOrderRequest) : Deferred<WalkerResponse>?
 }
 
 object DogWalkerServiceApi {

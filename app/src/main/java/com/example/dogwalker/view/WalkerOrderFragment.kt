@@ -110,10 +110,9 @@ class WalkerOrderFragment : Fragment() {
                 binding.walkerOrderRecyclerView.layoutManager as LinearLayoutManager
 
             val action = WalkerOrderFragmentDirections.actionWalkerOrderFragmentToListOrderFragment(
-                date = binding.dogCalendarOrder.text.toString(),
-                time = binding.timeOrderWalker.text.toString(),
+                date = "${binding.timeOrderWalker.text} ${binding.dogCalendarOrder.text}",
                 hours = hours,
-                dogId = linearLayoutManager.findFirstVisibleItemPosition()
+                dogId = walkerOrderAdapter.listDog[linearLayoutManager.findFirstVisibleItemPosition()].id
             )
 
             it.findNavController().navigate(action)

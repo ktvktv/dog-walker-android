@@ -19,6 +19,6 @@ class TimeFragment(val textView: TextView) : TimePickerDialog.OnTimeSetListener,
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        textView.text = "$hourOfDay:$minute"
+        textView.text = "$hourOfDay:$minute:00"
     }
 }

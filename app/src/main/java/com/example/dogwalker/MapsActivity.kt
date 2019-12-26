@@ -48,7 +48,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         phone = intent.extras.get(OngoingOrderFragment.PHONE_EXTRA) as String
 
         // Check GPS is enabled
-        if(userType == "Walker") {
+        if(userType.toLowerCase() == "walker") {
             val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show()

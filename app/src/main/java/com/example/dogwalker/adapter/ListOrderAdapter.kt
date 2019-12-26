@@ -13,7 +13,7 @@ import com.example.dogwalker.data.Walker
 import kotlinx.android.synthetic.main.order_item.view.*
 import kotlinx.android.synthetic.main.post_item.view.*
 
-class ListOrderAdapter(val listOrder: List<Walker>, val context: Context,
+class ListOrderAdapter(var listOrder: List<Walker>, val context: Context,
                        val listOrderOnClickListener: ListOrderOnClickListener,
                        val checkWalkerListener: CheckWalkerListener) : RecyclerView.Adapter<ListOrderAdapter.ViewHolder>() {
 
