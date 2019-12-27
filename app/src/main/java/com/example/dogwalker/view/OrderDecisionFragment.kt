@@ -46,6 +46,10 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
     ): View? {
         val view = inflater.inflate(R.layout.fragment_order_decision, container)
 
+        val sharedPreferences = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+        val session = sharedPreferences.getString(getString(R.string.session_cache), "")
+        val type = sharedPreferences.getString(getString(R.string.type_cache), "")
+
         if(notifyData.userImageUrl != null && notifyData.userImageUrl != "") {
             val imgUri = notifyData.userImageUrl.toUri().buildUpon().scheme("https").build()
             val imageView = view.user_image
@@ -58,9 +62,6 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
         view.description_text.text = notifyData.description
         view.date_text.text = notifyData.date
 
-        val session = context!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
-            .getString(getString(R.string.session_cache), "")
-
         view.yes_button.setOnClickListener {
             coroutineScope.launch {
                 orderDecisionViewModel.changeStatus(
@@ -69,9 +70,6 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
                         APPROVED
                     )
                 )
-                val sharedPreferences = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
-                val session = sharedPreferences.getString(getString(R.string.session_cache), "")
-                val type = sharedPreferences.getString(getString(R.string.type_cache), "")
 
                 if(type.toLowerCase() == "customer") {
                     ongoingOrderViewModel.getListOrder(session)
@@ -94,7 +92,7 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
                 }
 
                 Log.d(TAG, "Set alarm at TimesInMillis: ${calendar.timeInMillis}")
-                alarmMgr?.set(
+                alarmMgr.set(
                     AlarmManager.RTC_WAKEUP,
                     calendar.timeInMillis,
                     alarmIntent
@@ -109,9 +107,6 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
         view.no_button.setOnClickListener {
             coroutineScope.launch {
                 orderDecisionViewModel.rejectTransaction(session, notifyData.transactionId)
-                val sharedPreferences = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
-                val session = sharedPreferences.getString(getString(R.string.session_cache), "")
-                val type = sharedPreferences.getString(getString(R.string.type_cache), "")
 
                 if(type.toLowerCase() == "customer") {
                     ongoingOrderViewModel.getListOrder(session)

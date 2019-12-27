@@ -31,9 +31,6 @@
         <action
             android:id="@+id/action_listOrderFragment_to_walkerInfoFragment"
             app:destination="@id/walkerInfoFragment" />
-        <action
-            android:id="@+id/action_listOrderFragment_to_orderDetailFragment"
-            app:destination="@id/orderDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/walkerInfoFragment"
@@ -41,23 +38,6 @@
         android:label="WalkerInfoFragment" >
         <argument
             android:name="walkerId"
-            app:argType="integer" />
-    </fragment>
-    <fragment
-        android:id="@+id/orderDetailFragment"
-        android:name="com.example.dogwalker.view.OrderDetailFragment"
-        android:label="OrderDetailFragment" >
-        <argument
-            android:name="walkerId"
-            app:argType="integer" />
-        <argument
-            android:name="dogId"
-            app:argType="integer" />
-        <argument
-            android:name="date"
-            app:argType="string" />
-        <argument
-            android:name="hours"
             app:argType="integer" />
     </fragment>
 </navigation>

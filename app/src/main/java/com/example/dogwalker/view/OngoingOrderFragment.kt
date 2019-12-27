@@ -95,7 +95,7 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
             )
         }
 
-        ongoingOrderAdapter = OngoingOrderAdapter(activity!!, type, listOf(), this, this)
+        ongoingOrderAdapter = OngoingOrderAdapter(type, listOf(), this, this, context!!)
         binding.ongoingOrderRecycler.adapter = ongoingOrderAdapter
         binding.ongoingOrderRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 

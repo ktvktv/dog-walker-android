@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogwalker.DashboardActivity
+import com.example.dogwalker.OrderDetailActivity
 import com.example.dogwalker.R
 import com.example.dogwalker.adapter.ListOrderAdapter
 import com.example.dogwalker.data.ListWalkerRequest
@@ -66,31 +68,6 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener,
             }
         })
 
-//        val dummyData = Walker(
-//            1,
-//            "",
-//            "",
-//            "",
-//            "Kevin",
-//            "",
-//            "Male",
-//            "",
-//            true,
-//            "",
-//            "",
-//            "",
-//            "https://cbbinus.files.wordpress.com/2017/05/p_20170504_092501_bf1.jpg?w=700",
-//            true,
-//            true,
-//            "Hello guys aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-//            1,
-//            1,
-//            1,
-//            1,
-//            1,
-//            1
-//        )
-
         listOrderAdapter = ListOrderAdapter(listOf(), context!!, this, this)
         recyclerView.adapter = listOrderAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -99,11 +76,14 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener,
     }
 
     override fun pickOrder(walkerId: Int, price: Int) {
-        val action = ListOrderFragmentDirections.actionListOrderFragmentToOrderDetailFragment(
-            walkerId, args.dogId, args.date, args.hours
-        )
+        val intent = Intent(context, OrderDetailActivity::class.java)
+        intent.putExtra("dogId", args.dogId)
+        intent.putExtra("date", args.date)
+        intent.putExtra("hours", args.hours)
+        intent.putExtra("walkerId", walkerId)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-        findNavController().navigate(action)
+        startActivity(intent)
     }
 
     override fun checkWalker(walkerId: Int) {

@@ -22,11 +22,10 @@
         android:id="@+id/status_ongoing_order_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#645E5E"
         android:fontFamily="@font/delius"
         android:text="Pending"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,5 +66,15 @@
         app:layout_constraintEnd_toEndOf="@+id/name_ongoing_order"
         app:layout_constraintStart_toStartOf="@+id/name_ongoing_order"
         app:layout_constraintTop_toBottomOf="@+id/name_ongoing_order" />
+
+    <ImageView
+        android:id="@+id/detail_button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/status_ongoing_order_button"
+        app:layout_constraintStart_toEndOf="@+id/status_ongoing_order_button"
+        app:layout_constraintTop_toTopOf="@+id/status_ongoing_order_button"
+        app:srcCompat="@drawable/loupe" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

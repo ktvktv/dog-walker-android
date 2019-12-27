@@ -52,6 +52,7 @@
             android:windowSoftInputMode="adjustPan|adjustResize">
         </activity>
         <activity android:name=".WalkerDashboardActivity"/>
+        <activity android:name=".OrderDetailActivity"/>
         <service
             android:name=".service.DogWalkerService"
             android:exported="true"

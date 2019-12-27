@@ -39,6 +39,7 @@ class OrderDetailViewModel : ViewModel() {
     }
 
     suspend fun getDogInformation(session: String, dogId: Int) {
+        Log.d(TAG, "$dogId")
         try {
             dogResponse.value = DogWalkerServiceApi.DogWalkerService.getDog(session, dogId)?.await()
         } catch (e: Exception) {

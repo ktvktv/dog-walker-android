@@ -1,26 +1,23 @@
 package com.example.dogwalker.adapter
 
-import android.app.Activity
 import android.content.Context
-import android.os.Bundle
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dogwalker.OrderDetailActivity
 import com.example.dogwalker.R
 import com.example.dogwalker.data.NotifyData
 import com.example.dogwalker.data.Order
-import com.example.dogwalker.view.OngoingOrderFragment
-import com.example.dogwalker.view.OrderDetailFragment
-import com.example.dogwalker.view.OrderDetailFragmentArgs
 import kotlinx.android.synthetic.main.ongoing_order_item.view.*
 
-class OngoingOrderAdapter(val activity: FragmentActivity, val userType: String, var listOrder: List<Order>,
+class OngoingOrderAdapter(val userType: String, var listOrder: List<Order>,
                           val ongoingClickListener: OngoingClickListener,
-                          val pendingClickListener: PendingClickListener
+                          val pendingClickListener: PendingClickListener,
+                          val context: Context
 ) : RecyclerView.Adapter<OngoingOrderAdapter.ViewHolder>() {
 
     private val TAG = OngoingOrderAdapter::class.java.simpleName
@@ -40,22 +37,16 @@ class OngoingOrderAdapter(val activity: FragmentActivity, val userType: String, 
         holder.itemView.status_ongoing_order_button.text = listOrder[position].status
         holder.itemView.date_ongoing_order.text = listOrder[position].walkDate
 
-//        holder.itemView.status_ongoing_order_button.setOnClickListener {
-//            Log.d(TAG, "ON CLICKED")
-//
-//            val fragment = OrderDetailFragment()
-//            val bundle = Bundle()
-//            bundle.putString("date", listOrder[position].walkDate)
-//            bundle.putInt("dogId", listOrder[position].dogId)
-//            bundle.putInt("walkerId", listOrder[position].clientId)
-//            bundle.putInt("hours", listOrder[position].duration)
-//            fragment.arguments = bundle
-//
-//            activity.supportFragmentManager!!.beginTransaction()
-//                .replace(R.id.ongoing_order_view, fragment)
-//                .addToBackStack(null)
-//                .commit()
-//        }
+        holder.itemView.detail_button.setOnClickListener {
+            val intent = Intent(context, OrderDetailActivity::class.java)
+            intent.putExtra("dogId", listOrder[position].dogId)
+            //TODO:Need changes
+            intent.putExtra("walkerId", listOrder[position].clientId)
+            intent.putExtra("hours", listOrder[position].duration)
+            intent.putExtra("date", listOrder[position].walkDate)
+
+            context.startActivity(intent)
+        }
 
         holder.itemView.status_ongoing_order_button.setOnClickListener {
             val order = listOrder[position]
@@ -68,17 +59,20 @@ class OngoingOrderAdapter(val activity: FragmentActivity, val userType: String, 
                     )
                 }
 
+                //TODO:Modif this
                 "Pending".toLowerCase() -> {
-//                    if(userType.toLowerCase() == "walker") {
-//                        pendingClickListener.pendingClick(
-//                            NotifyData(
-//                                order.id,
-//                                order.photo,
-//                                "${order.name} want you to walk ${order.name}'s dog",
-//                                order.walkDate
-//                            )
-//                        )
-//                    }
+                    if(userType.toLowerCase() == "walker") {
+                        pendingClickListener.pendingClick(
+                            NotifyData(
+                                order.id,
+                                order.photo,
+                                "${order.name} want you to walk ${order.name}'s dog",
+                                order.walkDate,
+                                "",
+                                ""
+                            )
+                        )
+                    }
                 }
 
                 else -> Toast.makeText(holder.itemView.context, "Tracking only for current order", Toast.LENGTH_SHORT).show()
