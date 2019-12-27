@@ -49,18 +49,22 @@ class DogFirebaseMessagingService : FirebaseMessagingService() {
         } else {
             intent = Intent(this, WalkerDashboardActivity::class.java)
             intent.putExtra("isFromNotify", true)
+            intent.putExtra("id", remoteMessage.data["id"])
             intent.putExtra("photo", remoteMessage.data["photo"])
             intent.putExtra("description", remoteMessage.data["description"])
             intent.putExtra("date", remoteMessage.data["date"])
+            intent.putExtra("duration", remoteMessage.data["duration"])
+            intent.putExtra("title", remoteMessage.notification!!.title)
+            intent.putExtra("body", remoteMessage.notification!!.body)
         }
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         var builder = NotificationCompat.Builder(this, "2")
             .setSmallIcon(R.mipmap.dog)
-            .setContentTitle("Test")
-            .setContentText("Testing")
+            .setContentTitle(remoteMessage.notification?.title)
+            .setContentText(remoteMessage.notification?.body)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)

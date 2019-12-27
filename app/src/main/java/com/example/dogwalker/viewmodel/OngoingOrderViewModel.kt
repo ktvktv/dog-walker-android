@@ -46,12 +46,4 @@ class OngoingOrderViewModel : ViewModel() {
             }
         }
     }
-
-    fun getOrderList() : List<Order> {
-        if(orderList.value == null) {
-            return listOf()
-        }
-
-        return orderList.value!!
-    }
 }

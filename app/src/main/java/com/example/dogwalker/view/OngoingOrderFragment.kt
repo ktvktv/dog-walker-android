@@ -1,6 +1,7 @@
 package com.example.dogwalker.view
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -62,27 +63,39 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
 
         ongoingOrderViewModel.orderList.observe(this, Observer{
             if(it != null) {
+                Log.d(TAG, "$it")
                 ongoingOrderAdapter.listOrder = it
                 ongoingOrderAdapter.notifyDataSetChanged()
             }
         })
 
-        val orderList = ongoingOrderViewModel.getOrderList()
-
         val intent = activity!!.intent
         val isFromNotify = intent.getBooleanExtra("isFromNotify", false)
 
-        if(type != "" && type.toLowerCase() == "walker" && isFromNotify) {
+        var transactionID = -1
+        val transactionIDString = intent.getStringExtra("id")
+
+        if(transactionIDString != null) {
+            transactionID = transactionIDString.toInt()
+        }
+
+        Log.d(TAG, type)
+        Log.d(TAG, "$isFromNotify")
+        Log.d(TAG, "$transactionID")
+        if(type != "" && type.toLowerCase() == "walker" && isFromNotify && transactionID > 0) {
             pendingClick(
                 NotifyData(
+                    transactionID,
                     intent.getStringExtra("photo"),
                     intent.getStringExtra("description"),
-                    intent.getStringExtra("date")
+                    intent.getStringExtra("date"),
+                    intent.getStringExtra("body"),
+                    intent.getStringExtra("title")
                 )
             )
         }
 
-        ongoingOrderAdapter = OngoingOrderAdapter(activity!!, type, orderList, this, this)
+        ongoingOrderAdapter = OngoingOrderAdapter(activity!!, type, listOf(), this, this)
         binding.ongoingOrderRecycler.adapter = ongoingOrderAdapter
         binding.ongoingOrderRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
@@ -98,9 +111,7 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
     }
 
     override fun pendingClick(pendingData: NotifyData) {
-        val newFragment = OrderDecisionFragment(pendingData)
-
-//        newFragment.dialog!!.window.setLayout(300, 350)
+        val newFragment = OrderDecisionFragment(pendingData, ongoingOrderViewModel)
 
         newFragment.show(activity!!.supportFragmentManager, "Dialog")
     }

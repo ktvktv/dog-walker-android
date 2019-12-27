@@ -108,6 +108,14 @@ interface DogWalker {
 
     @GET("transaction/get/walker")
     fun getWalkerListOrder(@Header("session") session: String) : Deferred<ListOrderResponse>?
+
+    @POST("transaction/status")
+    fun changeTransactionStatus(@Header("session") session: String,
+                                @Body transactionStatus: TransactionStatus) : Deferred<CommonResponse>?
+
+    @GET("transaction/reject/{id}")
+    fun rejectTransaction(@Header("session") session: String,
+                          @Path("id") transactionId: Int) : Deferred<CommonResponse>?
 }
 
 object DogWalkerServiceApi {

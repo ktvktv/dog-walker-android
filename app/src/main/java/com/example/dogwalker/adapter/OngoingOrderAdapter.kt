@@ -59,24 +59,26 @@ class OngoingOrderAdapter(val activity: FragmentActivity, val userType: String, 
 
         holder.itemView.status_ongoing_order_button.setOnClickListener {
             val order = listOrder[position]
-            when(it.status_ongoing_order_button.text) {
-                "On Going" -> {
+            val status = it.status_ongoing_order_button.text.toString().toLowerCase()
+            when(status) {
+                "On Going".toLowerCase() -> {
                     ongoingClickListener.onClick(
                         order.phoneNumber,
                         userType
                     )
                 }
 
-                "Pending" -> {
-                    if(userType.toLowerCase() == "walker") {
-                        pendingClickListener.pendingClick(
-                            NotifyData(
-                                order.photo,
-                                "${order.name} want you to walk ${order.name}'s dog",
-                                order.walkDate
-                            )
-                        )
-                    }
+                "Pending".toLowerCase() -> {
+//                    if(userType.toLowerCase() == "walker") {
+//                        pendingClickListener.pendingClick(
+//                            NotifyData(
+//                                order.id,
+//                                order.photo,
+//                                "${order.name} want you to walk ${order.name}'s dog",
+//                                order.walkDate
+//                            )
+//                        )
+//                    }
                 }
 
                 else -> Toast.makeText(holder.itemView.context, "Tracking only for current order", Toast.LENGTH_SHORT).show()
