@@ -3,11 +3,9 @@ package com.example.dogwalker.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dogwalker.LOGIN_SUCCESSFUL
-import com.example.dogwalker.data.CommonResponse
+import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.LoginRequest
 import com.example.dogwalker.data.LoginResponse
-import com.example.dogwalker.data.User
 import com.example.dogwalker.network.DogWalkerServiceApi
 
 class LoginViewModel : ViewModel() {
@@ -26,7 +24,7 @@ class LoginViewModel : ViewModel() {
 
         Log.i(TAG, "Login response: ${loginResponse.value}}")
         if (loginResponse.value != null) {
-            if (loginResponse.value!!.message.equals(LOGIN_SUCCESSFUL)) {
+            if (loginResponse.value!!.message.equals(SUCCESSFUL)) {
                 isLoginSuccess.value = true
                 return
             }

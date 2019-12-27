@@ -3,7 +3,7 @@ package com.example.dogwalker.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dogwalker.LOGIN_SUCCESSFUL
+import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.Dog
 import com.example.dogwalker.data.DogResponse
 import com.example.dogwalker.network.DogWalkerServiceApi
@@ -26,7 +26,7 @@ class WalkerOrderViewModel : ViewModel() {
         }
 
         if(dogResponse != null) {
-            if(dogResponse.message == LOGIN_SUCCESSFUL) {
+            if(dogResponse.message == SUCCESSFUL) {
                 listDog.value = dogResponse.body
                 return
             }

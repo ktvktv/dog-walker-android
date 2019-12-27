@@ -2,6 +2,7 @@ package com.example.dogwalker.view
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.dogwalker.LOGIN_SUCCESSFUL
+import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.R
 import com.example.dogwalker.data.PostOrderRequest
 import com.example.dogwalker.databinding.FragmentDetailOrderBinding
@@ -25,6 +26,7 @@ import kotlinx.coroutines.launch
 
 class OrderDetailFragment : Fragment() {
 
+    private val TAG = OrderDetailFragment::class.java.simpleName
     private lateinit var binding: FragmentDetailOrderBinding
     val args: OrderDetailFragmentArgs by navArgs()
     private val orderDetailView by lazy {
@@ -37,6 +39,7 @@ class OrderDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(TAG, "ORDER DETAIL FRAGMENT")
         binding = FragmentDetailOrderBinding.inflate(inflater)
 
         val sharedPreferences = context!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
@@ -94,7 +97,7 @@ class OrderDetailFragment : Fragment() {
 
         orderDetailView.orderResponse.observe(this, Observer {
             if(it != null) {
-                if(it == LOGIN_SUCCESSFUL) {
+                if(it == SUCCESSFUL) {
                     //TODO:Send notif using firebase
 
                     activity?.finish()

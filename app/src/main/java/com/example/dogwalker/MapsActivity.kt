@@ -11,6 +11,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -35,6 +38,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var polyLines: Polyline
     private lateinit var userType: String
     private lateinit var phone: String
+    private var firstTime: Boolean = true
 
     companion object Constants {
         val PHONE_EXTRA = "phone"
@@ -44,8 +48,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
-        userType = intent.extras.get(OngoingOrderFragment.USER_TYPE) as String
-        phone = intent.extras.get(OngoingOrderFragment.PHONE_EXTRA) as String
+        firstTime = true
+
+//        userType = intent.extras.get(OngoingOrderFragment.USER_TYPE) as String
+//        phone = intent.extras.get(OngoingOrderFragment.PHONE_EXTRA) as String
+
+        userType = "walker"
+        phone = "081293312313"
 
         // Check GPS is enabled
         if(userType.toLowerCase() == "walker") {
@@ -80,6 +89,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun startTrackerService() {
         val intent = Intent(this, DogWalkerService::class.java)
+        Log.d(TAG, phone)
         intent.putExtra(PHONE_EXTRA, phone)
 
         startService(intent)
@@ -189,7 +199,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         doneRef.addChildEventListener(doneListener)
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     private fun setMarker(dataSnapshot: DataSnapshot) {
+        if(firstTime) {
+            firstTime = false
+            return
+        }
         // When a location update is received, put or update
         // its value in mMarkers, which contains all the markers
         // for locations received, so that we can build the
@@ -217,5 +235,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap!!.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 300))
 
         polyLines = mMap!!.addPolyline(polylineOptions)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            R.id.end_walk_menu -> {
+                Log.d(TAG, "Success!")
+            }
+            else -> {}
+        }
+        return true
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater = MenuInflater(this)
+        menuInflater.inflate(R.menu.menu_item, menu)
+
+        return true
     }
 }

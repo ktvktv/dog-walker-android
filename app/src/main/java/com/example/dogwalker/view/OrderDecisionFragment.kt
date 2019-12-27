@@ -6,13 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.dogwalker.R
 import com.example.dogwalker.data.NotifyData
+import com.example.dogwalker.viewmodel.OrderDecisionViewModel
+import com.example.dogwalker.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_order_decision.view.*
 import kotlinx.android.synthetic.main.info_item.view.*
 
 class OrderDecisionFragment(val notifyData: NotifyData) : DialogFragment() {
+
+    private val orderDecisionViewModel by lazy {
+        ViewModelProviders.of(this, ViewModelFactory()).get(OrderDecisionViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,11 +41,11 @@ class OrderDecisionFragment(val notifyData: NotifyData) : DialogFragment() {
         view.date_text.text = notifyData.date
 
         view.yes_button.setOnClickListener {
-            //Call API
+
         }
 
         view.no_button.setOnClickListener {
-            //Call API
+
         }
 
         return view

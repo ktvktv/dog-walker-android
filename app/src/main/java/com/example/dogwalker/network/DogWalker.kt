@@ -102,6 +102,12 @@ interface DogWalker {
     @POST("transaction/order")
     fun postOrder(@Header("session") session: String,
                   @Body orderRequest: PostOrderRequest) : Deferred<WalkerResponse>?
+
+    @GET("transaction/get/user")
+    fun getListOrderCustomer(@Header("session") session: String) : Deferred<ListOrderResponse>?
+
+    @GET("transaction/get/walker")
+    fun getWalkerListOrder(@Header("session") session: String) : Deferred<ListOrderResponse>?
 }
 
 object DogWalkerServiceApi {

@@ -1,3 +1,7 @@
 package com.example.dogwalker
 
-val LOGIN_SUCCESSFUL = "OK"
+val SUCCESSFUL = "OK"
+
+val APPROVED = "APPROVED"
+val ONGOING = "ONGOING"
+val DONE = "DONE"

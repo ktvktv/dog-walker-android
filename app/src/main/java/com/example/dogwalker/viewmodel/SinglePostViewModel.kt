@@ -3,7 +3,7 @@ package com.example.dogwalker.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dogwalker.LOGIN_SUCCESSFUL
+import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.*
 import com.example.dogwalker.network.DogWalkerServiceApi
 
@@ -24,7 +24,7 @@ class SinglePostViewModel : ViewModel() {
         }
 
         if(postDetailResponse != null) {
-            if(postDetailResponse.message == LOGIN_SUCCESSFUL) {
+            if(postDetailResponse.message == SUCCESSFUL) {
                 postDetail.value = postDetailResponse.body
             }
         }
@@ -41,7 +41,7 @@ class SinglePostViewModel : ViewModel() {
         }
 
         if(commentResponse != null) {
-            if(commentResponse.message == LOGIN_SUCCESSFUL) {
+            if(commentResponse.message == SUCCESSFUL) {
                 commentDetail.value = commentResponse.body
             }
         }
@@ -60,7 +60,7 @@ class SinglePostViewModel : ViewModel() {
         }
 
         if(commentResponse != null) {
-            if(commentResponse.message == LOGIN_SUCCESSFUL){
+            if(commentResponse.message == SUCCESSFUL){
                 message.value = "Success comment!"
             } else {
                 message.value = commentResponse.message

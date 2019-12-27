@@ -3,7 +3,7 @@ package com.example.dogwalker.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dogwalker.LOGIN_SUCCESSFUL
+import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.CommonResponse
 import com.example.dogwalker.data.InsertPostRequest
 import com.example.dogwalker.data.Post
@@ -30,7 +30,7 @@ class PostViewModel : ViewModel() {
         }
 
         if(postResponse != null) {
-            if(postResponse.message == LOGIN_SUCCESSFUL) {
+            if(postResponse.message == SUCCESSFUL) {
                 isInsertPostSuccess.value = true
                 return
             } else {
@@ -55,7 +55,7 @@ class PostViewModel : ViewModel() {
         }
 
         if(postResponse != null) {
-            if(postResponse.message == LOGIN_SUCCESSFUL) {
+            if(postResponse.message == SUCCESSFUL) {
                 postList.value = postResponse.body
                 return
             }

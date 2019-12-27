@@ -3,12 +3,10 @@ package com.example.dogwalker.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dogwalker.LOGIN_SUCCESSFUL
+import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.CommonResponse
-import com.example.dogwalker.data.LoginResponse
 import com.example.dogwalker.data.Register
 import com.example.dogwalker.network.DogWalkerServiceApi
-import java.text.SimpleDateFormat
 
 class RegisterViewModel : ViewModel() {
 
@@ -29,7 +27,7 @@ class RegisterViewModel : ViewModel() {
 
         Log.i(TAG, "Register response: ${registerResponse.value}")
 
-        if(registerResponse.value?.message == LOGIN_SUCCESSFUL) {
+        if(registerResponse.value?.message == SUCCESSFUL) {
             isRegisterSuccess.value = true
             return
         }

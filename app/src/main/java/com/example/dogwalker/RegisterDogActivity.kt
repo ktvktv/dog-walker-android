@@ -102,7 +102,7 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
             var isSuccess = false
             var message = "Unknown error, please try again."
             if(it != null) {
-                if(it.message == LOGIN_SUCCESSFUL) {
+                if(it.message == SUCCESSFUL) {
                     message = "Register Success!"
                     isSuccess = true
                 } else {

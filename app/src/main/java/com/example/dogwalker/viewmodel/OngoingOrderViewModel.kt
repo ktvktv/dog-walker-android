@@ -1,39 +1,50 @@
 package com.example.dogwalker.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.dogwalker.SUCCESSFUL
+import com.example.dogwalker.data.ListOrderResponse
 import com.example.dogwalker.data.Order
+import com.example.dogwalker.network.DogWalkerServiceApi
+import java.lang.Exception
 
 class OngoingOrderViewModel : ViewModel() {
-    private val orderList = MutableLiveData<List<Order>>()
+    private val TAG = OngoingOrderViewModel::class.java.simpleName
+    val orderList = MutableLiveData<List<Order>>()
 
-    init {
-        orderList.value = listOf(
-            Order(
-                name = "Kevin",
-                phone = "081290001998",
-                status = "Pending",
-                date = "18:00 - 23:00 12/09/12",
-                address = "Jl. Barleria VI B1/H5",
-                userImageUrl = "https://cbbinus.files.wordpress.com/2017/05/p_20170504_092501_bf1.jpg?w=700"
-            ),
-            Order(
-                name = "Wijoyo",
-                phone = "081293312313",
-                status = "On Going",
-                date = "18:00 09/09/1998 - 23:00 09/09/1998",
-                address = "Jl. Barleria VI B1/H5",
-                userImageUrl = ""
-            ),
-            Order(
-                name = "Wijoyo",
-                phone = "081293312313",
-                status = "On Going",
-                date = "18:00 09/09/1998 - 23:00 09/09/1998",
-                address = "Jl. Barleria VI B1/H5",
-                userImageUrl = ""
-            )
-        )
+    suspend fun getListOrder(session: String) {
+        var orderResponse: ListOrderResponse?
+        try {
+            orderResponse = DogWalkerServiceApi.DogWalkerService.getListOrderCustomer(session)?.await()
+        } catch(e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+            return
+        }
+
+        if(orderResponse != null) {
+            if(orderResponse.message == SUCCESSFUL) {
+                orderList.value = orderResponse.body
+            }
+        }
+    }
+
+    suspend fun getWalkerListOrder(session: String) {
+        var orderResponse: ListOrderResponse?
+        try {
+            orderResponse = DogWalkerServiceApi.DogWalkerService.getWalkerListOrder(session)?.await()
+        } catch(e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+            return
+        }
+
+        if(orderResponse != null) {
+            if(orderResponse.message == SUCCESSFUL) {
+                orderList.value = orderResponse.body
+            }
+        }
     }
 
     fun getOrderList() : List<Order> {

@@ -120,7 +120,7 @@ class InfoFragment : Fragment() {
         })
 
         infoViewModel.infoResponse.observe(this, Observer {
-            if(it != null && it.message == LOGIN_SUCCESSFUL) {
+            if(it != null && it.message == SUCCESSFUL) {
                 val userData = it.body
 
                 if(userData == null) {

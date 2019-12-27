@@ -20,6 +20,7 @@ class ViewModelFactory : ViewModelProvider.Factory {
         if(modelClass.isAssignableFrom(WalkerOrderViewModel::class.java)) return WalkerOrderViewModel() as T
         if(modelClass.isAssignableFrom(OrderDetailViewModel::class.java)) return OrderDetailViewModel() as T
         if(modelClass.isAssignableFrom(ListOrderViewModel::class.java)) return ListOrderViewModel() as T
+        if(modelClass.isAssignableFrom(OrderDecisionViewModel::class.java)) return OrderDecisionViewModel() as T
 
         throw IllegalArgumentException("Unknown view model class")
     }

@@ -3,11 +3,14 @@ package com.example.dogwalker.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dogwalker.MapsActivity
 import com.example.dogwalker.R
@@ -17,12 +20,19 @@ import com.example.dogwalker.data.Order
 import com.example.dogwalker.databinding.FragmentOngoingOrderBinding
 import com.example.dogwalker.viewmodel.OngoingOrderViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListener, OngoingOrderAdapter.PendingClickListener{
 
+    private val TAG = OngoingOrderFragment::class.java.simpleName
     private val ongoingOrderViewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory()).get(OngoingOrderViewModel::class.java)
     }
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+    private lateinit var ongoingOrderAdapter: OngoingOrderAdapter
 
     companion object {
         val PHONE_EXTRA = "phone"
@@ -36,11 +46,28 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
     ): View? {
         val binding = FragmentOngoingOrderBinding.inflate(inflater)
 
-        val orderList = ongoingOrderViewModel.getOrderList()
-
         val sharedPreferences = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
-        val phoneNumber = sharedPreferences.getString(getString(R.string.phone_number_cache), "")
+        val session = sharedPreferences.getString(getString(R.string.session_cache), "")
         val type = sharedPreferences.getString(getString(R.string.type_cache), "")
+
+        if(type.toLowerCase() == "customer") {
+            coroutineScope.launch {
+                ongoingOrderViewModel.getListOrder(session)
+            }
+        } else {
+            coroutineScope.launch {
+                ongoingOrderViewModel.getWalkerListOrder(session)
+            }
+        }
+
+        ongoingOrderViewModel.orderList.observe(this, Observer{
+            if(it != null) {
+                ongoingOrderAdapter.listOrder = it
+                ongoingOrderAdapter.notifyDataSetChanged()
+            }
+        })
+
+        val orderList = ongoingOrderViewModel.getOrderList()
 
         val intent = activity!!.intent
         val isFromNotify = intent.getBooleanExtra("isFromNotify", false)
@@ -55,7 +82,8 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
             )
         }
 
-        binding.ongoingOrderRecycler.adapter = OngoingOrderAdapter(type, orderList, this, this, phoneNumber)
+        ongoingOrderAdapter = OngoingOrderAdapter(activity!!, type, orderList, this, this)
+        binding.ongoingOrderRecycler.adapter = ongoingOrderAdapter
         binding.ongoingOrderRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         return binding.root

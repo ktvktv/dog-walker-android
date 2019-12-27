@@ -33,7 +33,7 @@ class RegisterWalkerActivity : AppCompatActivity() {
         registerWalkerViewModel.registerWalkerResponse.observe(this, Observer {
             if(it != null) {
                 Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                if(it.message == LOGIN_SUCCESSFUL) {
+                if(it.message == SUCCESSFUL) {
                     finish()
                 }
             }
