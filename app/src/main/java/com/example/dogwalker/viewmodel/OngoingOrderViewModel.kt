@@ -7,6 +7,8 @@ import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.ListOrderResponse
 import com.example.dogwalker.data.Order
 import com.example.dogwalker.network.DogWalkerServiceApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class OngoingOrderViewModel : ViewModel() {
@@ -14,14 +16,7 @@ class OngoingOrderViewModel : ViewModel() {
     val orderList = MutableLiveData<List<Order>>()
 
     suspend fun getListOrder(session: String) {
-        var orderResponse: ListOrderResponse?
-        try {
-            orderResponse = DogWalkerServiceApi.DogWalkerService.getListOrderCustomer(session)?.await()
-        } catch(e: Exception) {
-            Log.e(TAG, e.message)
-            e.printStackTrace()
-            return
-        }
+        val orderResponse = fetchListOrderCustomer(session)
 
         if(orderResponse != null) {
             if(orderResponse.message == SUCCESSFUL) {
@@ -30,20 +25,39 @@ class OngoingOrderViewModel : ViewModel() {
         }
     }
 
-    suspend fun getWalkerListOrder(session: String) {
-        var orderResponse: ListOrderResponse?
+    private suspend fun fetchListOrderCustomer(session: String): ListOrderResponse?
+            = withContext(Dispatchers.IO) {
+        var orderResponse: ListOrderResponse? = null
         try {
-            orderResponse = DogWalkerServiceApi.DogWalkerService.getWalkerListOrder(session)?.await()
+            orderResponse = DogWalkerServiceApi.DogWalkerService.getListOrderCustomer(session)?.await()
         } catch(e: Exception) {
             Log.e(TAG, e.message)
             e.printStackTrace()
-            return
         }
+
+        orderResponse
+    }
+
+    suspend fun getWalkerListOrder(session: String) {
+        val orderResponse = fetchWalkerListOrder(session)
 
         if(orderResponse != null) {
             if(orderResponse.message == SUCCESSFUL) {
                 orderList.value = orderResponse.body
             }
         }
+    }
+
+    private suspend fun fetchWalkerListOrder(session: String) : ListOrderResponse?
+            = withContext(Dispatchers.IO) {
+        var orderResponse: ListOrderResponse? = null
+        try {
+            orderResponse = DogWalkerServiceApi.DogWalkerService.getWalkerListOrder(session)?.await()
+        } catch(e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+        }
+
+        orderResponse
     }
 }

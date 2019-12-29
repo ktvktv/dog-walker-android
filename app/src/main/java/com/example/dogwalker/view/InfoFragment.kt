@@ -65,9 +65,13 @@ class InfoFragment : Fragment() {
     ): View? {
         binding = FragmentInfoBinding.inflate(inflater)
 
-        binding.userPicture.setOnClickListener {
-            //Get the picture from gallery and set it.
-            uploadImage()
+        //If in any case context is null, then don't set adapter to the recycler view, it'll make the app crash.
+        val mContext = context
+        if(mContext != null) {
+            binding.infoRecyclerView.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            infoAdapter = InfoAdapter(listOf(), mContext)
+            binding.infoRecyclerView.adapter = infoAdapter
         }
 
         //Get user and its dog data
@@ -76,8 +80,7 @@ class InfoFragment : Fragment() {
         val session = sharedPreferences.getString(getString(R.string.session_cache), "")
 
         coroutineScope.launch {
-            infoViewModel.getUserInformation(session!!)
-            infoViewModel.getDogInformation(session!!)
+            infoViewModel.getInformation(session)
         }
 
         //Go to add dog page.
@@ -87,7 +90,19 @@ class InfoFragment : Fragment() {
             startActivity(intent)
         }
 
-        //Change user type
+        //Go to register page.
+        binding.registerWalkerButton.setOnClickListener {
+            val intent = Intent(context, RegisterWalkerActivity::class.java)
+
+            startActivity(intent)
+        }
+
+        //Get the picture from gallery and set it.
+        binding.userPicture.setOnClickListener {
+            uploadImage()
+        }
+
+        //Change user type.
         binding.changeInfoButton.setOnClickListener{
             val intent = Intent(context, WalkerDashboardActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -101,12 +116,7 @@ class InfoFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.registerWalkerButton.setOnClickListener {
-            val intent = Intent(context, RegisterWalkerActivity::class.java)
-
-            startActivity(intent)
-        }
-
+        //Observing dog data
         infoViewModel.dogResponse.observe(this, Observer {
             val dogData = it.body
 
@@ -119,6 +129,7 @@ class InfoFragment : Fragment() {
             infoAdapter.notifyDataSetChanged()
         })
 
+        //Observing customer data
         infoViewModel.infoResponse.observe(this, Observer {
             if(it != null && it.message == SUCCESSFUL) {
                 val userData = it.body
@@ -159,15 +170,6 @@ class InfoFragment : Fragment() {
             }
         })
 
-        //If in any case context is null, then don't set adapter to the recycler view, it'll make the app crash.
-        val mContext = context
-        if(mContext != null) {
-            binding.infoRecyclerView.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            infoAdapter = InfoAdapter(listOf(), mContext)
-            binding.infoRecyclerView.adapter = infoAdapter
-        }
-
         return binding.root
     }
 
@@ -207,14 +209,14 @@ class InfoFragment : Fragment() {
     }
 
     override fun onResume() {
-        val session = context?.getSharedPreferences(getString
+        val session = context!!.getSharedPreferences(getString
             (R.string.preferences_file_key), Context.MODE_PRIVATE)
-            ?.getString(getString(R.string.session_cache), "")
+            .getString(getString(R.string.session_cache), "")
 
         coroutineScope.launch {
-            infoViewModel.getUserInformation(session!!)
-            infoViewModel.getDogInformation(session!!)
+            infoViewModel.getDogInformation(session)
         }
+
         super.onResume()
     }
 

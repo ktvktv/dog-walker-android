@@ -7,6 +7,8 @@ import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.LoginRequest
 import com.example.dogwalker.data.LoginResponse
 import com.example.dogwalker.network.DogWalkerServiceApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class LoginViewModel : ViewModel() {
     private val TAG = LoginViewModel::class.java.simpleName
@@ -14,15 +16,10 @@ class LoginViewModel : ViewModel() {
     val loginResponse = MutableLiveData<LoginResponse>()
 
     suspend fun checkCredential(loginData: LoginRequest) {
-        try {
-            loginResponse.value = DogWalkerServiceApi.DogWalkerService.login(loginData)?.await()
-        } catch (e: Exception) {
-            Log.e(TAG, "Login error: ${e.message}")
-            isLoginSuccess.value = false
-            return
-        }
+        loginResponse.value = checkCredentialBackgroundTask(loginData)
 
         Log.i(TAG, "Login response: ${loginResponse.value}}")
+
         if (loginResponse.value != null) {
             if (loginResponse.value!!.message.equals(SUCCESSFUL)) {
                 isLoginSuccess.value = true
@@ -31,6 +28,18 @@ class LoginViewModel : ViewModel() {
         }
 
         isLoginSuccess.value = false
+    }
+
+    private suspend fun checkCredentialBackgroundTask(loginData: LoginRequest) : LoginResponse?
+            = withContext(Dispatchers.IO) {
+        var loginResponse : LoginResponse? = null
+        try {
+            loginResponse = DogWalkerServiceApi.DogWalkerService.login(loginData)?.await()
+        } catch (e: Exception) {
+            Log.e(TAG, "Login error: ${e.message}")
+        }
+
+        loginResponse
     }
 
     fun getLoginMessage(): String {

@@ -9,6 +9,8 @@ import com.example.dogwalker.data.InsertPostRequest
 import com.example.dogwalker.data.Post
 import com.example.dogwalker.data.PostResponse
 import com.example.dogwalker.network.DogWalkerServiceApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class PostViewModel : ViewModel() {
@@ -18,16 +20,7 @@ class PostViewModel : ViewModel() {
     private val postMessage = MutableLiveData<String>()
 
     suspend fun InsertPost(session: String, postRequest: InsertPostRequest) {
-        var postResponse: CommonResponse?
-        try {
-            postResponse = DogWalkerServiceApi.DogWalkerService.insertPost(session,
-                postRequest)?.await()
-        } catch(e: Exception) {
-            Log.e(TAG, e.message)
-            e.printStackTrace()
-            isInsertPostSuccess.value = false
-            return
-        }
+        val postResponse = InsertPostBackground(session, postRequest)
 
         if(postResponse != null) {
             if(postResponse.message == SUCCESSFUL) {
@@ -44,15 +37,22 @@ class PostViewModel : ViewModel() {
         isInsertPostSuccess.value = false
     }
 
-    suspend fun GetAllPost(session: String) {
-        val postResponse: PostResponse?
+    private suspend fun InsertPostBackground(session: String, postRequest: InsertPostRequest) : CommonResponse?
+            = withContext(Dispatchers.IO) {
+        var postResponse: CommonResponse? = null
         try {
-            postResponse = DogWalkerServiceApi.DogWalkerService.getPost(session)?.await()
+            postResponse = DogWalkerServiceApi.DogWalkerService.insertPost(session,
+                postRequest)?.await()
         } catch(e: Exception) {
             Log.e(TAG, e.message)
             e.printStackTrace()
-            return
         }
+
+        postResponse
+    }
+
+    suspend fun GetAllPost(session: String) {
+        val postResponse = fetchAllPost(session)
 
         if(postResponse != null) {
             if(postResponse.message == SUCCESSFUL) {
@@ -64,6 +64,19 @@ class PostViewModel : ViewModel() {
         }
 
         postMessage.value = "Unknown error, please try again"
+    }
+
+    private suspend fun fetchAllPost(session: String): PostResponse?
+            = withContext(Dispatchers.IO) {
+        var postResponse: PostResponse? = null
+        try {
+            postResponse = DogWalkerServiceApi.DogWalkerService.getPost(session)?.await()
+        } catch(e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+        }
+
+        postResponse
     }
 
     fun getPostMessage() : String? {

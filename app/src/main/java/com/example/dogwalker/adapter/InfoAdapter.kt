@@ -35,6 +35,13 @@ class InfoAdapter(var listData: List<Dog>, val context: Context) : RecyclerView.
 
         holder.itemView.dog_name_info.text = listData[position].name
         holder.itemView.dog_age_info.text = listData[position].age.toString()
+        holder.itemView.breed_info.text = listData[position].breedName
+
+        if(listData[position].gender.toLowerCase() == "male") {
+            holder.itemView.gender_info.setImageResource(R.drawable.male_icon)
+        } else {
+            holder.itemView.gender_info.setImageResource(R.drawable.female_icon)
+        }
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)

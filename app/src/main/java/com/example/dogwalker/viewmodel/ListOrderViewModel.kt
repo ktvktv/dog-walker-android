@@ -8,6 +8,8 @@ import com.example.dogwalker.data.ListWalkerRequest
 import com.example.dogwalker.data.ListWalkerResponse
 import com.example.dogwalker.data.Walker
 import com.example.dogwalker.network.DogWalkerServiceApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class ListOrderViewModel : ViewModel() {
@@ -18,17 +20,7 @@ class ListOrderViewModel : ViewModel() {
 
     suspend fun getFilteredWalker(session: String, listWalkerRequest: ListWalkerRequest) {
         Log.d(TAG, "$listWalkerRequest")
-        var listWalkerResponse: ListWalkerResponse?
-        try {
-            listWalkerResponse = DogWalkerServiceApi.DogWalkerService.getFilteredWalker(session, listWalkerRequest)?.await()
-        } catch(e: Exception) {
-            Log.e(TAG, e.message)
-            e.printStackTrace()
-
-            errorMessage.value = "Unknown error, please try again"
-            return
-        }
-
+        val listWalkerResponse = fetchFilteredWalker(session, listWalkerRequest)
         Log.d(TAG, "$listWalkerResponse")
 
         if(listWalkerResponse != null) {
@@ -42,5 +34,17 @@ class ListOrderViewModel : ViewModel() {
         }
 
         errorMessage.value = "Unknown error, please try again"
+    }
+
+    private suspend fun fetchFilteredWalker(session: String, listWalkerRequest: ListWalkerRequest) : ListWalkerResponse?
+            = withContext(Dispatchers.IO) {
+        var listWalkerResponse: ListWalkerResponse? = null
+        try {
+            listWalkerResponse = DogWalkerServiceApi.DogWalkerService.getFilteredWalker(session, listWalkerRequest)?.await()
+        } catch(e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+        }
+        listWalkerResponse
     }
 }
