@@ -13,7 +13,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/profile_picture" />
 
     <RatingBar
         android:id="@+id/rating_bar_order"
@@ -44,6 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/delius"
+            android:textAlignment="center"
             android:textSize="18sp"
             tools:text="Hello, my name is Kevin!" />
     </ScrollView>

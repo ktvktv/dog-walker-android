@@ -41,9 +41,16 @@
         </activity>
         <activity android:name=".DashboardActivity">
         </activity>
+
         <activity android:name=".WalkerOrderActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden">
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:parentActivityName=".DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity"
+                />
         </activity>
+
         <activity android:name=".SinglePostActivity">
         </activity>
         <activity android:name=".MapsActivity">
