@@ -51,20 +51,34 @@
                 />
         </activity>
 
-        <activity android:name=".SinglePostActivity">
+        <activity android:name=".SinglePostActivity"
+            android:parentActivityName=".DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity"
+                />
         </activity>
-        <activity android:name=".MapsActivity">
-        </activity>
+
+        <activity android:name=".MapsActivity"/>
+
         <activity android:name=".RegisterDogActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize">
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:parentActivityName=".DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DashboardActivity"
+                />
+
         </activity>
         <activity android:name=".WalkerDashboardActivity"/>
         <activity android:name=".OrderDetailActivity"/>
+
         <service
             android:name=".service.DogWalkerService"
             android:exported="true"
             android:enabled="true">
         </service>
+
         <service
             android:name=".service.DogFirebaseMessagingService">
             <intent-filter>

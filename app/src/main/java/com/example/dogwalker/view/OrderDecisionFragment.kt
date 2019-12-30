@@ -82,6 +82,7 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
                 val alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
                     intent.putExtra("title", notifyData.title)
                     intent.putExtra("body", notifyData.message)
+                    intent.putExtra("id", notifyData.transactionId)
                     PendingIntent.getBroadcast(context, 0, intent, 0)
                 }
 

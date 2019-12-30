@@ -214,7 +214,7 @@ class InfoFragment : Fragment() {
             .getString(getString(R.string.session_cache), "")
 
         coroutineScope.launch {
-            infoViewModel.getDogInformation(session)
+            infoViewModel.getInformation(session)
         }
 
         super.onResume()

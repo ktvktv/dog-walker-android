@@ -9,6 +9,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.dogwalker.R
 import com.example.dogwalker.WalkerDashboardActivity
+import com.example.dogwalker.data.TransactionStatus
+import com.example.dogwalker.network.DogWalkerServiceApi
+import kotlinx.coroutines.*
 
 class AlarmReceiver : BroadcastReceiver() {
     private val TAG = AlarmReceiver::class.java.simpleName
@@ -21,6 +24,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val title = intent!!.extras.getString("title")
         val body = intent.extras.getString("body")
+        val id = intent.extras.getInt("id")
 
         var builder = NotificationCompat.Builder(context, "2")
             .setSmallIcon(R.mipmap.dog)
@@ -33,6 +37,15 @@ class AlarmReceiver : BroadcastReceiver() {
         with(NotificationManagerCompat.from(context)) {
             // notificationId is a unique int for each notification that you must define
             notify(2, builder.build())
+        }
+
+        val session = context.getSharedPreferences(context.getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+            .getString(context.getString(R.string.session_cache), "")
+
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(session, TransactionStatus(
+                id, "On Going"
+            ))
         }
 
         Log.i(TAG, "Alarm fired!")

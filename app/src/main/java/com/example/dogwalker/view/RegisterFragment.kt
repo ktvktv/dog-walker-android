@@ -18,6 +18,8 @@ import com.example.dogwalker.databinding.FragmentRegisterBinding
 import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.viewmodel.RegisterViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -39,6 +41,12 @@ class RegisterFragment : Fragment() {
     ): View? {
         binding = FragmentRegisterBinding.inflate(inflater)
 
+        var token = ""
+
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
+            token = it.result?.token ?: ""
+        }
+
         binding.registerButton.setOnClickListener {
             coroutineScope.launch {
                 val date = binding.birthDateCalendar.date
@@ -55,7 +63,8 @@ class RegisterFragment : Fragment() {
                     nik = binding.nikEditText.text.toString(),
                     password = binding.passwordEditText.text.toString(),
                     phoneNumber = binding.phoneEditText.text.toString(),
-                    placeOfBirth = binding.birthplaceEditText.text.toString()
+                    placeOfBirth = binding.birthplaceEditText.text.toString(),
+                    token = token
                 ))
             }
         }

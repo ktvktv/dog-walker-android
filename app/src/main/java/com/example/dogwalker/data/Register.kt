@@ -9,5 +9,6 @@ data class Register (
     val nik: String,
     val password: String,
     val phoneNumber: String,
-    val placeOfBirth: String
+    val placeOfBirth: String,
+    val token: String
 )

@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.*
 import com.example.dogwalker.network.DogWalkerServiceApi
-import java.lang.Exception
+import kotlin.Exception
 
 class OrderDetailViewModel : ViewModel() {
     private val TAG = WalkerInfoViewModel::class.java.simpleName
     val walkerInfoData = MutableLiveData<Walker>()
     val dogResponse = MutableLiveData<SoloDogResponse>()
-    val orderResponse = MutableLiveData<String>()
+    val customerResponse = MutableLiveData<CommonResponse>()
+    val orderResponse = MutableLiveData<OrderResponse>()
     var walkerErrorMessage: String? = null
 
     suspend fun getWalkerData(session: String, walkerId: Int) {
@@ -52,22 +53,35 @@ class OrderDetailViewModel : ViewModel() {
     }
 
     suspend fun PostOrder(session: String, order: PostOrderRequest) {
-        val walkerResponse: WalkerResponse?
         try {
-            walkerResponse = DogWalkerServiceApi.DogWalkerService.postOrder(session, order)?.await()
+            orderResponse.value = DogWalkerServiceApi.DogWalkerService.postOrder(session, order)?.await()
         } catch(e: Exception) {
             Log.e(TAG, e.message)
             e.printStackTrace()
-
-            orderResponse.value = "Unknown error, please try again"
             return
         }
+    }
 
-        if(walkerResponse != null) {
-            orderResponse.value = walkerResponse.message
-            return
+    suspend fun getCustomerData(session: String, customerId: Int) {
+        try {
+            customerResponse.value = DogWalkerServiceApi.DogWalkerService.getUser(session, customerId)?.await()
+        } catch(e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+        }
+    }
+
+    suspend fun SendNotification(session: String, notification: Notification) {
+        var commonResponse: CommonResponse? = null
+        try {
+            commonResponse = DogWalkerServiceApi.DogWalkerService.sendNotification(session, notification)!!.await()
+        } catch(e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
         }
 
-        orderResponse.value = "Unknown error, please try again"
+        if(commonResponse != null){
+            //TODO:wrap
+        }
     }
 }

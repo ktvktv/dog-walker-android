@@ -34,6 +34,9 @@ interface DogWalker {
     @GET("user/get")
     fun getUserInformation(@Header("session") session: String): Deferred<CommonResponse>?
 
+    @GET("user/get/{id}")
+    fun getUser(@Header("session") session: String, @Path("id") id: Int) : Deferred<CommonResponse>?
+
     @GET("dog/get")
     fun getDogInformation(@Header("session") session: String): Deferred<DogResponse>?
 
@@ -101,7 +104,7 @@ interface DogWalker {
 
     @POST("transaction/order")
     fun postOrder(@Header("session") session: String,
-                  @Body orderRequest: PostOrderRequest) : Deferred<WalkerResponse>?
+                  @Body orderRequest: PostOrderRequest) : Deferred<OrderResponse>?
 
     @GET("transaction/get/user")
     fun getListOrderCustomer(@Header("session") session: String) : Deferred<ListOrderResponse>?
@@ -116,6 +119,10 @@ interface DogWalker {
     @GET("transaction/reject/{id}")
     fun rejectTransaction(@Header("session") session: String,
                           @Path("id") transactionId: Int) : Deferred<CommonResponse>?
+
+    @POST("firebase/notification")
+    fun sendNotification(@Header("session") session: String,
+                         @Body notificationBody: Notification) : Deferred<CommonResponse>?
 }
 
 object DogWalkerServiceApi {

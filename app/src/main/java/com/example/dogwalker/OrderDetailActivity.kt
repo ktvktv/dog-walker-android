@@ -5,16 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.dogwalker.data.Notification
 import com.example.dogwalker.data.PostOrderRequest
 import com.example.dogwalker.databinding.FragmentDetailOrderBinding
 import com.example.dogwalker.viewmodel.OrderDetailViewModel
@@ -42,13 +39,19 @@ class OrderDetailActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
         val session = sharedPreferences.getString(getString(R.string.session_cache), "")
 
-        val walkerId = intent.extras.getInt("walkerId")
+        val clientId = intent.extras.getInt("clientId")
         val dogId = intent.extras.getInt("dogId")
         val hours = intent.extras.getInt("hours")
         val date = intent.extras.getString("date")
 
+        val type = sharedPreferences.getString(getString(R.string.type_cache), "")
+
         coroutineScope.launch {
-            orderDetailView.getWalkerData(session, walkerId)
+            if(type.toLowerCase() == "customer") {
+                orderDetailView.getWalkerData(session, clientId)
+            } else {
+                orderDetailView.getCustomerData(session, clientId)
+            }
             orderDetailView.getDogInformation(session, dogId)
         }
 
@@ -68,23 +71,45 @@ class OrderDetailActivity : AppCompatActivity() {
             }
         })
 
-        orderDetailView.walkerInfoData.observe(this, Observer {
-            if(it != null) {
-                binding.walkerNameDetail.text = it.name
+        if(type.toLowerCase() == "customer") {
+            orderDetailView.walkerInfoData.observe(this, Observer {
+                if (it != null) {
+                    binding.walkerNameDetail.text = it.name
 
-                if(it.photo != null) {
-                    val imgUri = it.photo!!.toUri().buildUpon().scheme("https").build()
-                    val imageView = binding.walkerPictureDetail
+                    if (it.photo != null) {
+                        val imgUri = it.photo!!.toUri().buildUpon().scheme("https").build()
+                        val imageView = binding.walkerPictureDetail
 
-                    Glide.with(imageView.context)
-                        .load(imgUri)
-                        .into(imageView)
+                        Glide.with(imageView.context)
+                            .load(imgUri)
+                            .into(imageView)
+                    }
+
+                    binding.addressDetailOrder.text = it.address
+                    binding.totalPriceText.text = "Rp. ${it.pricing * hours}"
                 }
+            })
+        } else {
+            orderDetailView.customerResponse.observe(this, Observer{
+                if(it != null && it.message == SUCCESSFUL) {
+                    binding.walkerNameDetail.text = it.body?.name
 
-                binding.addressDetailOrder.text = it.address
-                binding.totalPriceText.text = "Rp. ${it.pricing * hours}"
-            }
-        })
+                    if (it.body?.userImageUrl != null) {
+                        val imgUri = it.body?.userImageUrl!!.toUri().buildUpon().scheme("https").build()
+                        val imageView = binding.walkerPictureDetail
+
+                        Glide.with(imageView.context)
+                            .load(imgUri)
+                            .into(imageView)
+                    }
+
+                    binding.addressDetailOrder.text = it.body?.address
+                }
+            })
+
+            val pricing = intent.extras.getInt("price")
+            binding.totalPriceText.text = "Rp. ${pricing}"
+        }
 
         binding.orderDetailButton.setOnClickListener {
             coroutineScope.launch {
@@ -92,25 +117,36 @@ class OrderDetailActivity : AppCompatActivity() {
                     dogId,
                     hours,
                     date,
-                    walkerId
+                    clientId
                 ))
             }
         }
 
         orderDetailView.orderResponse.observe(this, Observer {
-            if(it != null) {
-                if(it == SUCCESSFUL) {
+            if(it != null && it.message == SUCCESSFUL) {
                     //TODO:Send notif using firebase
+                    val orderId = it.body.id
+
+                    coroutineScope.launch{
+                        orderDetailView.SendNotification(session, Notification(
+                                "Order incoming",
+                                "Good news, there's a new order for you.",
+                                "Customer",
+                                "Good news, there's a new order for you.",
+                                orderId
+                            )
+                        )
+                    }
 
                     val intent = Intent(this, DashboardActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
-            }
         })
 
         binding.dateOrderText.text = date
+        binding.hourText.text = "$hours Hour"
 
         setContentView(binding.root)
     }

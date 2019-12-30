@@ -179,7 +179,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 if(doneValue.equals("Yes")) {
                     ref.removeEventListener(locationListener)
-                    polyLines.remove()
+//                    polyLines.remove()
 
                     //Call network operation to notify the order's done.
 
@@ -197,10 +197,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         doneRef.addChildEventListener(doneListener)
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     private fun setMarker(dataSnapshot: DataSnapshot) {
@@ -237,20 +233,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         polyLines = mMap!!.addPolyline(polylineOptions)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
-            R.id.end_walk_menu -> {
-                Log.d(TAG, "Success!")
-            }
-            else -> {}
-        }
-        return true
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val menuInflater = MenuInflater(this)
-        menuInflater.inflate(R.menu.menu_item, menu)
-
-        return true
-    }
+//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+//        when(item?.itemId) {
+//            R.id.end_walk_menu -> {
+//                Log.d(TAG, "Success!")
+//            }
+//            else -> {}
+//        }
+//        return true
+//    }
+//
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        val menuInflater = MenuInflater(this)
+//        menuInflater.inflate(R.menu.menu_item, menu)
+//
+//        return true
+//    }
 }

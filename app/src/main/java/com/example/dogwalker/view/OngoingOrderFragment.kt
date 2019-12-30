@@ -79,9 +79,6 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
             transactionID = transactionIDString.toInt()
         }
 
-        Log.d(TAG, type)
-        Log.d(TAG, "$isFromNotify")
-        Log.d(TAG, "$transactionID")
         if(type != "" && type.toLowerCase() == "walker" && isFromNotify && transactionID > 0) {
             pendingClick(
                 NotifyData(
@@ -114,5 +111,22 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
         val newFragment = OrderDecisionFragment(pendingData, ongoingOrderViewModel)
 
         newFragment.show(activity!!.supportFragmentManager, "Dialog")
+    }
+
+    override fun onResume() {
+        val sharedPreferences = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+        val session = sharedPreferences.getString(getString(R.string.session_cache), "")
+        val type = sharedPreferences.getString(getString(R.string.type_cache), "")
+
+        if(type.toLowerCase() == "customer") {
+            coroutineScope.launch {
+                ongoingOrderViewModel.getListOrder(session)
+            }
+        } else {
+            coroutineScope.launch {
+                ongoingOrderViewModel.getWalkerListOrder(session)
+            }
+        }
+        super.onResume()
     }
 }

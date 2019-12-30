@@ -41,17 +41,17 @@ class OngoingOrderAdapter(val userType: String, var listOrder: List<Order>,
             val intent = Intent(context, OrderDetailActivity::class.java)
             intent.putExtra("dogId", listOrder[position].dogId)
             //TODO:Need changes
-            intent.putExtra("walkerId", listOrder[position].clientId)
+            intent.putExtra("clientId", listOrder[position].clientId)
             intent.putExtra("hours", listOrder[position].duration)
             intent.putExtra("date", listOrder[position].walkDate)
+            intent.putExtra("price", listOrder[position].price)
 
             context.startActivity(intent)
         }
 
         holder.itemView.status_ongoing_order_button.setOnClickListener {
             val order = listOrder[position]
-            val status = it.status_ongoing_order_button.text.toString().toLowerCase()
-            when(status) {
+            when(it.status_ongoing_order_button.text.toString().toLowerCase()) {
                 "On Going".toLowerCase() -> {
                     ongoingClickListener.onClick(
                         order.phoneNumber,
