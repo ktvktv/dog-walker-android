@@ -27,6 +27,8 @@ class OrderDetailViewModel : ViewModel() {
             return
         }
 
+        Log.d(TAG, walkerResponse.toString())
+
         if(walkerResponse != null) {
             if(walkerResponse.message == SUCCESSFUL && walkerResponse.body != null) {
                 walkerInfoData.value = walkerResponse.body
@@ -69,6 +71,7 @@ class OrderDetailViewModel : ViewModel() {
             Log.e(TAG, e.message)
             e.printStackTrace()
         }
+        Log.d(TAG, customerResponse.value.toString())
     }
 
     suspend fun SendNotification(session: String, notification: Notification) {

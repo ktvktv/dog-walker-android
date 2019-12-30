@@ -14,10 +14,13 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.dogwalker.data.TransactionStatus
+import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.service.DogWalkerService
 import com.example.dogwalker.view.OngoingOrderFragment
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -48,16 +51,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
+        val buttonView = findViewById<Button>(R.id.endWalkButton)
+        val id = intent.extras.getInt("id")
+
+        val session = getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+            .getString(getString(R.string.session_cache), "")
+
+        buttonView.setOnClickListener{
+            CoroutineScope(Job() + Dispatchers.Main).launch {
+                DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(
+                    session, TransactionStatus(
+                        id, "DONE"
+                    )
+                ).await()
+            }
+
+            Toast.makeText(this, "Transaction done", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
         firstTime = true
 
-//        userType = intent.extras.get(OngoingOrderFragment.USER_TYPE) as String
-//        phone = intent.extras.get(OngoingOrderFragment.PHONE_EXTRA) as String
-
-        userType = "walker"
-        phone = "081293312313"
+        userType = intent.extras.get(OngoingOrderFragment.USER_TYPE) as String
+        phone = intent.extras.get(OngoingOrderFragment.PHONE_EXTRA) as String
 
         // Check GPS is enabled
         if(userType.toLowerCase() == "walker") {
+            buttonView.visibility = View.GONE
             val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show()
@@ -120,7 +140,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun subscribeToUpdates() {
         Log.d(TAG, "Here's the phone: $phone")
-        val ref = FirebaseDatabase.getInstance().getReference("walker/$phone/position")
+        val ref = FirebaseDatabase.getInstance().getReference("walker/$phone")
         val locationListener = object : ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
                 setMarker(dataSnapshot)

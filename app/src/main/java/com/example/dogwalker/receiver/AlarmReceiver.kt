@@ -19,18 +19,23 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.d(TAG, "Before Notification")
 
-        val intents = Intent(context, WalkerDashboardActivity::class.java)
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context!!, 0, intents, 0)
+        val id = intent!!.extras.getInt("id")
 
-        val title = intent!!.extras.getString("title")
-        val body = intent.extras.getString("body")
-        val id = intent.extras.getInt("id")
+        var title = intent.extras.getString("title")
+        var body = intent.extras.getString("body")
 
-        var builder = NotificationCompat.Builder(context, "2")
+        if(title == "") {
+            title = "Time to walk the dog"
+        }
+
+        if(body == "") {
+            body = "Walk the dog now sir!"
+        }
+
+        var builder = NotificationCompat.Builder(context!!, "2")
             .setSmallIcon(R.mipmap.dog)
             .setContentTitle(title)
             .setContentText(body)
-            .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
 
@@ -42,10 +47,12 @@ class AlarmReceiver : BroadcastReceiver() {
         val session = context.getSharedPreferences(context.getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
             .getString(context.getString(R.string.session_cache), "")
 
-        CoroutineScope(Job() + Dispatchers.IO).launch {
-            DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(session, TransactionStatus(
-                id, "On Going"
-            ))
+        CoroutineScope(Job() + Dispatchers.Main).launch {
+            val resp = DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(session, TransactionStatus(
+                    id, "ONGOING"
+                ))!!.await()
+
+            Log.d(TAG, "$resp")
         }
 
         Log.i(TAG, "Alarm fired!")

@@ -80,7 +80,7 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener,
         intent.putExtra("dogId", args.dogId)
         intent.putExtra("date", args.date)
         intent.putExtra("hours", args.hours)
-        intent.putExtra("walkerId", walkerId)
+        intent.putExtra("clientId", walkerId)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
         startActivity(intent)

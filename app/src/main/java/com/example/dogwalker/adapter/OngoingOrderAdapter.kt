@@ -52,7 +52,7 @@ class OngoingOrderAdapter(val userType: String, var listOrder: List<Order>,
         holder.itemView.status_ongoing_order_button.setOnClickListener {
             val order = listOrder[position]
             when(it.status_ongoing_order_button.text.toString().toLowerCase()) {
-                "On Going".toLowerCase() -> {
+                "OnGoing".toLowerCase() -> {
                     ongoingClickListener.onClick(
                         order.phoneNumber,
                         userType

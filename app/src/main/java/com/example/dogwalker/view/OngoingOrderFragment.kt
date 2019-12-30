@@ -18,7 +18,9 @@ import com.example.dogwalker.R
 import com.example.dogwalker.adapter.OngoingOrderAdapter
 import com.example.dogwalker.data.NotifyData
 import com.example.dogwalker.data.Order
+import com.example.dogwalker.data.TransactionStatus
 import com.example.dogwalker.databinding.FragmentOngoingOrderBinding
+import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.viewmodel.OngoingOrderViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
 import kotlinx.coroutines.CoroutineScope
@@ -70,7 +72,7 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
         })
 
         val intent = activity!!.intent
-        val isFromNotify = intent.getBooleanExtra("isFromNotify", false)
+        var isFromNotify = intent.getBooleanExtra("isFromNotify", false)
 
         var transactionID = -1
         val transactionIDString = intent.getStringExtra("id")
@@ -90,6 +92,8 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
                     intent.getStringExtra("title")
                 )
             )
+
+            intent.putExtra("isFromNotify", false)
         }
 
         ongoingOrderAdapter = OngoingOrderAdapter(type, listOf(), this, this, context!!)

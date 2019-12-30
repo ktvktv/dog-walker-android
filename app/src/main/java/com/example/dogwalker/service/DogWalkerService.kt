@@ -30,7 +30,7 @@ class DogWalkerService : Service() {
 
     val TRACKER_NOTIFICATION_ID = 1
 
-    private lateinit var locationCallBack: LocationCallback
+    private var locationCallBack: LocationCallback? = null
     private lateinit var client: FusedLocationProviderClient
     private lateinit var phone: String
 
@@ -48,15 +48,13 @@ class DogWalkerService : Service() {
         return null
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        client = LocationServices.getFusedLocationProviderClient(this)
-        buildNotification()
-        requestLocationUpdates()
-    }
-
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        phone = intent!!.extras.get(MapsActivity.PHONE_EXTRA) as String
+        if(locationCallBack == null) {
+            phone = intent!!.extras.get(MapsActivity.PHONE_EXTRA) as String
+            client = LocationServices.getFusedLocationProviderClient(this)
+            buildNotification()
+            requestLocationUpdates()
+        }
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -105,11 +103,11 @@ class DogWalkerService : Service() {
 
     private fun requestLocationUpdates() {
         val request = LocationRequest()
-        request.interval = 5000
+        request.interval = 2000
         request.fastestInterval = 1000
         request.priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
 //        request.smallestDisplacement = 50.toFloat()
-        val path = getString(R.string.firebase_path) + "/" + getString(R.string.transport_id)
+        val path = "walker/$phone/position"
         val permission = ContextCompat.checkSelfPermission(
             this,
             Manifest.permission.ACCESS_FINE_LOCATION
