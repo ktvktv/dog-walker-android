@@ -103,10 +103,11 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
         return binding.root
     }
 
-    override fun onClick(phone: String, userType: String) {
+    override fun onClick(phone: String, userType: String, id: Int) {
         val intent = Intent(context, MapsActivity::class.java)
         intent.putExtra(PHONE_EXTRA, phone)
         intent.putExtra(USER_TYPE, userType)
+        intent.putExtra("id", id)
 
         startActivity(intent)
     }

@@ -29,6 +29,10 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.FirebaseDatabase
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -59,14 +63,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         buttonView.setOnClickListener{
             CoroutineScope(Job() + Dispatchers.Main).launch {
-                DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(
+                val resp = DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(
                     session, TransactionStatus(
                         id, "DONE"
                     )
-                ).await()
+                )!!.await()
+
+                Log.d(TAG, resp.toString())
             }
 
             Toast.makeText(this, "Transaction done", Toast.LENGTH_SHORT).show()
+            stopService(Intent(this, DogWalkerService::class.java))
             finish()
         }
 
@@ -77,7 +84,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Check GPS is enabled
         if(userType.toLowerCase() == "walker") {
-            buttonView.visibility = View.GONE
             val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show()
@@ -100,6 +106,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     LOCATION_PERMISSIONS_REQUEST
                 )
             }
+        } else {
+            buttonView.visibility = View.GONE
         }
 
         val mapFragment = supportFragmentManager

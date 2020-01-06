@@ -55,7 +55,8 @@ class OngoingOrderAdapter(val userType: String, var listOrder: List<Order>,
                 "OnGoing".toLowerCase() -> {
                     ongoingClickListener.onClick(
                         order.phoneNumber,
-                        userType
+                        userType,
+                        order.id
                     )
                 }
 
@@ -89,7 +90,7 @@ class OngoingOrderAdapter(val userType: String, var listOrder: List<Order>,
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
     interface OngoingClickListener {
-        fun onClick(phone: String, walkerType: String)
+        fun onClick(phone: String, walkerType: String, id: Int)
     }
 
     interface PendingClickListener {
