@@ -40,11 +40,11 @@ class OngoingOrderAdapter(val userType: String, var listOrder: List<Order>,
         holder.itemView.detail_button.setOnClickListener {
             val intent = Intent(context, OrderDetailActivity::class.java)
             intent.putExtra("dogId", listOrder[position].dogId)
-            //TODO:Need changes
             intent.putExtra("clientId", listOrder[position].clientId)
             intent.putExtra("hours", listOrder[position].duration)
             intent.putExtra("date", listOrder[position].walkDate)
             intent.putExtra("price", listOrder[position].price)
+            intent.putExtra("isOrder", false)
 
             context.startActivity(intent)
         }

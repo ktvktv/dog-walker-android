@@ -2,6 +2,7 @@ package com.example.dogwalker.view
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -17,18 +18,21 @@ import com.example.dogwalker.data.LoginRequest
 import com.example.dogwalker.databinding.FragmentLoginBinding
 import com.example.dogwalker.viewmodel.LoginViewModel
 import com.example.dogwalker.viewmodel.ViewModelFactory
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
-
+    private val TAG = LoginFragment::class.java.simpleName
     private lateinit var binding: FragmentLoginBinding
     private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
     private val loginViewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory()).get(LoginViewModel::class.java)
     }
+    private var token = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +40,19 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater)
+
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(TAG, "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                if(task.result != null) {
+                    token = task.result!!.token
+                }
+            })
 
         binding.passwordEditText.setOnKeyListener { v, keyCode, event ->
             if(event.action == KeyEvent.ACTION_DOWN) {
@@ -90,9 +107,11 @@ class LoginFragment : Fragment() {
             return
         }
 
+        Log.d(TAG, "Here's token after $token")
+
         coroutineScope.launch {
             loginViewModel.checkCredential(LoginRequest(
-                phoneNumber, password
+                phoneNumber, password, token
             ))
         }
     }

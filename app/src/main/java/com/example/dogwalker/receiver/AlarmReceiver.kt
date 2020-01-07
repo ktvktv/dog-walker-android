@@ -11,6 +11,7 @@ import com.example.dogwalker.R
 import com.example.dogwalker.WalkerDashboardActivity
 import com.example.dogwalker.data.TransactionStatus
 import com.example.dogwalker.network.DogWalkerServiceApi
+import com.example.dogwalker.viewmodel.OngoingOrderViewModel
 import kotlinx.coroutines.*
 
 class AlarmReceiver : BroadcastReceiver() {
@@ -47,12 +48,16 @@ class AlarmReceiver : BroadcastReceiver() {
         val session = context.getSharedPreferences(context.getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
             .getString(context.getString(R.string.session_cache), "")
 
+        val ongoingOrderViewModel = OngoingOrderViewModel()
+
         CoroutineScope(Job() + Dispatchers.Main).launch {
             val resp = DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(session, TransactionStatus(
                     id, "ONGOING"
                 ))!!.await()
 
             Log.d(TAG, "$resp")
+
+            ongoingOrderViewModel.getWalkerListOrder(session)
         }
 
         Log.i(TAG, "Alarm fired!")

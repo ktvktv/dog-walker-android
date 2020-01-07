@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -43,6 +44,7 @@ class OrderDetailActivity : AppCompatActivity() {
         val dogId = intent.extras.getInt("dogId")
         val hours = intent.extras.getInt("hours")
         val date = intent.extras.getString("date")
+        val isOrder = intent.extras.getBoolean("isOrder")
 
         val type = sharedPreferences.getString(getString(R.string.type_cache), "")
 
@@ -111,15 +113,21 @@ class OrderDetailActivity : AppCompatActivity() {
             binding.totalPriceText.text = "Rp. ${pricing}"
         }
 
-        binding.orderDetailButton.setOnClickListener {
-            coroutineScope.launch {
-                orderDetailView.PostOrder(session, PostOrderRequest(
-                    dogId,
-                    hours,
-                    date,
-                    clientId
-                ))
+        if(isOrder) {
+            binding.orderDetailButton.setOnClickListener {
+                coroutineScope.launch {
+                    orderDetailView.PostOrder(
+                        session, PostOrderRequest(
+                            dogId,
+                            hours,
+                            date,
+                            clientId
+                        )
+                    )
+                }
             }
+        } else {
+            binding.orderDetailButton.visibility = View.GONE
         }
 
         orderDetailView.orderResponse.observe(this, Observer {
