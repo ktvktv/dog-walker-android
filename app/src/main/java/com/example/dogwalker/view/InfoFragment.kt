@@ -107,7 +107,6 @@ class InfoFragment : Fragment() {
             val intent = Intent(context, WalkerDashboardActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
-            //TODO:Call api to change the type cache
             with (sharedPreferences.edit()) {
                 putString(getString(R.string.type_cache), "Walker")
                 apply()

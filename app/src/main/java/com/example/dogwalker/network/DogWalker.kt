@@ -57,7 +57,8 @@ interface DogWalker {
         @Part("phoneNumber") phoneNumber: String = "",
         @Part photo: MultipartBody.Part? = null,
         @Part("placeOfBirth") birthplace: String = "",
-        @Part("type") type: String = ""
+        @Part("type") type: String = "",
+        @Part("token") token: String = ""
     ): Deferred<CommonResponse>?
 
     @POST("walker/register")

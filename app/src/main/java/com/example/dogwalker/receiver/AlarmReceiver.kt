@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -48,16 +49,12 @@ class AlarmReceiver : BroadcastReceiver() {
         val session = context.getSharedPreferences(context.getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
             .getString(context.getString(R.string.session_cache), "")
 
-        val ongoingOrderViewModel = OngoingOrderViewModel()
-
         CoroutineScope(Job() + Dispatchers.Main).launch {
             val resp = DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(session, TransactionStatus(
                     id, "ONGOING"
                 ))!!.await()
 
             Log.d(TAG, "$resp")
-
-            ongoingOrderViewModel.getWalkerListOrder(session)
         }
 
         Log.i(TAG, "Alarm fired!")

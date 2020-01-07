@@ -82,4 +82,19 @@ class InfoViewModel : ViewModel() {
 
         resp
     }
+
+    suspend fun updateToken(session: String, token: String) {
+        var resp: CommonResponse? = null
+        try {
+            resp = DogWalkerServiceApi.DogWalkerService.updateUserInformation(
+                session = session,
+                token = token
+            )?.await()
+        } catch(e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+        }
+
+        resp
+    }
 }

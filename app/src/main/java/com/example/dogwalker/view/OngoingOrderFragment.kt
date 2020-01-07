@@ -28,7 +28,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListener, OngoingOrderAdapter.PendingClickListener{
+class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListener,
+    OngoingOrderAdapter.PendingClickListener {
 
     private val TAG = OngoingOrderFragment::class.java.simpleName
     private val ongoingOrderViewModel by lazy {
@@ -36,6 +37,7 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
     }
     private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
     private lateinit var ongoingOrderAdapter: OngoingOrderAdapter
+    private var isFromNotify: Boolean = false
 
     companion object {
         val PHONE_EXTRA = "phone"
@@ -49,11 +51,20 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
     ): View? {
         val binding = FragmentOngoingOrderBinding.inflate(inflater)
 
-        val sharedPreferences = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+        val sharedPreferences = activity!!.getSharedPreferences(
+            getString(R.string.preferences_file_key),
+            Context.MODE_PRIVATE
+        )
         val session = sharedPreferences.getString(getString(R.string.session_cache), "")
-        val type = sharedPreferences.getString(getString(R.string.type_cache), "")
+        var type = sharedPreferences.getString(getString(R.string.type_cache), "")
 
-        if(type.toLowerCase() == "customer") {
+        val intent = activity!!.intent
+        isFromNotify = intent.getBooleanExtra("isFromNotify", false)
+
+        if (isFromNotify) {
+            type = "walker"
+        }
+        if (type.toLowerCase() == "customer") {
             coroutineScope.launch {
                 ongoingOrderViewModel.getListOrder(session)
             }
@@ -63,25 +74,22 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
             }
         }
 
-        ongoingOrderViewModel.orderList.observe(this, Observer{
-            if(it != null) {
+        ongoingOrderViewModel.orderList.observe(this, Observer {
+            if (it != null) {
                 Log.d(TAG, "$it")
                 ongoingOrderAdapter.listOrder = it
                 ongoingOrderAdapter.notifyDataSetChanged()
             }
         })
 
-        val intent = activity!!.intent
-        var isFromNotify = intent.getBooleanExtra("isFromNotify", false)
-
         var transactionID = -1
         val transactionIDString = intent.getStringExtra("id")
 
-        if(transactionIDString != null) {
+        if (transactionIDString != null) {
             transactionID = transactionIDString.toInt()
         }
 
-        if(type != "" && type.toLowerCase() == "walker" && isFromNotify && transactionID > 0) {
+        if (type != "" && type.toLowerCase() == "walker" && isFromNotify && transactionID > 0) {
             pendingClick(
                 NotifyData(
                     transactionID,
@@ -98,7 +106,8 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
 
         ongoingOrderAdapter = OngoingOrderAdapter(type, listOf(), this, this, context!!)
         binding.ongoingOrderRecycler.adapter = ongoingOrderAdapter
-        binding.ongoingOrderRecycler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.ongoingOrderRecycler.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         return binding.root
     }
@@ -119,11 +128,19 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
     }
 
     override fun onResume() {
-        val sharedPreferences = activity!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+        val sharedPreferences = activity!!.getSharedPreferences(
+            getString(R.string.preferences_file_key),
+            Context.MODE_PRIVATE
+        )
         val session = sharedPreferences.getString(getString(R.string.session_cache), "")
-        val type = sharedPreferences.getString(getString(R.string.type_cache), "")
+        var type = sharedPreferences.getString(getString(R.string.type_cache), "")
 
-        if(type.toLowerCase() == "customer") {
+        Log.d(TAG, "THIS IS THE TYPE: $type")
+
+        if (isFromNotify) {
+            type = "walker"
+        }
+        if (type.toLowerCase() == "customer") {
             coroutineScope.launch {
                 ongoingOrderViewModel.getListOrder(session)
             }

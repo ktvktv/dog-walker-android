@@ -16,6 +16,11 @@ import androidx.core.app.NotificationManagerCompat
 import com.example.dogwalker.DashboardActivity
 import com.example.dogwalker.R
 import com.example.dogwalker.WalkerDashboardActivity
+import com.example.dogwalker.viewmodel.InfoViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 class DogFirebaseMessagingService : FirebaseMessagingService() {
@@ -97,6 +102,12 @@ class DogFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(p0: String) {
         Log.d(TAG, "New token: $p0")
 
-        //TODO:Send Token to server
+        val infoViewModel = InfoViewModel()
+        val session = getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+            .getString(getString(R.string.session_cache), "")
+
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            infoViewModel.updateToken(session, p0)
+        }
     }
 }

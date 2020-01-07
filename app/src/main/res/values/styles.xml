@@ -7,10 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 <!--        <item name="colorAccent">@color/colorAccent</item>-->
 
-        <item name="android:textViewStyle">@style/def</item>
-        <item name="android:editTextStyle">@style/def</item>
-        <item name="android:buttonStyle">@style/def</item>
-        <item name="android:hint">@style/def</item>
+<!--        <item name="android:textViewStyle">@style/def</item>-->
+<!--        <item name="android:editTextStyle">@style/def</item>-->
+<!--        <item name="android:buttonStyle">@style/def</item>-->
+<!--        <item name="android:hint">@style/def</item>-->
     </style>
 
     <style name="def" parent="android:Widget">
