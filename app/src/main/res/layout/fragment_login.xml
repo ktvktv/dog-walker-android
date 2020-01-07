@@ -20,7 +20,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
-                android:fontFamily="@font/delius"
                 android:text="@string/app_name"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +33,6 @@
                 android:layout_marginTop="48dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="@font/delius"
                 android:hint="@string/phone_number"
                 android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="@+id/textView"
@@ -45,10 +43,9 @@
                 android:id="@+id/password_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:fontFamily="@font/delius"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="@+id/phone_number"
@@ -57,57 +54,34 @@
 
             <Button
                 android:id="@+id/login_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/delius"
                 android:text="@string/login_button"
-                app:layout_constraintEnd_toEndOf="@+id/password_edit_text"
-                app:layout_constraintStart_toStartOf="@+id/password_edit_text"
+                app:layout_constraintEnd_toEndOf="@id/textView2"
+                app:layout_constraintStart_toStartOf="@id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/password_edit_text" />
 
             <Button
                 android:id="@+id/register_button"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/delius"
+                android:layout_marginBottom="132dp"
                 android:text="@string/register_button"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/textView2"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="@id/textView2" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/delius"
                 android:text="@string/register_invitation"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/register_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintEnd_toStartOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@+id/textView"
-                app:srcCompat="@drawable/paw_print_64" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="@+id/textView"
-                app:srcCompat="@drawable/paw_print_64" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

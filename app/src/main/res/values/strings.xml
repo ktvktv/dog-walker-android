@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Dog Walker</string>
+    <string name="app_name">Dog Walker Indonesia</string>
 
     <!-- LoginRequest -->
     <string name="login_description">Enter your registered phone number and password</string>
     <string name="login_button">Login</string>
-    <string name="register_button">Register Now</string>
+    <string name="register_button">Daftar</string>
 
     <string name="preferences_file_key">com.example.dogwalker.PREFERENCES_FILE</string>
     <string name="session_cache">Session</string>
@@ -14,7 +14,7 @@
     <string name="phone_number_cache">PhoneNumber</string>
 
     <!--Registration-->
-    <string name="register_invitation">Don\'t have an account?</string>
+    <string name="register_invitation">Belum daftar?</string>
     <string name="register_title">Registration</string>
     <string name="name">Name</string>
     <string name="gender">Gender</string>
@@ -23,8 +23,8 @@
     <string name="email">Email</string>
     <string name="nik">NIK</string>
     <string name="address">Address</string>
-    <string name="password">Password</string>
-    <string name="phone_number">Phone Number</string>
+    <string name="password">Kata Sandi</string>
+    <string name="phone_number">Nomor Telepon</string>
     <string name="birthplace">Birthplace</string>
     <string name="birth_date">Birth date</string>
     <string name="kg">Kilo Gram</string>
