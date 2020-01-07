@@ -86,6 +86,9 @@ dependencies {
     //Maps
     implementation "com.google.android.gms:play-services-maps:$map_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //Material
+    implementation "com.google.android.material:material:$material_version"
 }
 
 apply plugin: 'com.google.gms.google-services'

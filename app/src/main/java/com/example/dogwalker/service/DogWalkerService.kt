@@ -121,7 +121,7 @@ class DogWalkerService : Service() {
                 override fun onLocationResult(locationResult: LocationResult?) {
                     val ref = FirebaseDatabase.getInstance().getReference(path)
                     val location = locationResult!!.lastLocation
-                    if (location != null) {
+                    if (location != null && location.speed < 5.0) {
                         Log.d(TAG, "location update $location")
                         val locations = Location(location.latitude, location.longitude)
                         ref.setValue(locations)
