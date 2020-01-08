@@ -36,7 +36,12 @@ class DashboardActivity: AppCompatActivity() {
 
         viewPager.adapter = ScreenSlidePagerAdapter(supportFragmentManager)
         viewPager.setPageTransformer(true, PageTransformer())
-        viewPager.currentItem = intent.getIntExtra("isNotified", 1)
+        val page = intent.getIntExtra("isNotified", -1)
+
+        Log.d(TAG, "Current Item: ${viewPager.currentItem}")
+        if(page != -1) {
+            viewPager.currentItem = page
+        }
 
         tabLayout.setupWithViewPager(viewPager)
         tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))

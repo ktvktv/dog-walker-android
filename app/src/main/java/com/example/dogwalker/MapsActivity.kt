@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.DataSnapshot
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import android.util.Log
@@ -24,11 +23,9 @@ import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.service.DogWalkerService
 import com.example.dogwalker.view.OngoingOrderFragment
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.FirebaseDatabase
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.*
+import com.google.firebase.database.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -55,6 +52,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         val buttonView = findViewById<Button>(R.id.endWalkButton)
         val id = intent.extras.getInt("id")
 
@@ -68,12 +67,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         id, "DONE"
                     )
                 )!!.await()
-
-                Log.d(TAG, resp.toString())
             }
+
+            FirebaseDatabase.getInstance().getReference("walker/$phone/done").setValue("Yes")
 
             Toast.makeText(this, "Transaction done", Toast.LENGTH_SHORT).show()
             stopService(Intent(this, DogWalkerService::class.java))
+            setResult(RESULT_OK)
             finish()
         }
 
@@ -147,84 +147,101 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun subscribeToUpdates() {
-        Log.d(TAG, "Here's the phone: $phone")
-        val ref = FirebaseDatabase.getInstance().getReference("walker/$phone")
-        val locationListener = object : ChildEventListener {
-            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                setMarker(dataSnapshot)
+        Log.d(TAG, "Subscribe to walker's location, phone: $phone")
+        val ref = FirebaseDatabase.getInstance().getReference("walker/$phone/position")
+//        val locationListener = object : ChildEventListener {
+//            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
+//                Log.d(TAG, "child name: $previousChildName")
+//                if(previousChildName != "done") {
+//                    setMarker(dataSnapshot)
+//                }
+//            }
+//
+//            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+//                Log.d(TAG, "child name: $previousChildName")
+//                if(previousChildName != "done") {
+//                    setMarker(dataSnapshot)
+//                }
+//            }
+//
+//            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {}
+//
+//            override fun onChildRemoved(dataSnapshot: DataSnapshot) {}
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                Log.d(TAG, "Failed to read value.", error.toException())
+//            }
+//        }
+//
+//        ref.addChildEventListener(locationListener)
+        val locationListener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.e(TAG, "Cancel location")
             }
 
-            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
-                setMarker(dataSnapshot)
+            override fun onDataChange(p0: DataSnapshot) {
+                setMarker(p0)
             }
 
-            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {}
-
-            override fun onChildRemoved(dataSnapshot: DataSnapshot) {}
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, "Failed to read value.", error.toException())
-            }
         }
 
-        ref.addChildEventListener(locationListener)
+        ref.addValueEventListener(locationListener)
 
+        Log.d(TAG, "Subscribe to walker's end walk state")
         val doneRef = FirebaseDatabase.getInstance().getReference("walker/$phone/done")
-
-        val doneListener = object : ChildEventListener {
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, "Failed to read value.", error.toException())
+        val doneListener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.e(TAG, "Cancel Done")
             }
 
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                //
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+            override fun onDataChange(p0: DataSnapshot) {
                 val doneValue = p0.value as String
 
-                Log.d(TAG, doneValue)
-
-                if(doneValue.equals("Yes")) {
+                Log.d(TAG, "Done's walker value: $doneValue")
+                if(doneValue == "Yes") {
                     ref.removeEventListener(locationListener)
-                    polyLines.remove()
-
-                    //Call network operation to notify the order's done.
-                    //TO-DO
-
-                    Log.d(TAG, "doneListener called")
-
                     Toast.makeText(this@MapsActivity, "Walking session is done", Toast.LENGTH_SHORT).show()
-
+                    setResult(RESULT_OK)
                     finish()
                 }
             }
-
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                val doneValue = p0.value as String
-
-                Log.d(TAG, doneValue)
-
-                if(doneValue.equals("Yes")) {
-                    ref.removeEventListener(locationListener)
-//                    polyLines.remove()
-
-                    //Call network operation to notify the order's done.
-
-                    Log.d(TAG, "doneListener called")
-
-                    Toast.makeText(this@MapsActivity, "Walking session is done", Toast.LENGTH_SHORT).show()
-
-                    finish()
-                }
-            }
-
-            override fun onChildRemoved(p0: DataSnapshot) {
-                //
-            }
+//            override fun onCancelled(error: DatabaseError) {
+//                Log.d(TAG, "Failed to read value.", error.toException())
+//            }
+//
+//            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+//                //
+//            }
+//
+//            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+//
+//            }
+//
+//            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+//                val doneValue = p0.value as String
+//
+//                Log.d(TAG, doneValue)
+//
+//                if(doneValue.equals("Yes")) {
+//                    ref.removeEventListener(locationListener)
+////                    polyLines.remove()
+//
+//                    //Call network operation to notify the order's done.
+//
+//                    Log.d(TAG, "doneListener called")
+//
+//                    Toast.makeText(this@MapsActivity, "Walking session is done", Toast.LENGTH_SHORT).show()
+//
+//                    finish()
+//                }
+//            }
+//
+//            override fun onChildRemoved(p0: DataSnapshot) {
+//                //
+//            }
         }
 
-        doneRef.addChildEventListener(doneListener)
+        doneRef.addValueEventListener(doneListener)
     }
 
     private fun setMarker(dataSnapshot: DataSnapshot) {
@@ -237,8 +254,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // for locations received, so that we can build the
         // boundaries required to show them all on the map at once
         val key = dataSnapshot.key
-        Log.d(TAG, dataSnapshot.toString())
-        Log.d(TAG, key)
+        Log.d(TAG, "Data: $dataSnapshot")
+        Log.d(TAG, "Key: $key")
         val value = dataSnapshot.value as HashMap<String, Any>
         val lat = java.lang.Double.parseDouble(value["latitude"].toString())
         val lng = java.lang.Double.parseDouble(value["longitude"].toString())
@@ -261,15 +278,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         polyLines = mMap!!.addPolyline(polylineOptions)
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        when(item?.itemId) {
-//            R.id.end_walk_menu -> {
-//                Log.d(TAG, "Success!")
-//            }
-//            else -> {}
-//        }
-//        return true
-//    }
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            android.R.id.home -> finish()
+        }
+        return true
+    }
 //
 //    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 //        val menuInflater = MenuInflater(this)

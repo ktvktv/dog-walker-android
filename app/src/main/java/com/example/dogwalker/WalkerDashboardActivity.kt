@@ -44,6 +44,9 @@ class WalkerDashboardActivity : AppCompatActivity() {
 
         viewPager.adapter = ScreenSlidePagerAdapter(supportFragmentManager)
         viewPager.setPageTransformer(true, PageTransformer())
+
+        Log.d(TAG, "currentItem: ${viewPager.currentItem}")
+
         viewPager.currentItem = 1
 
         tabLayout.setupWithViewPager(viewPager)

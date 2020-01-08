@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,8 @@ class OrderDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         Log.d(TAG, "ORDER DETAIL FRAGMENT")
         binding = FragmentDetailOrderBinding.inflate(LayoutInflater.from(this))
@@ -157,5 +160,20 @@ class OrderDetailActivity : AppCompatActivity() {
         binding.hourText.text = "$hours Hour"
 
         setContentView(binding.root)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId == android.R.id.home) {
+            val isOrder = intent.extras.getBoolean("isOrder")
+            if(isOrder) {
+                val intent = Intent(this, WalkerOrderActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                startActivity(intent)
+            } else {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

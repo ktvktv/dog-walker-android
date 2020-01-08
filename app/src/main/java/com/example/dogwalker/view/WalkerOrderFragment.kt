@@ -3,10 +3,7 @@ package com.example.dogwalker.view
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -120,5 +117,12 @@ class WalkerOrderFragment : Fragment() {
         catch(e :Exception) {
             Toast.makeText(context, "Hours must be numeric", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == android.R.id.home) {
+            Log.d(TAG, "SELECTED")
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

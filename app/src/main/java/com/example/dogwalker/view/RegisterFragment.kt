@@ -27,12 +27,13 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 
 class RegisterFragment : Fragment() {
-
+    private val TAG = RegisterFragment::class.java.simpleName
     private lateinit var binding: FragmentRegisterBinding
     private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
     private val registerViewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory()).get(RegisterViewModel::class.java)
     }
+    private val DateTAG = "Date-Picker"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,27 +49,62 @@ class RegisterFragment : Fragment() {
         }
 
         binding.registerButton.setOnClickListener {
+            val date = binding.birthDateEditText.text.toString()
+            if(date == "" || date.isEmpty()) {
+                Toast.makeText(context, "Birthdate must not empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val dates = SimpleDateFormat("dd/MM/yyyy").format(date)
+
+            if(!binding.maleRadio.isChecked && !binding.femaleRadio.isChecked) {
+                Toast.makeText(context, "Gender must be chosen", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val gender = if(binding.maleRadio.isChecked) "Male" else "Female"
+
+            val address = binding.addressEditText.text.toString()
+            val email = binding.emailEditText.text.toString()
+            val name = binding.nameEditText.text.toString()
+            val nik = binding.nikEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+            val phoneNumber = binding.phoneEditText.text.toString()
+            val birthplace = binding.birthplaceEditText.text.toString()
+
+            if(address.isEmpty() || email.isEmpty() || name.isEmpty() || nik.isEmpty() || password.isEmpty()
+                || phoneNumber.isEmpty() || birthplace.isEmpty()) {
+                Toast.makeText(context, "Field must not empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if(nik.length != 16) {
+                Toast.makeText(context, "NIK length must be 16", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             coroutineScope.launch {
-                val date = binding.birthDateCalendar.date
-                val dates = SimpleDateFormat("dd-MM-yyyy").format(date)
-
-                val gender = if(binding.maleRadio.isChecked) "Male" else "Female"
-
                 registerViewModel.register(Register(
-                    address = binding.addressEditText.text.toString(),
+                    address = address,
                     dateOfBirth = dates,
-                    email = binding.emailEditText.text.toString(),
+                    email = email,
                     gender = gender,
-                    name = binding.nameEditText.text.toString(),
-                    nik = binding.nikEditText.text.toString(),
-                    password = binding.passwordEditText.text.toString(),
-                    phoneNumber = binding.phoneEditText.text.toString(),
-                    placeOfBirth = binding.birthplaceEditText.text.toString(),
+                    name = name,
+                    nik = nik,
+                    password = password,
+                    phoneNumber = phoneNumber,
+                    placeOfBirth = birthplace,
                     token = token
                 ))
             }
         }
 
+        Log.d(TAG, "Birthdate created")
+        binding.birthDateEditText.setOnClickListener{
+            Log.d(TAG, "Birthdate called")
+            val dateFragment = DateFragment(binding.birthDateEditText)
+            dateFragment.show(fragmentManager!!, DateTAG)
+        }
 
         registerViewModel.isRegisterSuccess.observe(this, Observer {
             if(it) {

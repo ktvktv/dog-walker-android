@@ -3,6 +3,7 @@ package com.example.dogwalker
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -29,6 +30,8 @@ class RegisterWalkerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityWalkerRegisterBinding.inflate(LayoutInflater.from(this))
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         registerWalkerViewModel.registerWalkerResponse.observe(this, Observer {
             if(it != null) {
@@ -92,5 +95,13 @@ class RegisterWalkerActivity : AppCompatActivity() {
         return RegisterWalkerRequest(
             description, maxDogSize, pricing, maxDistance, maxDuration
         )
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId == android.R.id.home) {
+            finish()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

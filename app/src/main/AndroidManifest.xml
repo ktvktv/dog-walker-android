@@ -43,33 +43,12 @@
         </activity>
 
         <activity android:name=".WalkerOrderActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:parentActivityName=".DashboardActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DashboardActivity"
-                />
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
-        <activity android:name=".SinglePostActivity"
-            android:parentActivityName=".DashboardActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DashboardActivity"
-                />
-        </activity>
-
-        <activity android:name=".MapsActivity"/>
+        <activity android:name=".SinglePostActivity"/>
 
         <activity android:name=".RegisterDogActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize"
-            android:parentActivityName=".DashboardActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".DashboardActivity"
-                />
-
-        </activity>
+            android:windowSoftInputMode="adjustPan|adjustResize"/>
         <activity android:name=".WalkerDashboardActivity"/>
         <activity android:name=".OrderDetailActivity"/>
 

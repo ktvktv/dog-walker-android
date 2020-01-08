@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -54,6 +55,8 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding = ActivityRegisterDogBinding.inflate(LayoutInflater.from(this))
 
@@ -289,5 +292,13 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         Log.d(TAG, "${parent!!.getItemAtPosition(position)} - $position")
         breedId = position+1
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId == android.R.id.home) {
+            finish()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

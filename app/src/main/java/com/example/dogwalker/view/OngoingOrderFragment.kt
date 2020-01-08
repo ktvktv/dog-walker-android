@@ -1,5 +1,6 @@
 package com.example.dogwalker.view
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -42,6 +43,7 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
     companion object {
         val PHONE_EXTRA = "phone"
         val USER_TYPE = "user-type"
+        val MAPS_REQUEST_CODE = 100
     }
 
     override fun onCreateView(
@@ -118,7 +120,34 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
         intent.putExtra(USER_TYPE, userType)
         intent.putExtra("id", id)
 
-        startActivity(intent)
+        startActivityForResult(intent, MAPS_REQUEST_CODE)
+//        startActivity(intent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == MAPS_REQUEST_CODE && resultCode == RESULT_OK) {
+            val sharedPreferences = activity!!.getSharedPreferences(
+                getString(R.string.preferences_file_key),
+                Context.MODE_PRIVATE
+            )
+            val session = sharedPreferences.getString(getString(R.string.session_cache), "")
+            var type = sharedPreferences.getString(getString(R.string.type_cache), "")
+
+            Log.d(TAG, "THIS IS THE TYPE: $type")
+
+            if (isFromNotify) {
+                type = "walker"
+            }
+            if (type.toLowerCase() == "customer") {
+                coroutineScope.launch {
+                    ongoingOrderViewModel.getListOrder(session)
+                }
+            } else {
+                coroutineScope.launch {
+                    ongoingOrderViewModel.getWalkerListOrder(session)
+                }
+            }
+        }
     }
 
     override fun pendingClick(pendingData: NotifyData) {

@@ -107,7 +107,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_weight="1"
                 android:ems="10"
                 android:fontFamily="@font/delius"
                 android:hint="@string/birthplace"
@@ -115,18 +114,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/address_edit_text"
                 app:layout_constraintStart_toStartOf="@+id/address_edit_text"
                 app:layout_constraintTop_toBottomOf="@+id/address_edit_text" />
-
-            <CalendarView
-                android:id="@+id/birth_date_calendar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
-                app:layout_constraintBottom_toTopOf="@+id/register_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <RadioGroup
                 android:id="@+id/radioGroup2"
@@ -165,18 +152,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/delius"
-                android:text="@string/birth_date"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/birthplace_edit_text"
-                app:layout_constraintStart_toStartOf="@+id/birthplace_edit_text"
-                app:layout_constraintTop_toBottomOf="@+id/birthplace_edit_text" />
-
             <EditText
                 android:id="@+id/nik_edit_text"
                 android:layout_width="wrap_content"
@@ -189,6 +164,22 @@
                 app:layout_constraintEnd_toEndOf="@+id/phone_edit_text"
                 app:layout_constraintStart_toStartOf="@+id/phone_edit_text"
                 app:layout_constraintTop_toBottomOf="@+id/phone_edit_text" />
+
+            <TextView
+                android:id="@+id/birth_date_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:fontFamily="@font/delius"
+                android:hint="@string/birth_date"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/register_button"
+                app:layout_constraintEnd_toEndOf="@+id/birthplace_edit_text"
+                app:layout_constraintStart_toStartOf="@+id/birthplace_edit_text"
+                app:layout_constraintTop_toBottomOf="@+id/birthplace_edit_text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

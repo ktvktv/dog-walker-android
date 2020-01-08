@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -24,7 +25,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition {
-
+    private val TAG = SinglePostActivity::class.java.simpleName
     private lateinit var binding: ActivitySinglePostBinding
     private lateinit var commentAdapter: CommentAdapter
     private val singlePostViewModel by lazy {
@@ -34,6 +35,8 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding = ActivitySinglePostBinding.inflate(LayoutInflater.from(this))
 
@@ -111,5 +114,12 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition {
             singlePostViewModel.insertComment(session, newComment)
             singlePostViewModel.getCommentDetail(session, postId)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId == android.R.id.home) {
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
