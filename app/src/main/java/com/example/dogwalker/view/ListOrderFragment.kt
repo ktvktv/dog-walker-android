@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -50,6 +51,8 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener,
         val view = inflater.inflate(R.layout.fragment_list_order, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.list_order_recycler)
 
+        setHasOptionsMenu(true)
+
         val session = context!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
             .getString(getString(R.string.session_cache), "")
 
@@ -93,5 +96,14 @@ class ListOrderFragment : Fragment(), ListOrderAdapter.ListOrderOnClickListener,
         val action = ListOrderFragmentDirections.actionListOrderFragmentToWalkerInfoFragment(walkerId)
 
         findNavController().navigate(action)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == android.R.id.home) {
+            val action = ListOrderFragmentDirections.actionListOrderFragmentToWalkerOrderFragment()
+
+            findNavController().navigate(action)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

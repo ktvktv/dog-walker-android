@@ -25,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.util.*
 
 class RegisterFragment : Fragment() {
     private val TAG = RegisterFragment::class.java.simpleName
@@ -55,7 +56,15 @@ class RegisterFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val dates = SimpleDateFormat("dd/MM/yyyy").format(date)
+            val datez = date.split("/")
+            val cld = Calendar.getInstance()
+            cld.set(Calendar.YEAR, datez[2].toInt())
+            cld.set(Calendar.MONTH, datez[1].toInt()-1)
+            cld.set(Calendar.DAY_OF_MONTH, datez[0].toInt())
+            val result = cld.time
+
+            val dates = SimpleDateFormat("dd/MM/yyyy").format(result)
+            Log.d(TAG, "THIS IS DATES: $dates")
 
             if(!binding.maleRadio.isChecked && !binding.femaleRadio.isChecked) {
                 Toast.makeText(context, "Gender must be chosen", Toast.LENGTH_SHORT).show()
@@ -99,9 +108,7 @@ class RegisterFragment : Fragment() {
             }
         }
 
-        Log.d(TAG, "Birthdate created")
         binding.birthDateEditText.setOnClickListener{
-            Log.d(TAG, "Birthdate called")
             val dateFragment = DateFragment(binding.birthDateEditText)
             dateFragment.show(fragmentManager!!, DateTAG)
         }

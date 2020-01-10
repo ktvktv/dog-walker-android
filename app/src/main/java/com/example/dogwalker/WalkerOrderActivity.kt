@@ -10,6 +10,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
+import com.example.dogwalker.view.ListOrderFragment
+import com.example.dogwalker.view.WalkerOrderFragment
 
 
 class WalkerOrderActivity: AppCompatActivity() {
@@ -20,15 +22,5 @@ class WalkerOrderActivity: AppCompatActivity() {
         setContentView(R.layout.activity_walker_order)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item?.itemId == android.R.id.home) {
-            Log.d(TAG, "Walker Order home")
-            val currFragment = supportFragmentManager.fragments.size
-            Log.d(TAG, "Total fragment: $currFragment")
-
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

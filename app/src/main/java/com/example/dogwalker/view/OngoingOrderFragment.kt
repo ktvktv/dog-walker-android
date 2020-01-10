@@ -76,6 +76,18 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
             }
         }
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            if (type.toLowerCase() == "customer") {
+                coroutineScope.launch {
+                    ongoingOrderViewModel.getListOrder(session)
+                }
+            } else {
+                coroutineScope.launch {
+                    ongoingOrderViewModel.getWalkerListOrder(session)
+                }
+            }
+        }
+
         ongoingOrderViewModel.orderList.observe(this, Observer {
             if (it != null) {
                 Log.d(TAG, "$it")

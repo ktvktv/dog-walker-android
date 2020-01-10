@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_listOrderFragment_to_walkerInfoFragment"
             app:destination="@id/walkerInfoFragment" />
+        <action
+            android:id="@+id/action_listOrderFragment_to_walkerOrderFragment"
+            app:destination="@id/walkerOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/walkerInfoFragment"
@@ -39,5 +42,8 @@
         <argument
             android:name="walkerId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_walkerInfoFragment_to_walkerOrderFragment"
+            app:destination="@+id/walkerOrderFragment" />
     </fragment>
 </navigation>

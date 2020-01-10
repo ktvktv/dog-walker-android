@@ -136,6 +136,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_listOrderFragment_to_walkerOrderFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -149,6 +154,15 @@
                             <option name="x" value="258" />
                             <option name="y" value="-283" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_walkerInfoFragment_to_walkerOrderFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

@@ -44,6 +44,8 @@ class WalkerOrderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWalkerOrderBinding.inflate(inflater)
+
+        setHasOptionsMenu(true)
         
         val currentDate = Calendar.getInstance().time
         binding.dogCalendarOrder.text = SimpleDateFormat("dd/MM/yyyy").format(currentDate)
@@ -121,7 +123,7 @@ class WalkerOrderFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == android.R.id.home) {
-            Log.d(TAG, "SELECTED")
+            activity?.finish()
         }
         return super.onOptionsItemSelected(item)
     }

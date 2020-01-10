@@ -2,6 +2,7 @@ package com.example.dogwalker.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.example.dogwalker.WalkerOrderActivity
 import com.example.dogwalker.databinding.FragmentDashboardBinding
 
 class DashboardFragment: Fragment() {
-
+    private val TAG = DashboardFragment::class.java.simpleName
     private lateinit var binding: FragmentDashboardBinding
 
     override fun onCreateView(
@@ -21,6 +22,10 @@ class DashboardFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDashboardBinding.inflate(inflater)
+
+        binding.dashboardView.setOnClickListener {
+            Log.d(TAG, "Nothing happen")
+        }
 
         binding.dogDashboardImage.setOnClickListener {
             val intent = Intent(context, WalkerOrderActivity::class.java)

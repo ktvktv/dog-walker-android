@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.dogwalker.DashboardActivity
@@ -69,6 +71,7 @@ class WalkerInfoFragment : Fragment() {
 
             binding.changeRoleWalkerButton.visibility = View.VISIBLE
         } else {
+            setHasOptionsMenu(true)
             binding.changeRoleWalkerButton.visibility = View.GONE
         }
 
@@ -117,7 +120,16 @@ class WalkerInfoFragment : Fragment() {
             }
         })
 
-
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == android.R.id.home) {
+            val action = WalkerInfoFragmentDirections.actionWalkerInfoFragmentToWalkerOrderFragment()
+
+            findNavController().navigate(action)
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
