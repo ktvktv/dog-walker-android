@@ -11,7 +11,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -46,9 +48,9 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/delius"
+                android:text="@{user.name}"
                 app:layout_constraintStart_toEndOf="@+id/user_picture"
                 app:layout_constraintTop_toTopOf="@+id/user_picture"
-                android:text="@{user.name}"
                 tools:text="Kevin Tigravictor" />
 
             <TextView
@@ -136,11 +138,11 @@
                 android:fontFamily="@font/delius"
                 android:text="@{user.type}"
                 android:textSize="18sp"
-                tools:text="Customer"
                 app:layout_constraintBottom_toBottomOf="@+id/gender_info_image"
                 app:layout_constraintEnd_toEndOf="@+id/user_picture"
                 app:layout_constraintStart_toEndOf="@+id/gender_info_image"
-                app:layout_constraintTop_toTopOf="@+id/gender_info_image" />
+                app:layout_constraintTop_toTopOf="@+id/gender_info_image"
+                tools:text="Customer" />
 
             <ImageView
                 android:id="@+id/add_dog_image"
@@ -167,9 +169,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="@{user.nik}"
                 app:layout_constraintStart_toStartOf="@+id/phone_info_text"
                 app:layout_constraintTop_toBottomOf="@+id/phone_info_text"
-                android:text="@{user.nik}"
                 tools:text="1111111111111111" />
 
             <TextView
@@ -183,6 +185,17 @@
                 app:layout_constraintBottom_toTopOf="@+id/register_walker_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="150dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Logout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/info_recycler_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

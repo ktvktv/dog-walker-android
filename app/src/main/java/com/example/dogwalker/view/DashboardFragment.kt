@@ -32,15 +32,6 @@ class DashboardFragment: Fragment() {
             startActivity(intent)
         }
 
-        binding.logoutButton.setOnClickListener{
-            val intent = Intent(context, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-            context?.deleteSharedPreferences(getString(R.string.preferences_file_key))
-
-            startActivity(intent)
-        }
-
         return binding.root
     }
 }

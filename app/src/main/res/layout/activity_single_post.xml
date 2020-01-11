@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/delius"
-                android:text="Kevin Tigravictor"
+                tools:text="Kevin Tigravictor"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/profile_post"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,8 +56,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/delius"
-                        android:inputType="textLongMessage|textMultiLine"
-                        android:text="TextView" />
+                        android:inputType="textLongMessage|textMultiLine" />
                 </LinearLayout>
             </ScrollView>
 
@@ -67,8 +66,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/delius"
+                tools:text="Why dog walking is important?"
                 android:inputType="textLongMessage|textMultiLine"
-                android:text="Why dog walking is important?"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,16 +92,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="#F8E7DF"
                 app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+                app:layout_constraintTop_toBottomOf="@+id/textView34">
 
             </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/delius"
+                android:text="Comment"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

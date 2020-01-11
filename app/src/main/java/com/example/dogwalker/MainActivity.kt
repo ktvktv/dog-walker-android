@@ -27,10 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         Log.d(TAG, type)
 
-        //Session Verification
-        //TODO: If there's time, need to make the logout.
         if(type != "") {
-            var intent: Intent = Intent()
+            var intent = Intent()
             if (type.toLowerCase() == "customer") {
                 intent = Intent(this, DashboardActivity::class.java)
             } else if (type.toLowerCase() == "walker") {

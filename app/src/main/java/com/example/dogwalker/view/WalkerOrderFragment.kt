@@ -1,6 +1,8 @@
 package com.example.dogwalker.view
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -52,14 +54,14 @@ class WalkerOrderFragment : Fragment() {
         binding.timeOrderWalker.text = SimpleDateFormat("kk:mm:ss").format(currentDate)
 
         binding.dogCalendarOrder.setOnClickListener {
-            Log.d(TAG, "Calendar clicked")
+            Log.d(TAG, "Calendar picked")
 
             val newFragment = DateFragment(it as TextView)
             newFragment.show(fragmentManager!!, DatePickerTAG)
         }
 
         binding.timeOrderWalker.setOnClickListener {
-            Log.d(TAG, "Time clicked")
+            Log.d(TAG, "Time picked")
 
             val newFragment = TimeFragment(it as TextView)
             newFragment.show(fragmentManager!!, TimePickerTAG)
@@ -83,6 +85,16 @@ class WalkerOrderFragment : Fragment() {
 
         walkerOrderViewModel.listDog.observe(this, androidx.lifecycle.Observer {
             if(it != null) {
+                if(it.isEmpty()) {
+                    AlertDialog.Builder(ContextThemeWrapper(context, android.R.style.Theme_DeviceDefault_Dialog_Alert))
+                        .setTitle("Peringatan")
+                        .setMessage("Anda tidak mempunyai anjing untuk dijalankan, " +
+                                "tolong daftarkan anjing anda terlebih dahulu")
+                        .setPositiveButton("OK") { dialogInterface, i ->
+                            activity?.finish()
+                        }.create().show()
+                }
+
                 walkerOrderAdapter.listDog = it
                 walkerOrderAdapter.notifyDataSetChanged()
             }

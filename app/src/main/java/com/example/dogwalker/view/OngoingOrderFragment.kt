@@ -57,40 +57,31 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
             getString(R.string.preferences_file_key),
             Context.MODE_PRIVATE
         )
+
         val session = sharedPreferences.getString(getString(R.string.session_cache), "")
         var type = sharedPreferences.getString(getString(R.string.type_cache), "")
 
         val intent = activity!!.intent
         isFromNotify = intent.getBooleanExtra("isFromNotify", false)
 
+        //Clicked from notification
         if (isFromNotify) {
             type = "walker"
         }
-        if (type.toLowerCase() == "customer") {
-            coroutineScope.launch {
-                ongoingOrderViewModel.getListOrder(session)
-            }
-        } else {
-            coroutineScope.launch {
-                ongoingOrderViewModel.getWalkerListOrder(session)
-            }
-        }
 
+        //Get data for the first time
+        populateData(type, session)
+
+        //If refreshed, then populate data from server
         binding.swipeRefreshLayout.setOnRefreshListener {
-            if (type.toLowerCase() == "customer") {
-                coroutineScope.launch {
-                    ongoingOrderViewModel.getListOrder(session)
-                }
-            } else {
-                coroutineScope.launch {
-                    ongoingOrderViewModel.getWalkerListOrder(session)
-                }
-            }
+            populateData(type, session)
         }
 
         ongoingOrderViewModel.orderList.observe(this, Observer {
             if (it != null) {
-                Log.d(TAG, "$it")
+                Log.d(TAG, "Ongoing order data: $it")
+                binding.swipeRefreshLayout.isRefreshing = false
+
                 ongoingOrderAdapter.listOrder = it
                 ongoingOrderAdapter.notifyDataSetChanged()
             }
@@ -103,7 +94,7 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
             transactionID = transactionIDString.toInt()
         }
 
-        if (type != "" && type.toLowerCase() == "walker" && isFromNotify && transactionID > 0) {
+        if (type.toLowerCase() == "walker" && isFromNotify && transactionID > 0) {
             pendingClick(
                 NotifyData(
                     transactionID,
@@ -115,9 +106,10 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
                 )
             )
 
-            intent.putExtra("isFromNotify", false)
+//            intent.putExtra("isFromNotify", false)
         }
 
+        //Set adapter to populate the data in the layout
         ongoingOrderAdapter = OngoingOrderAdapter(type, listOf(), this, this, context!!)
         binding.ongoingOrderRecycler.adapter = ongoingOrderAdapter
         binding.ongoingOrderRecycler.layoutManager =
@@ -134,6 +126,18 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
 
         startActivityForResult(intent, MAPS_REQUEST_CODE)
 //        startActivity(intent)
+    }
+
+    private fun populateData(type: String, session: String) {
+        if (type.toLowerCase() == "customer") {
+            coroutineScope.launch {
+                ongoingOrderViewModel.getListOrder(session)
+            }
+        } else {
+            coroutineScope.launch {
+                ongoingOrderViewModel.getWalkerListOrder(session)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -166,30 +170,5 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
         val newFragment = OrderDecisionFragment(pendingData, ongoingOrderViewModel)
 
         newFragment.show(activity!!.supportFragmentManager, "Dialog")
-    }
-
-    override fun onResume() {
-        val sharedPreferences = activity!!.getSharedPreferences(
-            getString(R.string.preferences_file_key),
-            Context.MODE_PRIVATE
-        )
-        val session = sharedPreferences.getString(getString(R.string.session_cache), "")
-        var type = sharedPreferences.getString(getString(R.string.type_cache), "")
-
-        Log.d(TAG, "THIS IS THE TYPE: $type")
-
-        if (isFromNotify) {
-            type = "walker"
-        }
-        if (type.toLowerCase() == "customer") {
-            coroutineScope.launch {
-                ongoingOrderViewModel.getListOrder(session)
-            }
-        } else {
-            coroutineScope.launch {
-                ongoingOrderViewModel.getWalkerListOrder(session)
-            }
-        }
-        super.onResume()
     }
 }

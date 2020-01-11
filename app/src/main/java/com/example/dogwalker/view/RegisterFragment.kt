@@ -63,7 +63,7 @@ class RegisterFragment : Fragment() {
             cld.set(Calendar.DAY_OF_MONTH, datez[0].toInt())
             val result = cld.time
 
-            val dates = SimpleDateFormat("dd/MM/yyyy").format(result)
+            val dates = SimpleDateFormat("dd-MM-yyyy").format(result)
             Log.d(TAG, "THIS IS DATES: $dates")
 
             if(!binding.maleRadio.isChecked && !binding.femaleRadio.isChecked) {

@@ -1,6 +1,7 @@
 package com.example.dogwalker.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -13,7 +14,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.dogwalker.DashboardActivity
 import com.example.dogwalker.R
+import com.example.dogwalker.WalkerDashboardActivity
 import com.example.dogwalker.data.LoginRequest
 import com.example.dogwalker.databinding.FragmentLoginBinding
 import com.example.dogwalker.viewmodel.LoginViewModel
@@ -85,8 +88,15 @@ class LoginFragment : Fragment() {
                     apply()
                 }
 
-                val action = LoginFragmentDirections.actionLoginFragmentToDashboardActivity()
-                findNavController().navigate(action)
+                var intent: Intent
+                if(userCache?.body?.type?.toLowerCase() == "walker") {
+                    intent = Intent(context, WalkerDashboardActivity::class.java)
+                } else {
+                    intent = Intent(context, DashboardActivity::class.java)
+                }
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                startActivity(intent)
             } else {
                 Toast.makeText(context, loginViewModel.getLoginMessage(), Toast.LENGTH_SHORT).show()
             }
