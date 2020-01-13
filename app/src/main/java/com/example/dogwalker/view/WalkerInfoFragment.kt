@@ -59,7 +59,6 @@ class WalkerInfoFragment : Fragment() {
             binding.changeRoleWalkerButton.setOnClickListener {
                 val intent = Intent(context, DashboardActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                //TODO:Call API to update the type cache
 
                 with(sharedPreferences.edit()) {
                     putString(getString(R.string.type_cache), "Customer")

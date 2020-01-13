@@ -60,14 +60,13 @@ class OngoingOrderAdapter(val userType: String, var listOrder: List<Order>,
                     )
                 }
 
-                //TODO:Modif this
                 "Pending".toLowerCase() -> {
                     if(userType.toLowerCase() == "walker") {
                         pendingClickListener.pendingClick(
                             NotifyData(
                                 order.id,
                                 order.photo,
-                                "${order.name} want you to walk ${order.name}'s dog",
+                                "Ada pesanan untuk menjalankan anjing dari ${order.name}",
                                 order.walkDate,
                                 "",
                                 ""

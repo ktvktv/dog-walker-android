@@ -135,7 +135,6 @@ class OrderDetailActivity : AppCompatActivity() {
 
         orderDetailView.orderResponse.observe(this, Observer {
             if(it != null && it.message == SUCCESSFUL) {
-                    //TODO:Send notif using firebase
                     val orderId = it.body.id
 
                     coroutineScope.launch{

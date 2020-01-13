@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.ListOrderResponse
+import com.example.dogwalker.data.Notification
 import com.example.dogwalker.data.Order
 import com.example.dogwalker.network.DogWalkerServiceApi
 import kotlinx.coroutines.Dispatchers
@@ -60,4 +61,6 @@ class OngoingOrderViewModel : ViewModel() {
 
         orderResponse
     }
+
+
 }

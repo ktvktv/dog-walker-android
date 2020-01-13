@@ -34,10 +34,16 @@ class AlarmReceiver : BroadcastReceiver() {
             body = "Walk the dog now sir!"
         }
 
+        val intent = Intent(context, WalkerDashboardActivity::class.java)
+        intent.putExtra("isFromNotify", false)
+
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
         var builder = NotificationCompat.Builder(context!!, "2")
             .setSmallIcon(R.mipmap.dog)
             .setContentTitle(title)
             .setContentText(body)
+            .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true)
 

@@ -84,7 +84,7 @@ class OrderDetailViewModel : ViewModel() {
         }
 
         if(commonResponse != null){
-            //TODO:wrap
+            //TODO:Fix this if there's time
         }
     }
 }

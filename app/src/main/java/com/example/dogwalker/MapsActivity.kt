@@ -18,6 +18,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.dogwalker.data.Notification
 import com.example.dogwalker.data.TransactionStatus
 import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.service.DogWalkerService
@@ -62,11 +63,19 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         buttonView.setOnClickListener{
             CoroutineScope(Job() + Dispatchers.Main).launch {
-                val resp = DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(
+                DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(
                     session, TransactionStatus(
                         id, "DONE"
                     )
                 )!!.await()
+
+                DogWalkerServiceApi.DogWalkerService.sendNotification(session, Notification(
+                    "Order selesai",
+                    "Terima kasih telah menggunakan jasa kami",
+                    "Walker",
+                    "Rating",
+                    id
+                ))
             }
 
             FirebaseDatabase.getInstance().getReference("walker/$phone/done").setValue("Yes")

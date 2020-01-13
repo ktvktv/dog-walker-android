@@ -124,6 +124,10 @@ interface DogWalker {
     @POST("firebase/notification")
     fun sendNotification(@Header("session") session: String,
                          @Body notificationBody: Notification) : Deferred<CommonResponse>?
+
+    @POST("walker/rate")
+    fun rateWalker(@Header("session") session: String,
+                   @Body ratingRequest: RatingRequest) : Deferred<CommonResponse>?
 }
 
 object DogWalkerServiceApi {

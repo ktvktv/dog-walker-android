@@ -28,14 +28,10 @@ class DogFirebaseMessagingService : FirebaseMessagingService() {
     private val TAG = DogFirebaseMessagingService::class.java.simpleName
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        // ...
-
-        // TODO(developer): Handle FCM messages here.
-        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: " + remoteMessage.from!!)
 
         // Check if message contains a data payload.
-        if (remoteMessage.data.size > 0) {
+        if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
         }
 
@@ -49,7 +45,11 @@ class DogFirebaseMessagingService : FirebaseMessagingService() {
 
         var intent: Intent
         if(remoteMessage.data["From"] == "Walker") {
+            val isRating = remoteMessage.data["description"]!!.toLowerCase() == "rating"
             intent = Intent(this, DashboardActivity::class.java)
+            if(isRating) {
+                intent.putExtra("isRating", true)
+            }
             intent.putExtra("isNotified", 2)
         } else {
             intent = Intent(this, WalkerDashboardActivity::class.java)

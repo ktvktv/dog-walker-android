@@ -11,7 +11,8 @@ data class Order(
     val address: String,
     val dogId: Int,
     val phoneNumber: String,
-    val photo: String?
+    val photo: String?,
+    val isRated: Boolean
 )
 
 /*

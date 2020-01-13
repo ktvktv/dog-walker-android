@@ -63,30 +63,6 @@ class WalkerDashboardActivity : AppCompatActivity() {
             putString(getString(R.string.session_cache), "Walker")
             apply()
         }
-
-        //TODO:Call API to update session
-
-//        val alarmMgr = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//
-//        val alarmIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
-//            intent.putExtra("title", "Test")
-//            intent.putExtra("body", "Testing")
-//            PendingIntent.getBroadcast(this, 0, intent, 0)
-//        }
-//
-//        val dates = SimpleDateFormat("HH:mm:ss dd/MM/yyyy").parse("16:19:00 27/12/2019")
-//
-//        val calendar: Calendar = Calendar.getInstance().apply {
-//            timeInMillis = dates.time
-//        }
-//
-//        Log.d(TAG, "Time now.\nTimesInMillis: ${System.currentTimeMillis()}")
-//        Log.d(TAG, "Time set.\nTimesInMillis: ${calendar.timeInMillis}")
-//        alarmMgr?.set(
-//            AlarmManager.RTC_WAKEUP,
-//            calendar.timeInMillis,
-//            alarmIntent
-//        )
     }
 
     private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm,

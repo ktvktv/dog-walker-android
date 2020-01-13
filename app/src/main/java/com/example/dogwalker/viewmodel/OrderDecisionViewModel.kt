@@ -3,10 +3,7 @@ package com.example.dogwalker.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dogwalker.data.CommonResponse
-import com.example.dogwalker.data.DogResponse
-import com.example.dogwalker.data.TransactionStatus
-import com.example.dogwalker.data.WalkerResponse
+import com.example.dogwalker.data.*
 import com.example.dogwalker.network.DogWalkerServiceApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -49,5 +46,19 @@ class OrderDecisionViewModel : ViewModel() {
         }
 
         resp
+    }
+
+    suspend fun SendNotification(session: String, notification: Notification) {
+        var commonResponse: CommonResponse? = null
+        try {
+            commonResponse = DogWalkerServiceApi.DogWalkerService.sendNotification(session, notification)!!.await()
+        } catch(e: Exception) {
+            Log.e(TAG, e.message)
+            e.printStackTrace()
+        }
+
+        if(commonResponse != null){
+            //TODO:Fix this if there's time
+        }
     }
 }

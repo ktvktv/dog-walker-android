@@ -43,6 +43,12 @@ class DashboardActivity: AppCompatActivity() {
             viewPager.currentItem = page
         }
 
+        val isRating = intent.getBooleanExtra("isRating", false)
+        Log.d(TAG, "RATING: $isRating")
+        if(isRating) {
+            Log.d(TAG, "SHOW RATING")
+        }
+
         tabLayout.setupWithViewPager(viewPager)
         tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
 
