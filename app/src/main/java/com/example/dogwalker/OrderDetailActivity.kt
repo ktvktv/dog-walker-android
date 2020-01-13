@@ -164,16 +164,11 @@ class OrderDetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(item?.itemId == android.R.id.home) {
-            val isOrder = intent.extras.getBoolean("isOrder")
-            if(isOrder) {
-                val intent = Intent(this, WalkerOrderActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            finish()
 
-                startActivity(intent)
-            } else {
-                finish()
-            }
+            return true
         }
+
         return super.onOptionsItemSelected(item)
     }
 }

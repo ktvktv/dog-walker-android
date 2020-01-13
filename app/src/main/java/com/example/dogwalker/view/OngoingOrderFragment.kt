@@ -142,6 +142,7 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == MAPS_REQUEST_CODE && resultCode == RESULT_OK) {
+            Log.d(TAG, "MAPS END")
             val sharedPreferences = activity!!.getSharedPreferences(
                 getString(R.string.preferences_file_key),
                 Context.MODE_PRIVATE

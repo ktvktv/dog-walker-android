@@ -125,9 +125,7 @@ class WalkerInfoFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == android.R.id.home) {
-            val action = WalkerInfoFragmentDirections.actionWalkerInfoFragmentToWalkerOrderFragment()
-
-            findNavController().navigate(action)
+            return findNavController().navigateUp()
         }
 
         return super.onOptionsItemSelected(item)

@@ -280,15 +280,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
-            android.R.id.home -> finish()
+            android.R.id.home -> {
+                setResult(RESULT_OK)
+                finish()
+            }
         }
         return true
     }
-//
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        val menuInflater = MenuInflater(this)
-//        menuInflater.inflate(R.menu.menu_item, menu)
-//
-//        return true
-//    }
+
+    override fun onBackPressed() {
+        setResult(RESULT_OK)
+        super.onBackPressed()
+    }
 }

@@ -10,6 +10,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.dogwalker.view.ListOrderFragment
 import com.example.dogwalker.view.WalkerOrderFragment
 
@@ -22,5 +24,13 @@ class WalkerOrderActivity: AppCompatActivity() {
         setContentView(R.layout.activity_walker_order)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onBackPressed() {
+        val isUpAllowed = findNavController(R.id.walker_order_host).navigateUp()
+
+        if(!isUpAllowed) {
+            super.onBackPressed()
+        }
     }
 }
