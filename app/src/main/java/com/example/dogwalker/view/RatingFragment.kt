@@ -1,0 +1,69 @@
+package com.example.dogwalker.view
+
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.net.toUri
+import androidx.fragment.app.DialogFragment
+import com.bumptech.glide.Glide
+import com.example.dogwalker.R
+import com.example.dogwalker.data.Order
+import com.example.dogwalker.viewmodel.DashboardViewModel
+import kotlinx.android.synthetic.main.fragment_rating.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+
+class RatingFragment(val order: Order, val dashboardViewModel: DashboardViewModel) : DialogFragment() {
+
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_rating, container, false)
+
+        view.description_text.text = order.name
+        view.date_text.text = order.walkDate
+
+        if(order.photo != null && order.photo != "") {
+            val imgUri = order.photo.toUri().buildUpon().scheme("https").build()
+            val imageView = view.user_image
+
+            Glide.with(imageView.context)
+                .load(imgUri)
+                .into(imageView)
+        }
+
+        val rate = view.ratingBar.numStars
+
+        view.ok_button.setOnClickListener {
+            if(rate == 0) {
+                Toast.makeText(context, "Please rate the walker", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val session = context!!.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+                .getString(getString(R.string.session_cache), "")
+
+//            coroutineScope.launch {
+//                dashboardViewModel.rateWalker(
+//                    session, RatingRequest(
+//                        order.clientId,
+//                        rate,
+//                        order.id
+//                    )
+//                )
+//            }
+
+            dismiss()
+        }
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+}
