@@ -102,6 +102,12 @@ class InfoFragment : Fragment() {
             uploadImage()
         }
 
+        binding.updateButton.setOnClickListener {
+            val intent = Intent(context, UpdateInfoActivity::class.java)
+
+            startActivity(intent)
+        }
+
         //Change user type.
         binding.changeInfoButton.setOnClickListener{
             val intent = Intent(context, WalkerDashboardActivity::class.java)
