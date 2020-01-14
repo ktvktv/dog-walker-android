@@ -150,7 +150,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         // Authenticate with Firebase when the Google map is loaded
         mMap = googleMap
-        mMap!!.setMaxZoomPreference(18f)
+        mMap!!.setMaxZoomPreference(17f)
 
         subscribeToUpdates()
     }
@@ -204,14 +204,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                val doneValue = p0.value as String
+                if(p0.exists()) {
+                    val doneValue = p0.value as String
 
-                Log.d(TAG, "Done's walker value: $doneValue")
-                if(doneValue == "Yes") {
-                    ref.removeEventListener(locationListener)
-                    Toast.makeText(this@MapsActivity, "Walking session is done", Toast.LENGTH_SHORT).show()
-                    setResult(RESULT_OK)
-                    finish()
+                    Log.d(TAG, "Done's walker value: $doneValue")
+                    if (doneValue == "Yes") {
+                        ref.removeEventListener(locationListener)
+                        Toast.makeText(
+                            this@MapsActivity,
+                            "Walking session is done",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        setResult(RESULT_OK)
+                        finish()
+                    }
                 }
             }
 //            override fun onCancelled(error: DatabaseError) {

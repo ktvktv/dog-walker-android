@@ -124,6 +124,8 @@ class OngoingOrderFragment : Fragment(), OngoingOrderAdapter.OngoingClickListene
         intent.putExtra(USER_TYPE, userType)
         intent.putExtra("id", id)
 
+        Log.d(TAG, "Send message to maps, phone: $phone, user-type: $userType, id: $id")
+
         startActivityForResult(intent, MAPS_REQUEST_CODE)
 //        startActivity(intent)
     }

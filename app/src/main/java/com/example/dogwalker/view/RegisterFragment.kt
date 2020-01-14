@@ -50,21 +50,11 @@ class RegisterFragment : Fragment() {
         }
 
         binding.registerButton.setOnClickListener {
-            val date = binding.birthDateEditText.text.toString()
-            if(date == "" || date.isEmpty()) {
+            val dates = binding.birthDateEditText.text.toString()
+            if(dates == "" || dates.isEmpty()) {
                 Toast.makeText(context, "Birthdate must not empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-            val datez = date.split("/")
-            val cld = Calendar.getInstance()
-            cld.set(Calendar.YEAR, datez[2].toInt())
-            cld.set(Calendar.MONTH, datez[1].toInt()-1)
-            cld.set(Calendar.DAY_OF_MONTH, datez[0].toInt())
-            val result = cld.time
-
-            val dates = SimpleDateFormat("dd-MM-yyyy").format(result)
-            Log.d(TAG, "THIS IS DATES: $dates")
 
             if(!binding.maleRadio.isChecked && !binding.femaleRadio.isChecked) {
                 Toast.makeText(context, "Gender must be chosen", Toast.LENGTH_SHORT).show()

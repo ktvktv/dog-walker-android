@@ -50,7 +50,7 @@ class WalkerOrderFragment : Fragment() {
         setHasOptionsMenu(true)
         
         val currentDate = Calendar.getInstance().time
-        binding.dogCalendarOrder.text = SimpleDateFormat("dd/MM/yyyy").format(currentDate)
+        binding.dogCalendarOrder.text = SimpleDateFormat("dd-MM-yyyy").format(currentDate)
         binding.timeOrderWalker.text = SimpleDateFormat("kk:mm:ss").format(currentDate)
 
         binding.dogCalendarOrder.setOnClickListener {

@@ -74,7 +74,6 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="@string/password"
-                android:text="@{user.password}"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/phonenumber_text"
                 app:layout_constraintStart_toStartOf="@+id/phonenumber_text"

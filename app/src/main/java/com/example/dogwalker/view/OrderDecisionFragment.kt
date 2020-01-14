@@ -85,7 +85,7 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
                     PendingIntent.getBroadcast(context, 0, intent, 0)
                 }
 
-                val dates = SimpleDateFormat("HH:mm:ss dd/MM/yyyy").parse(notifyData.date)
+                val dates = SimpleDateFormat("HH:mm:ss dd-MM-yyyy").parse(notifyData.date)
 
                 val calendar: Calendar = Calendar.getInstance().apply {
                     timeInMillis = dates.time

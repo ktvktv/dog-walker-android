@@ -147,7 +147,7 @@ class InfoFragment : Fragment() {
                 binding.user = userData
                 binding.notifyChange()
 
-                if(userData.gender.trim() == "Male") {
+                if(userData.gender.toLowerCase().trim() == "male") {
                     binding.genderInfoImage.setImageResource(R.drawable.male_icon)
                 } else {
                     binding.genderInfoImage.setImageResource(R.drawable.female_icon)

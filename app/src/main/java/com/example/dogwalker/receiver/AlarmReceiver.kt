@@ -13,6 +13,8 @@ import com.example.dogwalker.WalkerDashboardActivity
 import com.example.dogwalker.data.TransactionStatus
 import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.viewmodel.OngoingOrderViewModel
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.coroutines.*
 
 class AlarmReceiver : BroadcastReceiver() {
@@ -52,8 +54,8 @@ class AlarmReceiver : BroadcastReceiver() {
             notify(2, builder.build())
         }
 
-        val session = context.getSharedPreferences(context.getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
-            .getString(context.getString(R.string.session_cache), "")
+        val sharedPreferences = context.getSharedPreferences(context.getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+        val session = sharedPreferences.getString(context.getString(R.string.session_cache), "")
 
         CoroutineScope(Job() + Dispatchers.Main).launch {
             val resp = DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(session, TransactionStatus(
@@ -62,6 +64,11 @@ class AlarmReceiver : BroadcastReceiver() {
 
             Log.d(TAG, "$resp")
         }
+
+        val phone = sharedPreferences.getString(context.getString(R.string.phone_number_cache), "")
+        val path = "walker/$phone/done"
+        val ref = FirebaseDatabase.getInstance().getReference(path)
+        ref.setValue("No")
 
         Log.i(TAG, "Alarm fired!")
     }
