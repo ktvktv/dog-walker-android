@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
+    <data>
+        <variable
+            name="dog"
+            type="com.example.dogwalker.data.Dog"/>
+    </data>
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +19,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/dog_photo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="24dp"
@@ -28,14 +35,15 @@
                 android:layout_marginTop="48dp"
                 android:ems="10"
                 android:hint="@string/name"
+                android:text="@{dog.name}"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/dog_photo" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/year_age"
                 android:layout_width="64dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
@@ -57,16 +65,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/month_age"
                 android:layout_width="64dp"
                 android:layout_height="48dp"
                 android:ems="10"
                 android:hint="Month"
                 android:inputType="textPersonName"
-                app:layout_constraintBottom_toBottomOf="@+id/editText2"
+                app:layout_constraintBottom_toBottomOf="@+id/year_age"
                 app:layout_constraintEnd_toEndOf="@+id/editText"
                 app:layout_constraintStart_toEndOf="@+id/view10"
-                app:layout_constraintTop_toTopOf="@+id/editText2" />
+                app:layout_constraintTop_toTopOf="@+id/year_age" />
 
             <RadioGroup
                 android:id="@+id/radioGroup4"
@@ -76,16 +84,16 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/editText"
                 app:layout_constraintStart_toStartOf="@+id/editText"
-                app:layout_constraintTop_toBottomOf="@+id/editText2">
+                app:layout_constraintTop_toBottomOf="@+id/year_age">
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/female_radio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/female" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/male_radio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -115,6 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                    android:text="@{dog.specialNeeds}"
                     android:hint="Special Needs"
                     android:inputType="textLongMessage|textMultiLine" />
             </ScrollView>

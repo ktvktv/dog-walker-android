@@ -3,6 +3,7 @@ package com.example.dogwalker
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -24,6 +25,8 @@ class UpdateInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         viewPager = findViewById(R.id.view_pager)
         tabLayout = findViewById(R.id.tab_layout_dashboard)
@@ -52,5 +55,13 @@ class UpdateInfoActivity : AppCompatActivity() {
                 else -> DogUpdateFragment()
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId == android.R.id.home) {
+            finish()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
