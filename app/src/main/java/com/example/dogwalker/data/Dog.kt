@@ -6,6 +6,8 @@ class Dog (
     val age: Int,
     val gender: String,
     val photo: String?,
-    val specialNeeds: String?,
-    val breedName: String
+    val weight: Int? = null,
+    val specialNeeds: String? = null,
+    val breedName: String = "",
+    val breedId: Int? = null
 )

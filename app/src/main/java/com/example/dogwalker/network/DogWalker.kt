@@ -2,6 +2,7 @@ package com.example.dogwalker.network
 
 import com.example.dogwalker.data.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -42,6 +43,26 @@ interface DogWalker {
 
     @GET("dog/find/{id}")
     fun getDog(@Header("session") session: String, @Path("id") id: Int) : Deferred<SoloDogResponse>?
+
+    @Multipart
+    @POST("dog/update")
+    fun updateDogInformation(
+        @Header("session") session: String,
+        @Part("age") age: Int? = null,
+        @Part("breedId") breedId: Int? = null,
+        @Part("gender") gender: String = "",
+        @Part("name") name: String = "",
+        @Part("specialNeeds") specialNeeds: String? = "",
+        @Part("weight") weight: Int? = null,
+        @Part("id") Id: Int,
+        @Part photo: MultipartBody.Part? = null
+    ): Deferred<CommonResponse>?
+
+    @POST("dog/delete")
+    fun deleteDog(
+        @Header("session") session: String,
+        @Body dogRequest: DeleteDogRequest
+    ): Deferred<CommonResponse>?
 
     @Multipart
     @POST("user/update")
