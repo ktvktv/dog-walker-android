@@ -11,7 +11,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -70,8 +71,8 @@
                 android:gravity="start|top"
                 android:hint="@string/address"
                 android:inputType="textMultiLine"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/nik_edit_text"
+                app:layout_constraintStart_toStartOf="@+id/nik_edit_text"
                 app:layout_constraintTop_toBottomOf="@+id/nik_edit_text" />
 
             <EditText
@@ -122,8 +123,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/password_edit_text"
+                app:layout_constraintStart_toStartOf="@+id/password_edit_text"
                 app:layout_constraintTop_toBottomOf="@+id/password_edit_text">
 
                 <RadioButton
@@ -145,12 +146,13 @@
                 android:id="@+id/register_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:background="#F0EBF2"
                 android:fontFamily="@font/delius"
                 android:text="@string/register_button"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/birth_date_edit_text" />
 
             <EditText
                 android:id="@+id/nik_edit_text"
@@ -170,16 +172,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:ems="10"
                 android:fontFamily="@font/delius"
                 android:hint="@string/birth_date"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/register_button"
                 app:layout_constraintEnd_toEndOf="@+id/birthplace_edit_text"
                 app:layout_constraintStart_toStartOf="@+id/birthplace_edit_text"
                 app:layout_constraintTop_toBottomOf="@+id/birthplace_edit_text" />
+
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/delius"
+                android:text="Back to Login"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/register_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

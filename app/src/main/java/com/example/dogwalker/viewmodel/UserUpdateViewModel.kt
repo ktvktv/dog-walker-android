@@ -8,7 +8,10 @@ import com.example.dogwalker.data.User
 import com.example.dogwalker.network.DogWalkerServiceApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import java.lang.Exception
 
 class UserUpdateViewModel : ViewModel() {
@@ -32,7 +35,13 @@ class UserUpdateViewModel : ViewModel() {
         resp
     }
 
-    suspend fun updateUserInfo(session: String, user: User, photo: MultipartBody.Part?) {
+    suspend fun updateUserInfo(session: String, user: User, file: File?) {
+        var photo: MultipartBody.Part? = null
+        if(file != null) {
+            val fileReqBody = RequestBody.create(MediaType.parse("image/*"), file)
+            photo = MultipartBody.Part.createFormData("photo", file!!.name, fileReqBody)
+        }
+
         updateResp.value = updateUser(session, user, photo)
     }
 

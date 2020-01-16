@@ -7,7 +7,9 @@ import com.example.dogwalker.data.*
 import com.example.dogwalker.network.DogWalkerServiceApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.Multipart
 import java.io.File
 import java.lang.Exception
@@ -58,8 +60,14 @@ class DogUpdateViewModel : ViewModel() {
         dogResponse
     }
 
-    suspend fun updateDog(session: String, dog: Dog, file: MultipartBody.Part?, breedId: Int?) {
-        updateDogResponse.value = updateDogBackground(session, dog, file, breedId)
+    suspend fun updateDog(session: String, dog: Dog, file: File?, breedId: Int?) {
+        var photo: MultipartBody.Part? = null
+        if(file != null) {
+            val fileReqBody = RequestBody.create(MediaType.parse("image/*"), file)
+            photo = MultipartBody.Part.createFormData("photo", file.name, fileReqBody)
+        }
+
+        updateDogResponse.value = updateDogBackground(session, dog, photo, breedId)
     }
 
     private suspend fun updateDogBackground(session: String, dog: Dog, file: MultipartBody.Part?, breedId: Int?) : CommonResponse?

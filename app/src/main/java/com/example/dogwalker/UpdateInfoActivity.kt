@@ -1,9 +1,12 @@
 package com.example.dogwalker
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -63,5 +66,31 @@ class UpdateInfoActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when(requestCode) {
+            READ_STORAGE_PERMISSION -> {
+                // If request is cancelled, the result arrays are empty.
+                Log.d(TAG, "Request permission result for Info Fragment")
+
+                //Read and write file to storage device
+                if (grantResults.isNotEmpty()
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Thanks for the permission, please click picture again to upload", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            else -> {}
+        }
     }
 }

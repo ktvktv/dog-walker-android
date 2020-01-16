@@ -1,17 +1,29 @@
 package com.example.dogwalker.view
 
+import android.Manifest
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.example.dogwalker.PHOTO_PICKER
 import com.example.dogwalker.R
+import com.example.dogwalker.READ_STORAGE_PERMISSION
 import com.example.dogwalker.SUCCESSFUL
 import com.example.dogwalker.data.User
 import com.example.dogwalker.databinding.FragmentUserUpdateBinding
@@ -21,15 +33,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.lang.Exception
+import java.io.File
 
 class UserUpdateFragment : Fragment() {
-
+    private val TAG = UserUpdateFragment::class.java.simpleName
     private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
     private val userUpdateViewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory()).get(UserUpdateViewModel::class.java)
     }
+    private val pickImageIntent = Intent(Intent.ACTION_PICK)
     private lateinit var binding: FragmentUserUpdateBinding
+
+    private var file: File? = null
+    private var alertDialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,7 +82,7 @@ class UserUpdateFragment : Fragment() {
 
                 if(it.body.userImageUrl != null && it.body.userImageUrl != "") {
                     val imgUri = it.body.userImageUrl.toUri().buildUpon().scheme("https").build()
-                    val imageView = binding.imageView
+                    val imageView = binding.userProfileImage
 
                     Glide.with(imageView.context)
                         .load(imgUri)
@@ -96,8 +112,12 @@ class UserUpdateFragment : Fragment() {
                     birthDate = binding.birthdateText.text.toString(),
                     birthPlace = binding.birthplaceText.text.toString(),
                     userImageUrl = null
-                ), null)
+                ), file)
             }
+        }
+
+        binding.userProfileImage.setOnClickListener {
+            uploadImage()
         }
 
         userUpdateViewModel.updateResp.observe(this, Observer {
@@ -108,6 +128,31 @@ class UserUpdateFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        pickImageIntent.type = "image/*"
+
+        //Dialog to get the permission initialization
+        alertDialog = AlertDialog.Builder(context)
+            .setMessage(R.string.read_permission)
+            .setPositiveButton(
+                R.string.positive_permission
+            ) { dialog, id ->
+                Log.d(TAG, "Positive Permission clicked.")
+                dialog.dismiss()
+
+                //If the user agree, ask it again.
+                askPermission()
+            }
+            .setNegativeButton(
+                R.string.negative_permission
+            ) { dialog, which ->
+                Log.d(TAG, "Negative permission clicked.")
+                dialog.dismiss()
+            }.create()
     }
 
     fun checkValidity(): String {
@@ -143,14 +188,94 @@ class UserUpdateFragment : Fragment() {
             return "Gender must be filled"
         }
 
-//            if(binding.imageView.drawable == null) {
-//                return "Image must be filled"
-//            }
-
-//            if(file == null) {
-//                return "Please input dog photo"
-//            }
-
         return ""
+    }
+
+    fun uploadImage() {
+        val mContext = context ?: return
+        val mActivity = activity ?: return
+
+        //Check permission for read image into device storage
+        if (ContextCompat.checkSelfPermission(
+                mContext,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            //If not granted, give explanation and ask it again
+            if(ActivityCompat.shouldShowRequestPermissionRationale(mActivity, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Log.d(TAG, "User denied the permission request")
+
+                if(alertDialog != null) {
+                    alertDialog!!.show()
+                } else {
+                    Toast.makeText(context, R.string.read_permission, Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                askPermission()
+            }
+        } else {
+            startActivityForResult(pickImageIntent, PHOTO_PICKER)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when(requestCode) {
+            PHOTO_PICKER -> {
+                if (resultCode == Activity.RESULT_OK) {
+
+                    //Check data validity.
+                    if(data == null) {
+                        Log.e(TAG, "Data is null")
+                        return
+                    }
+
+                    //Get the file from the device
+                    file = getBitmapFile(data) ?: return
+
+                    //Set the picture in the page.
+                    binding.userProfileImage.setImageDrawable(Drawable.createFromPath(file?.absolutePath))
+                } else {
+                    Toast.makeText(context, "Cancelled get the picture", Toast.LENGTH_SHORT).show()
+                }
+            }
+            else -> {}
+        }
+    }
+
+    //TODO:Find out the logic behind this
+    private fun getBitmapFile(data: Intent): File? {
+        val mActivity = activity ?: return null
+
+        val selectedImage = data.data ?: return null
+
+        val cursor = mActivity.contentResolver.query(
+            selectedImage,
+            arrayOf(MediaStore.Images.ImageColumns.DATA),
+            null,
+            null,
+            null
+        ) ?: return null
+
+        cursor.moveToFirst()
+
+        val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+        val selectedImagePath = cursor.getString(idx)
+        cursor.close()
+
+        return File(selectedImagePath)
+    }
+
+    //Ask permission to read image in the device storage
+    private fun askPermission() {
+        val mActivity = activity ?: return
+
+        Log.d(TAG, "Asking a permission")
+        ActivityCompat.requestPermissions(
+            mActivity,
+            arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ),
+            READ_STORAGE_PERMISSION
+        )
     }
 }

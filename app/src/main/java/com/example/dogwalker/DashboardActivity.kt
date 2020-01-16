@@ -88,29 +88,4 @@ class DashboardActivity: AppCompatActivity() {
             }
         }
     }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode) {
-            InfoFragment.READ_STORAGE_PERMISSION -> {
-                // If request is cancelled, the result arrays are empty.
-                Log.d(TAG, "Request permission result for Info Fragment")
-
-                //Read and write file to storage device
-                if (grantResults.size > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    InfoFragment.uploadImageFirstTimePermission.value = true
-                } else {
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-            else -> {}
-        }
-    }
 }

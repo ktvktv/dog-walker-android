@@ -227,7 +227,7 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ),
-            InfoFragment.READ_STORAGE_PERMISSION
+            READ_STORAGE_PERMISSION
         )
     }
 

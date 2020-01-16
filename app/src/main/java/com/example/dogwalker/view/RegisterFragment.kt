@@ -3,6 +3,7 @@ package com.example.dogwalker.view
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -101,6 +102,10 @@ class RegisterFragment : Fragment() {
         binding.birthDateEditText.setOnClickListener{
             val dateFragment = DateFragment(binding.birthDateEditText)
             dateFragment.show(fragmentManager!!, DateTAG)
+        }
+
+        binding.loginButton.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         registerViewModel.isRegisterSuccess.observe(this, Observer {
