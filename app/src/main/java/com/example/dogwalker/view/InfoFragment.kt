@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.view.*
+import android.view.animation.Animation
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -41,6 +42,7 @@ class InfoFragment : Fragment() {
     private val infoViewModel: InfoViewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory()).get(InfoViewModel::class.java)
     }
+    private val counts = MutableLiveData(0)
     private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
 
     override fun onCreateView(
@@ -65,10 +67,6 @@ class InfoFragment : Fragment() {
         val sharedPreferences = context!!.getSharedPreferences(getString
             (R.string.preferences_file_key), Context.MODE_PRIVATE)
         val session = sharedPreferences.getString(getString(R.string.session_cache), "")
-
-        coroutineScope.launch {
-            infoViewModel.getInformation(session)
-        }
 
         //Go to add dog page.
         binding.addDogImage.setOnClickListener {
@@ -112,6 +110,8 @@ class InfoFragment : Fragment() {
                 return@Observer
             }
 
+            counts.value = counts.value?.plus(1)
+
             infoAdapter.listData = dogData
             infoAdapter.notifyDataSetChanged()
         })
@@ -125,6 +125,8 @@ class InfoFragment : Fragment() {
                     Toast.makeText(context, "Network error, please refresh", Toast.LENGTH_SHORT).show()
                     return@Observer
                 }
+
+                counts.value = counts.value?.plus(1)
 
                 binding.user = userData
                 binding.notifyChange()
@@ -154,6 +156,17 @@ class InfoFragment : Fragment() {
                         .load(imgUri)
                         .into(imageView)
                 }
+            }
+        })
+
+        counts.observe(this, Observer {
+            Log.d(TAG, "COUNT: $it")
+            if((it % 2) == 0 && it != 0) {
+                binding.progressBar.visibility = View.GONE
+                binding.constraintInfo.alpha = 1f
+            } else {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.constraintInfo.alpha = 0.5f
             }
         })
 

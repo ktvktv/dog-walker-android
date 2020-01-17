@@ -15,6 +15,7 @@
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -194,6 +195,16 @@
                 app:layout_constraintEnd_toEndOf="@+id/user_picture"
                 app:layout_constraintStart_toStartOf="@+id/user_picture"
                 app:layout_constraintTop_toBottomOf="@+id/user_picture" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.Holo.ProgressBar.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/register_walker_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
