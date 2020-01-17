@@ -8,9 +8,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.dogwalker.databinding.FragmentInfoBinding
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +17,7 @@ import java.io.File
 import androidx.core.app.ActivityCompat
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -51,6 +49,8 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentInfoBinding.inflate(inflater)
+
+        setHasOptionsMenu(true)
 
         //If in any case context is null, then don't set adapter to the recycler view, it'll make the app crash.
         val mContext = context
@@ -157,15 +157,6 @@ class InfoFragment : Fragment() {
             }
         })
 
-        binding.logoutButton.setOnClickListener{
-            val intent = Intent(context, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-            context?.deleteSharedPreferences(getString(R.string.preferences_file_key))
-
-            startActivity(intent)
-        }
-
         return binding.root
     }
 
@@ -179,5 +170,21 @@ class InfoFragment : Fragment() {
         }
 
         super.onResume()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_item, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.logout) {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+            context?.deleteSharedPreferences(getString(R.string.preferences_file_key))
+
+            startActivity(intent)
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

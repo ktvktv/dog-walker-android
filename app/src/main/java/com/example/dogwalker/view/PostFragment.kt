@@ -69,7 +69,7 @@ class PostFragment : Fragment(), PostViewAdapter.PostViewAdapterClickListener, N
         })
 
         binding.addPostButton.setOnClickListener {
-            val newPost = NewPostFragment(this)
+            val newPost = NewPostFragment(this, false, -1)
 
             val mActivity = activity
             if(mActivity == null) {
@@ -108,5 +108,9 @@ class PostFragment : Fragment(), PostViewAdapter.PostViewAdapterClickListener, N
             postViewModel.InsertPost(session, newPost)
             postViewModel.GetAllPost(session)
         }
+    }
+
+    override fun updateNewPost(content: String, title: String) {
+        //No need to do anything
     }
 }

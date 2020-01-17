@@ -111,6 +111,12 @@ interface DogWalker {
     @GET("post/find/{id}")
     fun getPostDetail(@Path("id") id: Int, @Header("session") session: String): Deferred<DetailPostResponse>?
 
+    @POST("post/update/{id}")
+    fun updatePost(@Path("id") id: Int, @Header("session") session: String, @Body post: InsertPostRequest) : Deferred<CommonResponse>?
+
+    @GET("post/delete/{id}")
+    fun deletePost(@Path("id") id: Int, @Header("session") session: String) : Deferred<CommonResponse>?
+
     @GET("comment/getList/{id}")
     fun getComment(@Path("id") id: Int, @Header("session") session: String): Deferred<CommentResponse>?
 

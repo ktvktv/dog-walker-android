@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.fragment_comment.view.post_content_text
 import kotlinx.android.synthetic.main.fragment_comment.view.post_ok_button
 import kotlinx.android.synthetic.main.fragment_new_post.view.*
 
-class NewPostFragment(val postAddition: PostAddition): DialogFragment() {
+class NewPostFragment(val postAddition: PostAddition, val isUpdate: Boolean,
+                      val postId: Int): DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,6 +23,10 @@ class NewPostFragment(val postAddition: PostAddition): DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_new_post, container, false)
+
+        if(isUpdate) {
+            //Get data
+        }
 
         view.post_ok_button.setOnClickListener {
             val textContent = view.post_content_text.text.toString()
@@ -32,7 +37,11 @@ class NewPostFragment(val postAddition: PostAddition): DialogFragment() {
             } else if(title.equals("")) {
                 Toast.makeText(context, "Title should not be empty", Toast.LENGTH_SHORT).show()
             } else {
-                postAddition.addNewPost(textContent, title)
+                if(isUpdate) {
+                    postAddition.updateNewPost(textContent, title)
+                } else {
+                    postAddition.addNewPost(textContent, title)
+                }
                 dismiss()
             }
         }
@@ -46,5 +55,6 @@ class NewPostFragment(val postAddition: PostAddition): DialogFragment() {
 
     interface PostAddition {
         fun addNewPost(content: String, title: String)
+        fun updateNewPost(content: String, title: String)
     }
 }

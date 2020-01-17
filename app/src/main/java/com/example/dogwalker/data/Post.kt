@@ -8,5 +8,6 @@ data class Post(
     val content: String,
     @Json(name="createdAt") val date: String,
     val name: String,
-    val photo: String?
+    val photo: String?,
+    val isMyPost: Boolean = false
 )
