@@ -27,10 +27,10 @@
     <string name="phone_number">Nomor Telepon</string>
     <string name="birthplace">Birthplace</string>
     <string name="birth_date">Birth date</string>
-    <string name="kg">Kilo Gram</string>
-    <string name="km">Kilo Metre</string>
-    <string name="hr">Hour</string>
-    <string name="rp">Rupiah</string>
+    <string name="kg">Kg</string>
+    <string name="km">Km</string>
+    <string name="hr">Jam</string>
+    <string name="rp">Rp/Jam</string>
 
 
     <string name="notification_text">Tracking, tap to cancel</string>

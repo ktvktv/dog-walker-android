@@ -4,10 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -34,6 +31,7 @@ class WalkerInfoFragment : Fragment() {
         ViewModelProviders.of(this, ViewModelFactory()).get(WalkerInfoViewModel::class.java)
     }
     private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+    private var isVisitedByCustomer = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +39,8 @@ class WalkerInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWalkerInfoBinding.inflate(inflater)
+
+        setHasOptionsMenu(true)
 
         val walkerId = arguments!!.getInt("walkerId")
 
@@ -70,7 +70,7 @@ class WalkerInfoFragment : Fragment() {
 
             binding.changeRoleWalkerButton.visibility = View.VISIBLE
         } else {
-            setHasOptionsMenu(true)
+            isVisitedByCustomer = true
             binding.changeRoleWalkerButton.visibility = View.GONE
         }
 
@@ -122,9 +122,19 @@ class WalkerInfoFragment : Fragment() {
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        if(!isVisitedByCustomer) {
+            inflater.inflate(R.menu.walker_info, menu)
+        } else {
+            super.onCreateOptionsMenu(menu, inflater)
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == android.R.id.home) {
             return findNavController().navigateUp()
+        } else if(item.itemId == R.id.walker_update_menu) {
+            Log.d(TAG, "Update Walker")
         }
 
         return super.onOptionsItemSelected(item)

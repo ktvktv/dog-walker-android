@@ -25,15 +25,15 @@
                 android:id="@+id/weight_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
                 android:ems="10"
                 android:fontFamily="@font/delius"
-                android:hint="Max Weight"
+                android:hint="Maksimal Berat Anjing"
                 android:inputType="textPersonName"
                 android:numeric="integer"
                 android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/info_button_max_dog"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <EditText
@@ -43,7 +43,7 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:fontFamily="@font/delius"
-                android:hint="Max Distance"
+                android:hint="Maksimal Jarak"
                 android:inputType="textPersonName"
                 android:numeric="integer"
                 android:textAlignment="center"
@@ -58,7 +58,7 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:fontFamily="@font/delius"
-                android:hint="Max Walk Duration"
+                android:hint="Maksimal Durasi Jalan"
                 android:inputType="textPersonName"
                 android:numeric="decimal"
                 android:textAlignment="center"
@@ -73,7 +73,7 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:fontFamily="@font/delius"
-                android:hint="Pricing"
+                android:hint="Harga"
                 android:inputType="textPersonName"
                 android:numeric="integer"
                 android:textAlignment="center"
@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:fontFamily="@font/delius"
-                        android:hint="Description"
+                        android:hint="Deskripsi Diri"
                         android:inputType="textLongMessage|textMultiLine|textPersonName"
                         android:textAlignment="center" />
                 </LinearLayout>
@@ -125,7 +125,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:fontFamily="@font/delius"
                 android:text="@string/kg"
                 android:textSize="18sp"
@@ -137,7 +137,7 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="18dp"
                 android:fontFamily="@font/delius"
@@ -151,7 +151,7 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:fontFamily="@font/delius"
                 android:text="@string/hr"
                 android:textSize="18sp"
@@ -163,13 +163,53 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:fontFamily="@font/delius"
                 android:text="@string/rp"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/pricing_text"
                 app:layout_constraintStart_toEndOf="@+id/pricing_text"
                 app:layout_constraintTop_toTopOf="@+id/pricing_text" />
+
+            <ImageView
+                android:id="@+id/info_button_max_dog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/weight_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/weight_text"
+                app:srcCompat="@drawable/ic_info" />
+
+            <ImageView
+                android:id="@+id/info_button_max_dist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_info"
+                app:layout_constraintBottom_toBottomOf="@+id/max_distance_text"
+                app:layout_constraintEnd_toEndOf="@+id/info_button_max_dog"
+                app:layout_constraintStart_toStartOf="@+id/info_button_max_dog"
+                app:layout_constraintTop_toTopOf="@+id/max_distance_text" />
+
+            <ImageView
+                android:id="@+id/info_button_max_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_info"
+                app:layout_constraintBottom_toBottomOf="@+id/max_duration_text"
+                app:layout_constraintEnd_toEndOf="@+id/info_button_max_dist"
+                app:layout_constraintStart_toStartOf="@+id/info_button_max_dist"
+                app:layout_constraintTop_toTopOf="@+id/max_duration_text" />
+
+            <ImageView
+                android:id="@+id/info_button_pricing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/pricing_text"
+                app:layout_constraintEnd_toEndOf="@+id/info_button_max_duration"
+                app:layout_constraintStart_toStartOf="@+id/info_button_max_duration"
+                app:layout_constraintTop_toTopOf="@+id/pricing_text"
+                app:srcCompat="@drawable/ic_info" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

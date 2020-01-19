@@ -27,6 +27,12 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
+import android.content.Context.INPUT_METHOD_SERVICE
+import androidx.core.content.ContextCompat.getSystemService
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
+
 
 class RegisterFragment : Fragment() {
     private val TAG = RegisterFragment::class.java.simpleName
