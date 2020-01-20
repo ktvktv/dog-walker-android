@@ -156,6 +156,10 @@ interface DogWalker {
     fun rateWalker(@Header("session") session: String,
                    @Body ratingRequest: RatingRequest) : Deferred<RateResponse>?
 
+    @POST("walker/update")
+    fun updateWalker(@Header("session") session: String,
+                     @Body walkerUpdateRequest: WalkerUpdateRequest) : Deferred<CommonResponse>?
+
     @GET("transaction/isRated")
     fun getLatestTransaction(@Header("session") session: String) : Deferred<RateResponse>?
 }

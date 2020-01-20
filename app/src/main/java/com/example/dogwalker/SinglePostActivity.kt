@@ -44,7 +44,6 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition, 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
         binding = ActivitySinglePostBinding.inflate(LayoutInflater.from(this))
 
         val session = getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
@@ -184,7 +183,6 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition, 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = MenuInflater(this)
-
         inflater.inflate(R.menu.post_menu, menu)
         return true
     }

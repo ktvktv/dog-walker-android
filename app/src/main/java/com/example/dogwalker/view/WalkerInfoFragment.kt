@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.dogwalker.DashboardActivity
 import com.example.dogwalker.R
+import com.example.dogwalker.WalkerUpdateInfoActivity
 import com.example.dogwalker.databinding.FragmentWalkerInfoBinding
 import com.example.dogwalker.viewmodel.ViewModelFactory
 import com.example.dogwalker.viewmodel.WalkerInfoViewModel
@@ -135,6 +136,9 @@ class WalkerInfoFragment : Fragment() {
             return findNavController().navigateUp()
         } else if(item.itemId == R.id.walker_update_menu) {
             Log.d(TAG, "Update Walker")
+
+            val intent = Intent(context, WalkerUpdateInfoActivity::class.java)
+            activity?.startActivity(intent)
         }
 
         return super.onOptionsItemSelected(item)
