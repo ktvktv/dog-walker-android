@@ -57,6 +57,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".MapsActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".WalkerUpdateInfoActivity"
+            android:screenOrientation="portrait"/>
         <service
             android:name=".service.DogWalkerService"
             android:exported="true"

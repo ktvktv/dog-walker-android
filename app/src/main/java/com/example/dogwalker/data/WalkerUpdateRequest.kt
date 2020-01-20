@@ -6,6 +6,6 @@ data class WalkerUpdateRequest(
     val pricing: Int,
     val travelDistance: Int,
     val walkDuration: Int,
-    val isVerified: Boolean,
-    val isRecommended: Boolean
+    val isVerified: Boolean? = null,
+    val isRecommended: Boolean? = null
 )
