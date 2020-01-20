@@ -13,6 +13,8 @@ import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.dogwalker.data.Notification
 import com.example.dogwalker.data.PostOrderRequest
 import com.example.dogwalker.databinding.FragmentDetailOrderBinding
@@ -71,6 +73,8 @@ class OrderDetailActivity : AppCompatActivity() {
 
                     Glide.with(imageView.context)
                         .load(imgUri)
+                        .apply(RequestOptions.skipMemoryCacheOf(true))
+                        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                         .into(imageView)
                 }
             }
@@ -87,6 +91,8 @@ class OrderDetailActivity : AppCompatActivity() {
 
                         Glide.with(imageView.context)
                             .load(imgUri)
+                            .apply(RequestOptions.skipMemoryCacheOf(true))
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                             .into(imageView)
                     }
 
@@ -105,6 +111,8 @@ class OrderDetailActivity : AppCompatActivity() {
 
                         Glide.with(imageView.context)
                             .load(imgUri)
+                            .apply(RequestOptions.skipMemoryCacheOf(true))
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                             .into(imageView)
                     }
 

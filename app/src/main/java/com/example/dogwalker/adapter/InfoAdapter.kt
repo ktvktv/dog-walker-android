@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.dogwalker.R
 import com.example.dogwalker.data.Dog
 import kotlinx.android.synthetic.main.info_item.view.*
@@ -30,6 +32,8 @@ class InfoAdapter(var listData: List<Dog>, val context: Context) : RecyclerView.
 
             Glide.with(imageView.context)
                 .load(imgUri)
+                .apply(RequestOptions.skipMemoryCacheOf(true))
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                 .into(imageView)
         }
 

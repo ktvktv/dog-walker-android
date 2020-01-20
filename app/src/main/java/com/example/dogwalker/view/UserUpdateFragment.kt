@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.dogwalker.PHOTO_PICKER
 import com.example.dogwalker.R
 import com.example.dogwalker.READ_STORAGE_PERMISSION
@@ -84,15 +86,21 @@ class UserUpdateFragment : Fragment() {
                     val imgUri = it.body.userImageUrl.toUri().buildUpon().scheme("https").build()
                     val imageView = binding.userProfileImage
 
+                    Log.d(TAG, "User Image: $imgUri")
+
                     Glide.with(imageView.context)
                         .load(imgUri)
+                        .apply(RequestOptions.skipMemoryCacheOf(true))
+                        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                         .into(imageView)
                 }
             }
         })
 
         binding.button.setOnClickListener {
-            if(checkValidity() != "") {
+            val message = checkValidity()
+            if(message != "") {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -170,10 +178,6 @@ class UserUpdateFragment : Fragment() {
 
         if(binding.addressText.text.toString().equals("")) {
             return "Address must be filled"
-        }
-
-        if(binding.passwordText.text.toString().equals("")) {
-            return "Password must be filled"
         }
 
         if(binding.birthdateText.text.toString().equals("")) {

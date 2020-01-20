@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.dogwalker.R
 import com.example.dogwalker.data.Post
 import kotlinx.android.synthetic.main.post_item.view.*
@@ -43,6 +45,8 @@ class PostViewAdapter(var list: List<Post>, val listener: PostViewAdapterClickLi
 
             Glide.with(imageView.context)
                 .load(imgUri)
+                .apply(RequestOptions.skipMemoryCacheOf(true))
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                 .into(imageView)
         }
     }

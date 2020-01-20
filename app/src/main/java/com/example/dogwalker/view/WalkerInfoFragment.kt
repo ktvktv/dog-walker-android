@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.dogwalker.DashboardActivity
 import com.example.dogwalker.R
 import com.example.dogwalker.WalkerUpdateInfoActivity
@@ -86,6 +88,8 @@ class WalkerInfoFragment : Fragment() {
 
                     Glide.with(imageView.context)
                         .load(imgUri)
+                        .apply(RequestOptions.skipMemoryCacheOf(true))
+                        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                         .into(imageView)
                 }
 

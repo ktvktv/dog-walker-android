@@ -14,6 +14,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.dogwalker.adapter.CommentAdapter
 import com.example.dogwalker.data.Comment
 import com.example.dogwalker.data.InsertCommentRequest
@@ -68,6 +70,8 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition, 
 
                     Glide.with(imageView.context)
                         .load(imgUri)
+                        .apply(RequestOptions.skipMemoryCacheOf(true))
+                        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                         .into(imageView)
                 }
 

@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.dogwalker.R
 import com.example.dogwalker.data.Order
 import com.example.dogwalker.data.RatingRequest
@@ -40,6 +42,8 @@ class RatingFragment(val order: Order, val dashboardViewModel: DashboardViewMode
 
             Glide.with(imageView.context)
                 .load(imgUri)
+                .apply(RequestOptions.skipMemoryCacheOf(true))
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                 .into(imageView)
         }
 

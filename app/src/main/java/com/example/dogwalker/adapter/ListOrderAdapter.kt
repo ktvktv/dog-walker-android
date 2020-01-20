@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.dogwalker.R
 import com.example.dogwalker.data.Walker
 import kotlinx.android.synthetic.main.order_item.view.*
@@ -56,6 +58,8 @@ class ListOrderAdapter(var listOrder: List<Walker>, val context: Context,
 
             Glide.with(imageView.context)
                 .load(imgUri)
+                .apply(RequestOptions.skipMemoryCacheOf(true))
+                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                 .into(imageView)
         }
 
