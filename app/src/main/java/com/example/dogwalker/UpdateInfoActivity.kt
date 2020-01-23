@@ -84,9 +84,9 @@ class UpdateInfoActivity : AppCompatActivity() {
                 if (grantResults.isNotEmpty()
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Thanks for the permission, please click picture again to upload", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Terimakasih telah memberi permisi. Silahkan pilih kembali foto yang diinginkan", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Tidak diberikan ijin", Toast.LENGTH_SHORT)
                         .show()
                 }
             }

@@ -108,7 +108,7 @@ class InfoFragment : Fragment() {
             val dogData = it.body
 
             if(dogData == null) {
-                Toast.makeText(context, "Network error, please refresh", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Sinyal rusak, mohon dicoba kembali", Toast.LENGTH_SHORT).show()
                 return@Observer
             }
 
@@ -124,7 +124,7 @@ class InfoFragment : Fragment() {
                 val userData = it.body
 
                 if(userData == null) {
-                    Toast.makeText(context, "Network error, please refresh", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Sinyal rusak, mohon dicoba kembali", Toast.LENGTH_SHORT).show()
                     return@Observer
                 }
 

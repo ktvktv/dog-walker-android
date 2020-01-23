@@ -147,10 +147,10 @@ class OrderDetailActivity : AppCompatActivity() {
 
                     coroutineScope.launch{
                         orderDetailView.SendNotification(session, Notification(
-                                "Order incoming",
-                                "Good news, there's a new order for you.",
+                                "Ada pesanan baru!",
+                                "Berita baik, ada pesanan baru.",
                                 "Customer",
-                                "Good news, there's a new order for you.",
+                                "Berita baik, ada pesanan baru.",
                                 orderId
                             )
                         )
@@ -164,7 +164,7 @@ class OrderDetailActivity : AppCompatActivity() {
         })
 
         binding.dateOrderText.text = date
-        binding.hourText.text = "$hours Hour"
+        binding.hourText.text = "$hours jam"
 
         setContentView(binding.root)
     }

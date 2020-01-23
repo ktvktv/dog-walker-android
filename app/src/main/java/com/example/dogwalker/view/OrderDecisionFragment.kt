@@ -83,8 +83,8 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
                 val alarmMgr = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
                 val alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
-                    intent.putExtra("title", "Time to walk the dog")
-                    intent.putExtra("body", "Don't forget to walk the dog sir")
+                    intent.putExtra("title", "Waktunya menjalankan anjing!")
+                    intent.putExtra("body", "Jangan lupa menjalankan anjing.")
                     intent.putExtra("id", notifyData.transactionId)
                     PendingIntent.getBroadcast(context, 0, intent, 0)
                 }
@@ -103,8 +103,8 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
                 )
 
                 orderDecisionViewModel.SendNotification(session, Notification(
-                    "Order Accepted",
-                    "$name accepted your order at ${notifyData.date}",
+                    "Pesanan telah diterima",
+                    "$name menerima pesanan anda di ${notifyData.date}",
                     "Walker",
                     "",
                     notifyData.transactionId
@@ -128,8 +128,8 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
                 }
 
                 orderDecisionViewModel.SendNotification(session, Notification(
-                    "Order Rejected",
-                    "$name rejected your order at ${notifyData.date}",
+                    "Pesanan ditolak!",
+                    "$name menolak pesanan anda di ${notifyData.date}",
                     "Walker",
                     "",
                     notifyData.transactionId

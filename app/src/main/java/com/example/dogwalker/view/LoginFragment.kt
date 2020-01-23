@@ -113,7 +113,7 @@ class LoginFragment : Fragment() {
         val phoneNumber = binding.phoneNumber.text.toString().trim()
         val password = binding.passwordEditText.text.toString().trim()
         if(phoneNumber == "" || password == "") {
-            Toast.makeText(context, "Phone number and password must be filled", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Nomor telepon dan kata sandi harus diisi", Toast.LENGTH_SHORT).show()
             return
         }
 

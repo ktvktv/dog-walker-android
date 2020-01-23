@@ -130,7 +130,7 @@ class RegisterWalkerActivity : AppCompatActivity() {
         try {
             maxDogSize = binding.weightText.text.toString().toInt()
         } catch(e: Exception) {
-            Toast.makeText(this, "Weight dog must be numeric", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Berat anjing harus angka!", Toast.LENGTH_SHORT).show()
             return null
         }
 
@@ -138,7 +138,7 @@ class RegisterWalkerActivity : AppCompatActivity() {
         try {
             maxDistance = binding.maxDistanceText.text.toString().toInt()
         } catch(e: Exception) {
-            Toast.makeText(this, "Distance must be numeric", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Jarak harus angka!", Toast.LENGTH_SHORT).show()
             return null
         }
 
@@ -146,7 +146,7 @@ class RegisterWalkerActivity : AppCompatActivity() {
         try {
             pricing = binding.pricingText.text.toString().toInt()
         } catch(e: Exception) {
-            Toast.makeText(this, "Price must be numeric", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Harga harus angka!", Toast.LENGTH_SHORT).show()
             return null
         }
 
@@ -154,7 +154,7 @@ class RegisterWalkerActivity : AppCompatActivity() {
         try {
             maxDuration = binding.maxDurationText.text.toString().toInt()
         } catch(e: Exception) {
-            Toast.makeText(this, "Duration must be numeric", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Durasi harus angka!", Toast.LENGTH_SHORT).show()
             return null
         }
 

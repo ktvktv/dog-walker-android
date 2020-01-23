@@ -73,7 +73,7 @@ class PostFragment : Fragment(), PostViewAdapter.PostViewAdapterClickListener, N
 
             val mActivity = activity
             if(mActivity == null) {
-                Toast.makeText(context, "Something went wrong when create a post", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT)
                     .show()
             } else {
                 newPost.show(mActivity.supportFragmentManager, "dialog")

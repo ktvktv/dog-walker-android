@@ -103,13 +103,13 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
         registerDogViewModel.registerResponse.observe(this, Observer {
             var isSuccess = false
-            var message = "Unknown error, please try again."
+            var message = "Terjadi kesalahan."
             if(it != null) {
                 if(it.message == SUCCESSFUL) {
-                    message = "Register Success!"
+                    message = "Registrasi berhasil!"
                     isSuccess = true
                 } else {
-                    message = it.message ?: "Unknown error, please try again"
+                    message = it.message ?: "Terjadi kesalahan"
                 }
             }
 
@@ -152,39 +152,39 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
     fun checkValidity(): String {
         if(binding.nameView.text.toString().equals("")) {
-            return "Name must be filled"
+            return "Nama harus diisi!"
         }
 
         if(binding.ageView.text.toString().equals("")) {
-            return "Age must be filled"
+            return "Umur harus diisi!"
         } else {
              try {
                  age = Integer.parseInt(binding.ageView.text.toString())
              } catch(e: Exception) {
-                 return "Age must be numeric"
+                 return "Umur harus angka!"
              }
         }
 
         if(binding.weightView.text.toString().equals("")) {
-            return "Weight must be filled"
+            return "Berat harus diisi!"
         } else {
             try {
                 weight = Integer.parseInt(binding.weightView.text.toString())
             } catch(e: Exception) {
-                return "Weight must be numeric"
+                return "Berat harus angka!"
             }
         }
 
         if(!binding.maleRadioButton.isChecked && !binding.femaleRadioButton.isChecked) {
-            return "Gender must be filled"
+            return "Jenis kelamin harus dipilih!"
         }
 
         if(binding.dogImage.drawable == null) {
-            return "Image must be filled"
+            return "Harus mengambil foto!"
         }
 
         if(file == null) {
-            return "Please input dog photo"
+            return "Tolong pilih foto"
         }
 
         return ""
@@ -279,7 +279,7 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
                     //Register into the DB
                 } else {
-                    Toast.makeText(this, "Cancelled get the picture", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Batal mengambil foto", Toast.LENGTH_SHORT).show()
                 }
             }
         }

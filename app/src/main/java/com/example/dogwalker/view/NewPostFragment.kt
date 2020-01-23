@@ -60,9 +60,9 @@ class NewPostFragment(val postAddition: PostAddition, val isUpdate: Boolean,
             val title = view.title_post_text.text.toString()
 
             if (textContent.equals("")) {
-                Toast.makeText(context, "Content should not be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Isi post tidak boleh kosong!", Toast.LENGTH_SHORT).show()
             } else if(title.equals("")) {
-                Toast.makeText(context, "Title should not be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Judul tidak boleh kosong!", Toast.LENGTH_SHORT).show()
             } else {
                 if(isUpdate) {
                     postAddition.updateNewPost(textContent, title)

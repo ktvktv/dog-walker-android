@@ -59,12 +59,12 @@ class RegisterFragment : Fragment() {
         binding.registerButton.setOnClickListener {
             val dates = binding.birthDateEditText.text.toString()
             if(dates == "" || dates.isEmpty()) {
-                Toast.makeText(context, "Birthdate must not empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Tanggal lahir tidak boleh kosong!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if(!binding.maleRadio.isChecked && !binding.femaleRadio.isChecked) {
-                Toast.makeText(context, "Gender must be chosen", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Jenis kelamin harus dipilih!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -80,12 +80,12 @@ class RegisterFragment : Fragment() {
 
             if(address.isEmpty() || email.isEmpty() || name.isEmpty() || nik.isEmpty() || password.isEmpty()
                 || phoneNumber.isEmpty() || birthplace.isEmpty()) {
-                Toast.makeText(context, "Field must not empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Form harus diisi lengkap!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if(nik.length != 16) {
-                Toast.makeText(context, "NIK length must be 16", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "NIK harus 16 angka", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -116,12 +116,12 @@ class RegisterFragment : Fragment() {
 
         registerViewModel.isRegisterSuccess.observe(this, Observer {
             if(it) {
-                Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Berhasil!", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
             } else {
                 var registerMessage = registerViewModel.getRegisterMessage()?.message
                 if(registerMessage == null) {
-                    registerMessage = "Unknown error, please try it again."
+                    registerMessage = "Terjadi kesalahan!"
                 }
 
                 Toast.makeText(context, registerMessage, Toast.LENGTH_SHORT).show()

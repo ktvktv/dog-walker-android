@@ -115,10 +115,10 @@ class WalkerInfoFragment : Fragment() {
                     binding.genderWalkerPicture.setImageResource(R.drawable.female_icon)
                 }
 
-                binding.maxDistanceWalkerText.text = "Max Distance: ${it.travelDistance} km"
-                binding.maxDogWeightWalkerText.text = "Max Dog Weight: ${it.maxDogSize} kg"
-                binding.maxDurationWalkerText.text = "Max Duration: ${it.walkDuration} hour"
-                binding.pricingWalkerText.text = "Pricing: Rp. ${it.pricing}/hr"
+                binding.maxDistanceWalkerText.text = "Jarak tempuh maksimal: ${it.travelDistance} km"
+                binding.maxDogWeightWalkerText.text = "Berat anjing maksimal: ${it.maxDogSize} kg"
+                binding.maxDurationWalkerText.text = "Maksimal durasi jalan: ${it.walkDuration} jam"
+                binding.pricingWalkerText.text = "Harga: Rp. ${it.pricing}/jam"
 
                 binding.ratingWalker.rating = rating.toFloat()
             }

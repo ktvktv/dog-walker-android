@@ -128,7 +128,7 @@ class UserUpdateFragment : Fragment() {
 
         userUpdateViewModel.updateResp.observe(this, Observer {
             if(it != null && it.message == SUCCESSFUL) {
-                Toast.makeText(context, "Success update user information", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Berhasil memperbarui data user!", Toast.LENGTH_SHORT).show()
                 activity?.finish()
             }
         })
@@ -163,31 +163,31 @@ class UserUpdateFragment : Fragment() {
 
     fun checkValidity(): String {
         if(binding.nameText.text.toString().equals("")) {
-            return "Name must be filled"
+            return "Nama harus diisi!"
         }
 
         if(binding.emailText.text.toString().equals("")) {
-            return "Email must be filled"
+            return "Email harus diisi!"
         }
 
         if(binding.phonenumberText.text.toString().equals("")) {
-            return "Phone number must be filled"
+            return "Nomor telepon harus diisi!"
         }
 
         if(binding.addressText.text.toString().equals("")) {
-            return "Address must be filled"
+            return "Alamat harus diisi!"
         }
 
         if(binding.birthdateText.text.toString().equals("")) {
-            return "Birthdate must be filled"
+            return "Tanggal lahir harus diisi!"
         }
 
         if(binding.birthplaceText.text.toString().equals("")) {
-            return "Birthplace must be filled"
+            return "Tempat tinggal harus diisi!"
         }
 
         if(!binding.maleRadio.isChecked && !binding.femaleRadio.isChecked) {
-            return "Gender must be filled"
+            return "Jenis kelamin harus diisi!"
         }
 
         return ""
@@ -237,7 +237,7 @@ class UserUpdateFragment : Fragment() {
                     //Set the picture in the page.
                     binding.userProfileImage.setImageDrawable(Drawable.createFromPath(file?.absolutePath))
                 } else {
-                    Toast.makeText(context, "Cancelled get the picture", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Batal mengambil foto", Toast.LENGTH_SHORT).show()
                 }
             }
             else -> {}

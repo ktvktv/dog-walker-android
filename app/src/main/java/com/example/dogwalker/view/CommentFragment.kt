@@ -23,7 +23,7 @@ class CommentFragment(val commentAddition: CommentAddition,
             val textContent = view.post_content_text.text.toString()
 
             if(textContent.equals("")) {
-                Toast.makeText(context, "Comment should not be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Komentar tidak boleh kosong!", Toast.LENGTH_SHORT).show()
             } else {
                 commentAddition.addNewComment(textContent, postId)
                 dismiss()

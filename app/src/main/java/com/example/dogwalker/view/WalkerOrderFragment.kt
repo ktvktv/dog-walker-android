@@ -129,7 +129,7 @@ class WalkerOrderFragment : Fragment() {
             it.findNavController().navigate(action)
         }
         catch(e :Exception) {
-            Toast.makeText(context, "Hours must be numeric", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Durasi harus angka!", Toast.LENGTH_SHORT).show()
         }
     }
 

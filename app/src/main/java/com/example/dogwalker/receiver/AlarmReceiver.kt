@@ -29,11 +29,11 @@ class AlarmReceiver : BroadcastReceiver() {
         var body = intent.extras.getString("body")
 
         if(title == "") {
-            title = "Time to walk the dog"
+            title = "Waktunya menjalankan anjing!"
         }
 
         if(body == "") {
-            body = "Walk the dog now sir!"
+            body = "Jangan lupa menjalankan anjing."
         }
 
         val intent = Intent(context, WalkerDashboardActivity::class.java)

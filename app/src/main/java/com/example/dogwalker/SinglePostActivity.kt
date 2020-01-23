@@ -97,19 +97,19 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition, 
 
         singlePostViewModel.updatePostResp.observe(this, Observer {
             if(it != null && it.message == SUCCESSFUL) {
-                Toast.makeText(this, "Success update the post", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Berhasil memperbarui post", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this, "Fail to update the post", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Gagal memperbarui post", Toast.LENGTH_SHORT).show()
             }
         })
 
         singlePostViewModel.deletePostResp.observe(this, Observer {
             if(it != null && it.message == SUCCESSFUL) {
-                Toast.makeText(this, "Success delete the post", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Berhasil menghapus post", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this, "Fail to delete the post", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Gagal menghapus post", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -155,14 +155,14 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition, 
 
                 if(isMyPost) {
                     if(postId == -1) {
-                        Toast.makeText(this, "Something went wrong, please try again", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         return false
                     }
                     val newPost = NewPostFragment(this, true, postId)
                     newPost.show(supportFragmentManager, "dialog")
 
                 } else {
-                    Toast.makeText(this, "This is not your post, so update isn't allowed", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Post milik orang lain!", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
@@ -170,14 +170,14 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition, 
                 Log.d(TAG, "Delete post menu item selected")
                 if(isMyPost) {
                     if(postId == -1) {
-                        Toast.makeText(this, "Something went wrong, please try again", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         return false
                     }
                     coroutineScope.launch{
                         singlePostViewModel.deletePost(session, postId)
                     }
                 } else {
-                    Toast.makeText(this, "This is not your post, so delete isn't allowed", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "Post milik orang lain!", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
@@ -200,7 +200,7 @@ class SinglePostActivity: AppCompatActivity(), CommentFragment.CommentAddition, 
             .getString(getString(R.string.session_cache), "")
 
         if(postId == -1) {
-            Toast.makeText(this, "Unknown error, please try again", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Terjadi kesalahan, silahkan dicoba lagi", Toast.LENGTH_SHORT).show()
             return
         }
 

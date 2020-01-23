@@ -49,11 +49,11 @@ class DashboardFragment: Fragment() {
         })
 
         dashboardViewModel.ratingResponse.observe(this, Observer {
-            var message = "Success to rate the walker"
+            var message = "Berhasil menilai walker!"
             if(it != null && it.message != SUCCESSFUL) {
                 message = it.message!!
             } else if(it == null) {
-                message = "Something wrong, unknown error"
+                message = "Terjadi kesalahan!"
             }
 
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()

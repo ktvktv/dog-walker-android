@@ -119,15 +119,15 @@ class DogUpdateFragment : Fragment() {
         dogUpdateViewModel.updateDogResponse.observe(this, Observer {
             if(it != null) {
                 if (it.message == SUCCESSFUL) {
-                    Toast.makeText(context, "Success update dog", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Berhasil memperbarui data anjing!", Toast.LENGTH_SHORT).show()
 
                     activity?.finish()
                 } else {
-                    Toast.makeText(context, "Fail to update the dog\n${it.message}", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, "Gagal memperbarui data anjing\n${it.message}", Toast.LENGTH_SHORT)
                         .show()
                 }
             } else {
-                Toast.makeText(context, "Unknown error, please try again", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "Terjadi kesalahan, mohon coba lagi", Toast.LENGTH_SHORT)
                     .show()
             }
         })
@@ -135,11 +135,11 @@ class DogUpdateFragment : Fragment() {
         dogUpdateViewModel.deleteDogResponse.observe(this, Observer {
             if(it != null) {
                 if(it.message == SUCCESSFUL) {
-                    Toast.makeText(context, "Success delete dog", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Berhasil menghapus anjing", Toast.LENGTH_SHORT).show()
 
                     activity?.finish()
                 } else {
-                    Toast.makeText(context, "Fail to delete dog\n${it.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Gagal menghapus anjing\n${it.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -163,7 +163,7 @@ class DogUpdateFragment : Fragment() {
                         (Integer.parseInt(binding.monthAge.text.toString()))
             } catch (e: Exception) {
                 Log.e(TAG, "Parsing error: ${e.message}")
-                Toast.makeText(context, "Please input year and month", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Masukkan tahun dan bulan", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -296,7 +296,7 @@ class DogUpdateFragment : Fragment() {
                     //Set the picture in the page.
                     binding.dogPhoto.setImageDrawable(Drawable.createFromPath(file?.absolutePath))
                 } else {
-                    Toast.makeText(context, "Cancelled get the picture", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Batal mengambil gambar", Toast.LENGTH_SHORT).show()
                 }
             }
             else -> {}

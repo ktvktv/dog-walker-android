@@ -33,7 +33,7 @@ class WalkerUpdateInfoActivity : AppCompatActivity() {
 
         val walkerUpdateBinding = ActivityWalkerRegisterBinding.inflate(LayoutInflater.from(this))
 
-        walkerUpdateBinding.walkerRegisterTitle.text = "Update Walker"
+        walkerUpdateBinding.walkerRegisterTitle.text = "Perbarui walker"
         walkerUpdateBinding.registerButton.text = "Ubah"
 
         coroutineScope.launch {
@@ -57,14 +57,14 @@ class WalkerUpdateInfoActivity : AppCompatActivity() {
         walkerUpdateInfoViewModel.walkerUpdateResponse.observe(this, Observer {
             if(it != null) {
                 if(it.message == SUCCESSFUL) {
-                    Toast.makeText(this, "Success update walker data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Berhasil memperbarui walker", Toast.LENGTH_SHORT).show()
 
                     finish()
                 } else {
-                    Toast.makeText(this, "Fail to update walker data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Gagal memperbarui walker", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "There's unknown error, please try again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Terjadi kesalahan, silahkan coba lagi", Toast.LENGTH_SHORT).show()
             }
         })
 

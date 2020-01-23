@@ -80,7 +80,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             FirebaseDatabase.getInstance().getReference("walker/$phone/done").setValue("Yes")
 
-            Toast.makeText(this, "Transaction done", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Transaksi selesai!", Toast.LENGTH_SHORT).show()
             stopService(Intent(this, DogWalkerService::class.java))
             setResult(RESULT_OK)
             finish()
@@ -95,7 +95,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if(userType.toLowerCase() == "walker") {
             val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
             if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Tolong nyalakan GPS", Toast.LENGTH_SHORT).show()
                 finish()
             }
 
@@ -212,7 +212,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         ref.removeEventListener(locationListener)
                         Toast.makeText(
                             this@MapsActivity,
-                            "Walking session is done",
+                            "Sesi jalan selesai!",
                             Toast.LENGTH_SHORT
                         ).show()
                         setResult(RESULT_OK)
