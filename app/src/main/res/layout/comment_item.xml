@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/delius"
+        android:fontFamily="sans-serif"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/image_comment"
         app:layout_constraintStart_toStartOf="@+id/image_comment"
@@ -45,7 +45,7 @@
                 android:id="@+id/content_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/delius"
+                android:fontFamily="@font/roboto"
                 android:text="TextView" />
 
         </LinearLayout>
@@ -56,7 +56,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/delius"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/comment_scroll_view"
         app:layout_constraintStart_toStartOf="@+id/comment_scroll_view"

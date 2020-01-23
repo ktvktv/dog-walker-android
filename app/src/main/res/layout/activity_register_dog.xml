@@ -15,8 +15,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:fontFamily="@font/delius"
-                android:text="Register Your Dog"
+                android:text="Daftarkan Anjing"
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +27,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:ems="10"
-                android:fontFamily="@font/delius"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -41,8 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:fontFamily="@font/delius"
-                android:hint="Age"
+                android:hint="Umur"
                 android:inputType="textPersonName"
                 android:numeric="integer"
                 android:textAlignment="center"
@@ -57,8 +54,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:fontFamily="@font/delius"
-                android:hint="Weight"
+                android:hint="Berat"
                 android:inputType="number"
                 app:layout_constraintStart_toEndOf="@+id/view5"
                 app:layout_constraintTop_toBottomOf="@+id/name_view" />
@@ -86,28 +82,25 @@
 
                 <RadioButton
                     android:id="@+id/female_radio_button"
-                    android:layout_width="100dp"
+                    android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="32dp"
-                    android:fontFamily="@font/delius"
                     android:text="@string/female" />
 
                 <RadioButton
                     android:id="@+id/male_radio_button"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/delius"
                     android:text="@string/male" />
 
             </RadioGroup>
 
             <Button
                 android:id="@+id/register_dog_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:fontFamily="@font/delius"
-                android:text="Register Now"
+                android:text="Daftar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dog_image" />
@@ -131,8 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:fontFamily="@font/delius"
-                        android:hint="Special Needs"
+                        android:hint="Kebutuhan Khusus"
                         android:inputType="textLongMessage|textMultiLine" />
                 </LinearLayout>
             </ScrollView>
@@ -161,8 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:fontFamily="@font/delius"
-                android:text="Month"
+                android:text="Bulan"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/age_view"
                 app:layout_constraintStart_toEndOf="@+id/age_view"

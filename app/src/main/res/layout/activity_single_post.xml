@@ -25,7 +25,6 @@
                 android:id="@+id/name_post_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/delius"
                 tools:text="Kevin Tigravictor"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/profile_post"
@@ -41,7 +40,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="16dp"
-                android:background="#F8E7DF"
+                android:background="#fed39f"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_text">
@@ -55,7 +54,6 @@
                         android:id="@+id/content_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/delius"
                         android:inputType="textLongMessage|textMultiLine" />
                 </LinearLayout>
             </ScrollView>
@@ -65,7 +63,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/delius"
                 tools:text="Why dog walking is important?"
                 android:inputType="textLongMessage|textMultiLine"
                 android:textSize="18sp"
@@ -95,7 +92,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="#F8E7DF"
+                android:background="#f6eec9"
                 app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,8 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/delius"
-                android:text="Comment"
+                android:text="Komen"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

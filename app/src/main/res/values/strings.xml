@@ -2,7 +2,7 @@
     <string name="app_name">Dog Walker Indonesia</string>
 
     <!-- LoginRequest -->
-    <string name="login_description">Enter your registered phone number and password</string>
+    <string name="login_description">Masukkan nomor telepon dan kata sandi yang terdaftar</string>
     <string name="login_button">Login</string>
     <string name="register_button">Daftar</string>
 
@@ -15,25 +15,25 @@
 
     <!--Registration-->
     <string name="register_invitation">Belum daftar?</string>
-    <string name="register_title">Registration</string>
-    <string name="name">Name</string>
-    <string name="gender">Gender</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
+    <string name="register_title">Registrasi</string>
+    <string name="name">Nama</string>
+    <string name="gender">Jenis Kelamin</string>
+    <string name="male">Laki - laki</string>
+    <string name="female">Perempuan</string>
     <string name="email">Email</string>
     <string name="nik">NIK</string>
-    <string name="address">Address</string>
+    <string name="address">Alamat</string>
     <string name="password">Kata Sandi</string>
     <string name="phone_number">Nomor Telepon</string>
-    <string name="birthplace">Birthplace</string>
-    <string name="birth_date">Birth date</string>
+    <string name="birthplace">Tempat Lahir</string>
+    <string name="birth_date">Tanggal Lahir</string>
     <string name="kg">Kg</string>
     <string name="km">Km</string>
     <string name="hr">Jam</string>
     <string name="rp">Rp/Jam</string>
 
 
-    <string name="notification_text">Tracking, tap to cancel</string>
+    <string name="notification_text">Tracking, penced untuk membatalkan</string>
     <string name="transport_id" translatable="false">123</string>
     <string name="firebase_path" translatable="false">locations</string>
     <string name="firebase_email" translatable="false">kevintigravictor30@gmail.com</string>
@@ -45,7 +45,7 @@
     <string name="negative_permission">Cancel</string>
 
     <!-- Info Page -->
-    <string name="profile_button">Profile</string>
-    <string name="role_button">Change Role</string>
+    <string name="profile_button">Profil</string>
+    <string name="role_button">Ubah Peran</string>
 
 </resources>

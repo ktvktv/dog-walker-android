@@ -28,6 +28,7 @@
                 android:layout_marginBottom="24dp"
                 android:clickable="true"
                 android:src="@drawable/ic_add_circle_black_24dp"
+                app:backgroundTint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />

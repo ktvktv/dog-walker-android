@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="#0A0A3C"
+    android:background="#af460f"
     android:minWidth="250dp"
     android:minHeight="200dp">
 
@@ -13,8 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/delius"
-        android:text="Comment"
+        android:text="Komen"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Your comment"
+                android:hint="Komentar..."
                 android:inputType="textLongMessage|textMultiLine|textPersonName"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF" />
