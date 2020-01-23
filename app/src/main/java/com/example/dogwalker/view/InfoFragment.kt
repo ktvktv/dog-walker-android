@@ -155,9 +155,6 @@ class InfoFragment : Fragment() {
                     val imgUri = userData.userImageUrl.toUri().buildUpon().scheme("https").build()
                     val imageView = binding.userPicture
 
-                    Log.d(TAG, "UserImageURL A: ${userData.userImageUrl}")
-                    Log.d(TAG, "URI: $imgUri")
-
                     Glide.with(imageView.context)
                         .load(imgUri)
                         .apply(RequestOptions.skipMemoryCacheOf(true))

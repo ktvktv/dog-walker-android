@@ -86,8 +86,6 @@ class UserUpdateFragment : Fragment() {
                     val imgUri = it.body.userImageUrl.toUri().buildUpon().scheme("https").build()
                     val imageView = binding.userProfileImage
 
-                    Log.d(TAG, "User Image: $imgUri")
-
                     Glide.with(imageView.context)
                         .load(imgUri)
                         .apply(RequestOptions.skipMemoryCacheOf(true))

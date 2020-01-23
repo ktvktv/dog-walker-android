@@ -77,34 +77,43 @@ class DogUpdateFragment : Fragment() {
                 breedAdapter.addAll(it)
                 binding.spinner.adapter = breedAdapter
 
-                binding.spinner.setSelection(listDog[currentPage.value!!].breedId!!)
+                if(!listDog.isEmpty()) {
+                    binding.spinner.setSelection(listDog[currentPage.value!!].breedId!!)
+                }
             }
         })
 
         dogUpdateViewModel.listDogResponse.observe(this, Observer {
             if(it != null && it.message == SUCCESSFUL && it.body != null) {
                 listDog = it.body
+                if(listDog.isEmpty()) {
+                    binding.dogUpdateConstraint.visibility = View.GONE
+                }
                 currentPage.value = 0
             }
         })
 
         currentPage.observe(this, Observer {
-            when (it) {
-                0 -> {
-                    binding.previousButton.visibility = View.GONE
-                    binding.nextButton.visibility = View.VISIBLE
+            if(listDog.isNotEmpty()) {
+                when (it) {
+                    0 -> {
+                        binding.previousButton.visibility = View.GONE
+                        binding.nextButton.visibility = View.VISIBLE
+                    }
+                    (listDog.size - 1) -> {
+                        binding.nextButton.visibility = View.GONE
+                        binding.previousButton.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        binding.nextButton.visibility = View.VISIBLE
+                        binding.previousButton.visibility = View.VISIBLE
+                    }
                 }
-                (listDog.size-1) -> {
-                    binding.nextButton.visibility = View.GONE
-                    binding.previousButton.visibility = View.VISIBLE
-                }
-                else -> {
-                    binding.nextButton.visibility = View.VISIBLE
-                    binding.previousButton.visibility = View.VISIBLE
-                }
-            }
 
-            setData()
+                Log.d(TAG, "TEST")
+
+                setData()
+            }
         })
 
         dogUpdateViewModel.updateDogResponse.observe(this, Observer {
@@ -117,6 +126,9 @@ class DogUpdateFragment : Fragment() {
                     Toast.makeText(context, "Fail to update the dog\n${it.message}", Toast.LENGTH_SHORT)
                         .show()
                 }
+            } else {
+                Toast.makeText(context, "Unknown error, please try again", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
 
@@ -165,7 +177,7 @@ class DogUpdateFragment : Fragment() {
                     gender = gender,
                     photo = null,
                     id = listDog[currentPage.value!!].id
-                ), file, binding.spinner.id+1)
+                ), file, binding.spinner.selectedItemPosition+1)
             }
         }
 
@@ -180,11 +192,13 @@ class DogUpdateFragment : Fragment() {
 
     private fun setData() {
         Log.d(TAG, "current page now: ${currentPage.value}")
+
         val currentPage = currentPage.value as Int
         binding.dog = listDog[currentPage]
 
-        if(listDog[currentPage].photo != null && listDog[currentPage].photo != "") {
-            val imgUri = listDog[currentPage].photo!!.toUri().buildUpon().scheme("https").build()
+        if (listDog[currentPage].photo != null && listDog[currentPage].photo != "") {
+            val imgUri =
+                listDog[currentPage].photo!!.toUri().buildUpon().scheme("https").build()
             val imageView = binding.dogPhoto
 
             Glide.with(imageView.context)
@@ -194,7 +208,7 @@ class DogUpdateFragment : Fragment() {
                 .into(imageView)
         }
 
-        if(listDog[currentPage].gender.toLowerCase() == "male") {
+        if (listDog[currentPage].gender.toLowerCase() == "male") {
             binding.maleRadio.isChecked = true
             binding.femaleRadio.isChecked = false
         } else {
@@ -204,8 +218,8 @@ class DogUpdateFragment : Fragment() {
 
         val age = listDog[currentPage].age
 
-        binding.yearAge.setText("${age/12}")
-        binding.monthAge.setText("${age%12}")
+        binding.yearAge.setText("${age / 12}")
+        binding.monthAge.setText("${age % 12}")
 
         Log.d(TAG, "SPINNER SELECTED, BreedID: ${listDog[currentPage].breedId!!}")
         binding.spinner.setSelection(listDog[currentPage].breedId!!)
@@ -276,6 +290,8 @@ class DogUpdateFragment : Fragment() {
 
                     //Get the file from the device
                     file = getBitmapFile(data) ?: return
+
+                    Log.d(TAG, "Path: ${file?.absolutePath}")
 
                     //Set the picture in the page.
                     binding.dogPhoto.setImageDrawable(Drawable.createFromPath(file?.absolutePath))

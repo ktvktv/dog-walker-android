@@ -15,6 +15,7 @@
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dog_update_constraint"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -35,8 +36,8 @@
                 android:layout_marginTop="48dp"
                 android:ems="10"
                 android:hint="@string/name"
-                android:text="@{dog.name}"
                 android:inputType="textPersonName"
+                android:text="@{dog.name}"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -119,9 +120,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:text="@{dog.specialNeeds}"
                     android:hint="Special Needs"
-                    android:inputType="textLongMessage|textMultiLine" />
+                    android:inputType="textLongMessage|textMultiLine"
+                    android:text="@{dog.specialNeeds}" />
             </ScrollView>
 
             <ImageView
@@ -131,6 +132,7 @@
                 android:layout_marginStart="16dp"
                 android:background="#000000"
                 android:src="@drawable/ic_previous"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -142,6 +144,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="#000000"
                 android:src="@drawable/ic_tracker"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/previous_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/previous_button" />
