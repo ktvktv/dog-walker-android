@@ -22,7 +22,8 @@ class DateFragment(val textView: TextView) : DialogFragment(), DatePickerDialog.
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
         val m = if(month < 10) "0${month+1}" else "${month+1}"
-        textView.text = "$day-$m-$year"
+        val d = if(day < 10) "0${day}" else "${day+1}"
+        textView.text = "$d-$m-$year"
     }
 
 }

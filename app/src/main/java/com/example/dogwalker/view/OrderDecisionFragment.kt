@@ -70,7 +70,7 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
                 orderDecisionViewModel.changeStatus(
                     session, TransactionStatus(
                         notifyData.transactionId,
-                        APPROVED
+                        "diterima"
                     )
                 )
 

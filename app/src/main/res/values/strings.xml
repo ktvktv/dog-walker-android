@@ -33,7 +33,7 @@
     <string name="rp">Rp/Jam</string>
 
 
-    <string name="notification_text">Tracking, penced untuk membatalkan</string>
+    <string name="notification_text">Melacak, pencet untuk membatalkan</string>
     <string name="transport_id" translatable="false">123</string>
     <string name="firebase_path" translatable="false">locations</string>
     <string name="firebase_email" translatable="false">kevintigravictor30@gmail.com</string>

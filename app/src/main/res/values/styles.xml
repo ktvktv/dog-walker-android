@@ -13,8 +13,4 @@
 <!--        <item name="android:hint">@style/def</item>-->
     </style>
 
-    <style name="def" parent="android:Widget">
-        <item name="android:fontFamily">@font/raleway</item>
-    </style>
-
 </resources>
