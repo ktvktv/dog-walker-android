@@ -59,7 +59,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         CoroutineScope(Job() + Dispatchers.Main).launch {
             val resp = DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(session, TransactionStatus(
-                    id, "ONGOING"
+                    id, "Sedang Berjalan"
                 ))!!.await()
 
             Log.d(TAG, "$resp")

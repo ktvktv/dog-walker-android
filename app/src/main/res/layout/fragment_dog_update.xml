@@ -120,7 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Special Needs"
+                    android:hint="Kebutuhan spesial"
                     android:inputType="textLongMessage|textMultiLine"
                     android:text="@{dog.specialNeeds}" />
             </ScrollView>
@@ -176,7 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Year"
+                android:text="Tahun"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/year_age"
                 app:layout_constraintStart_toEndOf="@+id/year_age"
@@ -187,7 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Month"
+                android:text="Bulan"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/month_age"
                 app:layout_constraintStart_toEndOf="@+id/month_age"
