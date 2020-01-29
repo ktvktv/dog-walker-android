@@ -119,8 +119,6 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
 
         view.no_button.setOnClickListener {
             coroutineScope.launch {
-                orderDecisionViewModel.rejectTransaction(session, notifyData.transactionId)
-
                 if(type.toLowerCase() == "customer") {
                     ongoingOrderViewModel.getListOrder(session)
                 } else {
@@ -134,6 +132,8 @@ class OrderDecisionFragment(val notifyData: NotifyData, val ongoingOrderViewMode
                     "",
                     notifyData.transactionId
                 ))
+
+                orderDecisionViewModel.rejectTransaction(session, notifyData.transactionId)
 
                 dismiss()
             }
