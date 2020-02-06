@@ -95,18 +95,23 @@ class DogUpdateFragment : Fragment() {
 
         currentPage.observe(this, Observer {
             if(listDog.isNotEmpty()) {
-                when (it) {
-                    0 -> {
-                        binding.previousButton.visibility = View.GONE
-                        binding.nextButton.visibility = View.VISIBLE
-                    }
-                    (listDog.size - 1) -> {
-                        binding.nextButton.visibility = View.GONE
-                        binding.previousButton.visibility = View.VISIBLE
-                    }
-                    else -> {
-                        binding.nextButton.visibility = View.VISIBLE
-                        binding.previousButton.visibility = View.VISIBLE
+                if(listDog.size == 1) {
+                    binding.previousButton.visibility = View.GONE
+                    binding.nextButton.visibility = View.GONE
+                } else {
+                    when (it) {
+                        0 -> {
+                            binding.previousButton.visibility = View.GONE
+                            binding.nextButton.visibility = View.VISIBLE
+                        }
+                        (listDog.size - 1) -> {
+                            binding.nextButton.visibility = View.GONE
+                            binding.previousButton.visibility = View.VISIBLE
+                        }
+                        else -> {
+                            binding.nextButton.visibility = View.VISIBLE
+                            binding.previousButton.visibility = View.VISIBLE
+                        }
                     }
                 }
 
