@@ -10,19 +10,21 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.dogwalker.data.Notification
 import com.example.dogwalker.data.TransactionStatus
+import com.example.dogwalker.databinding.ActivityMapsBinding
 import com.example.dogwalker.network.DogWalkerServiceApi
 import com.example.dogwalker.service.DogWalkerService
 import com.example.dogwalker.view.OngoingOrderFragment
+import com.example.dogwalker.viewmodel.MapsViewModel
+import com.example.dogwalker.viewmodel.ViewModelFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.*
@@ -45,24 +47,47 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var phone: String
     private var firstTime: Boolean = true
 
+    private val mapsViewModel by lazy {
+        ViewModelProviders.of(this, ViewModelFactory()).get(MapsViewModel::class.java)
+    }
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main)
+
     companion object Constants {
         val PHONE_EXTRA = "phone"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maps)
+
+        val mapsBinding = ActivityMapsBinding.inflate(LayoutInflater.from(this))
+
+        val id = intent.extras.getInt("id")
+
+        val sharedPreferences = getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
+
+        val session = sharedPreferences.getString(getString(R.string.session_cache), "")
+        val type = sharedPreferences.getString(getString(R.string.type_cache), "")
+
+        coroutineScope.launch {
+            mapsViewModel.getDetailData(session, id)
+        }
+
+        mapsViewModel.detailData.observe(this, Observer {
+            if(it != null) {
+                mapsBinding.nameText.text = it.name
+                mapsBinding.addressText.text = it.address
+                mapsBinding.dateText.text = it.walkDate
+                mapsBinding.durationText.text = "${it.duration} Jam"
+                mapsBinding.priceText.text = "Rp. ${it.price}"
+            }
+        })
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val buttonView = findViewById<Button>(R.id.endWalkButton)
-        val id = intent.extras.getInt("id")
-
-        val session = getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE)
-            .getString(getString(R.string.session_cache), "")
 
         buttonView.setOnClickListener{
-            CoroutineScope(Job() + Dispatchers.Main).launch {
+            coroutineScope.launch {
                 DogWalkerServiceApi.DogWalkerService.changeTransactionStatus(
                     session, TransactionStatus(
                         id, "DONE"
@@ -122,6 +147,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment!!.getMapAsync(this)
+
+        setContentView(mapsBinding.root)
     }
 
     private fun startTrackerService() {

@@ -126,6 +126,10 @@ interface DogWalker {
     @GET("breed/")
     fun getAllBreed() : Deferred<BreedResponse>?
 
+    @GET("transaction/find/{id}")
+    fun getDetailTransaction(@Header("session") session: String,
+                             @Path("id") transactionId: Int) : Deferred<MapsDetail>?
+
     @POST("transaction/findawalker")
     fun getFilteredWalker(@Header("session") session: String,
                           @Body listWalkerRequest: ListWalkerRequest) : Deferred<ListWalkerResponse>?
