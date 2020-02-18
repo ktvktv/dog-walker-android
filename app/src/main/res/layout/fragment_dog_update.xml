@@ -81,7 +81,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/name_text"
                 app:layout_constraintStart_toStartOf="@+id/name_text"
-                app:layout_constraintTop_toBottomOf="@+id/year_age">
+                app:layout_constraintTop_toBottomOf="@+id/weight_text">
 
                 <RadioButton
                     android:id="@+id/female_radio"
@@ -192,6 +192,28 @@
                 app:layout_constraintBottom_toBottomOf="@+id/month_age"
                 app:layout_constraintStart_toEndOf="@+id/month_age"
                 app:layout_constraintTop_toTopOf="@+id/month_age" />
+
+            <EditText
+                android:id="@+id/weight_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="@+id/name_text"
+                app:layout_constraintStart_toStartOf="@+id/name_text"
+                app:layout_constraintTop_toBottomOf="@+id/year_age" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/kg"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/weight_text"
+                app:layout_constraintStart_toEndOf="@+id/weight_text"
+                app:layout_constraintTop_toTopOf="@+id/view10" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -35,29 +35,26 @@
 
             <EditText
                 android:id="@+id/age_view"
-                android:layout_width="64dp"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="Umur"
                 android:inputType="textPersonName"
                 android:numeric="integer"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@+id/view5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/name_view"
                 app:layout_constraintTop_toBottomOf="@+id/name_view" />
 
             <EditText
                 android:id="@+id/weight_view"
-                android:layout_width="64dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="Berat"
                 android:inputType="number"
-                app:layout_constraintStart_toEndOf="@+id/view5"
-                app:layout_constraintTop_toBottomOf="@+id/name_view" />
+                app:layout_constraintEnd_toEndOf="@+id/name_view"
+                app:layout_constraintStart_toStartOf="@+id/name_view"
+                app:layout_constraintTop_toBottomOf="@+id/age_view" />
 
             <ImageView
                 android:id="@+id/dog_image"
@@ -112,7 +109,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/age_view">
+                app:layout_constraintTop_toBottomOf="@+id/weight_view">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -153,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Bulan"
+                android:text="Tahun"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/age_view"
                 app:layout_constraintStart_toEndOf="@+id/age_view"
@@ -169,6 +166,27 @@
                 app:layout_constraintBottom_toBottomOf="@+id/weight_view"
                 app:layout_constraintStart_toEndOf="@+id/weight_view"
                 app:layout_constraintTop_toTopOf="@+id/weight_view" />
+
+            <EditText
+                android:id="@+id/age_month_view"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toEndOf="@+id/view5"
+                tools:layout_editor_absoluteY="163dp" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Bulan"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/age_month_view"
+                app:layout_constraintStart_toEndOf="@+id/age_month_view"
+                app:layout_constraintTop_toTopOf="@+id/age_month_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

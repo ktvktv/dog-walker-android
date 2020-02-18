@@ -155,11 +155,11 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
             return "Nama harus diisi!"
         }
 
-        if(binding.ageView.text.toString().equals("")) {
+        if(binding.ageView.text.toString().equals("") || binding.ageMonthView.text.toString().equals("")) {
             return "Umur harus diisi!"
         } else {
              try {
-                 age = Integer.parseInt(binding.ageView.text.toString())
+                 age = Integer.parseInt(binding.ageView.text.toString()) * 12 + Integer.parseInt(binding.ageMonthView.text.toString())
              } catch(e: Exception) {
                  return "Umur harus angka!"
              }

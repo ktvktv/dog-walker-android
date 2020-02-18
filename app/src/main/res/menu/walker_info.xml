@@ -4,6 +4,6 @@
 
     <item
         android:id="@+id/walker_update_menu"
-        android:icon="@drawable/ic_update_post"
+        android:icon="@drawable/pencil_edit"
         app:showAsAction="always" />
 </menu>

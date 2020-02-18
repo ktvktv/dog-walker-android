@@ -168,7 +168,16 @@ class DogUpdateFragment : Fragment() {
                         (Integer.parseInt(binding.monthAge.text.toString()))
             } catch (e: Exception) {
                 Log.e(TAG, "Parsing error: ${e.message}")
-                Toast.makeText(context, "Masukkan tahun dan bulan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Masukkan tahun dan bulan dalam angka", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            var weight = 0
+            try {
+               weight = Integer.parseInt(binding.weightText.text.toString())
+            } catch(e: Exception) {
+                Log.e(TAG, "Parsing error: ${e.message}")
+                Toast.makeText(context, "Masukkan berat dalam angka", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -181,6 +190,7 @@ class DogUpdateFragment : Fragment() {
                     name = name,
                     gender = gender,
                     photo = null,
+                    weight = weight,
                     id = listDog[currentPage.value!!].id
                 ), file, binding.spinner.selectedItemPosition+1)
             }
