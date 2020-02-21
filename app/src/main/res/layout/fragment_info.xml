@@ -25,7 +25,9 @@
                 android:layout_height="150dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/border"
                 android:src="@drawable/profile_picture"
+                app:layout_constraintBottom_toBottomOf="@id/phone_info_text"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@drawable/profile_picture" />
@@ -34,7 +36,6 @@
                 android:id="@+id/info_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_marginTop="24dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -47,10 +48,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:text="@{user.name}"
                 app:layout_constraintStart_toEndOf="@+id/user_picture"
-                app:layout_constraintTop_toTopOf="@+id/user_picture"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Kevin Tigravictor" />
 
             <TextView
@@ -75,12 +76,11 @@
 
             <ImageView
                 android:id="@+id/gender_info_image"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toEndOf="@+id/role_info_text"
-                app:layout_constraintTop_toBottomOf="@+id/nik_edit_text"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="@id/nik_edit_text"
+                app:layout_constraintEnd_toEndOf="@id/user_picture"
+                app:layout_constraintStart_toStartOf="@id/user_picture"
                 tools:srcCompat="@drawable/male_icon" />
 
             <TextView
@@ -107,15 +107,17 @@
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/raleway_semibold"
                 android:text="Daftar Anjing"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/role_info_text"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/role_info_text" />
+                app:layout_constraintEnd_toEndOf="@id/progressBar"
+                app:layout_constraintStart_toStartOf="@id/progressBar"
+                app:layout_constraintTop_toBottomOf="@id/nik_edit_text" />
 
             <Button
                 android:id="@+id/change_info_button"
+                style="@style/Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="100dp"
@@ -132,9 +134,8 @@
                 android:text="@{user.type}"
                 android:textColor="@android:color/background_light"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/gender_info_image"
-                app:layout_constraintStart_toStartOf="@+id/nik_edit_text"
-                app:layout_constraintTop_toTopOf="@+id/gender_info_image"
+                app:layout_constraintEnd_toStartOf="@id/textView17"
+                app:layout_constraintTop_toTopOf="@id/textView17"
                 tools:text="Customer" />
 
             <ImageView
@@ -149,12 +150,14 @@
 
             <Button
                 android:id="@+id/register_walker_button"
-                android:layout_width="wrap_content"
+                style="@style/Button"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/register_button"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="@id/update_button"
+                app:layout_constraintStart_toStartOf="@id/update_button"
+                app:layout_constraintTop_toBottomOf="@id/walker_registration_text" />
 
             <TextView
                 android:id="@+id/nik_edit_text"
@@ -170,22 +173,24 @@
                 android:id="@+id/walker_registration_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/raleway_semibold"
                 android:text="Mau jadi walker?"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toTopOf="@+id/register_walker_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/update_button" />
 
             <Button
                 android:id="@+id/update_button"
+                style="@style/Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="perbarui"
-                app:layout_constraintEnd_toEndOf="@+id/user_picture"
-                app:layout_constraintStart_toStartOf="@+id/user_picture"
-                app:layout_constraintTop_toBottomOf="@+id/user_picture" />
+                app:layout_constraintEnd_toEndOf="@id/progressBar"
+                app:layout_constraintStart_toStartOf="@id/progressBar"
+                app:layout_constraintTop_toBottomOf="@id/info_recycler_view" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

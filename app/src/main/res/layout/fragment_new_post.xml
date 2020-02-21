@@ -14,9 +14,11 @@
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Post"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:text="Buat Postingan"
         android:textColor="#FFFFFF"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,9 +53,9 @@
 
     <Button
         android:id="@+id/post_ok_button"
+        style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#343875"
         android:text="@android:string/ok"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/post_cancel_button"
@@ -64,10 +66,10 @@
 
     <Button
         android:id="@+id/post_cancel_button"
+        style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="#343875"
         android:text="batal"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"

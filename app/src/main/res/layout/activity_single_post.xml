@@ -13,24 +13,26 @@
 
             <ImageView
                 android:id="@+id/profile_post"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="175dp"
+                android:background="@drawable/border"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_text"
                 app:srcCompat="@drawable/profile_picture" />
 
             <TextView
                 android:id="@+id/name_post_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Kevin Tigravictor"
-                android:textSize="24sp"
+                android:layout_marginStart="20dp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/profile_post"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/profile_post"
-                app:layout_constraintTop_toTopOf="@+id/profile_post" />
+                app:layout_constraintStart_toEndOf="@id/profile_post"
+                app:layout_constraintTop_toTopOf="@id/profile_post"
+                tools:text="Kevin Tigravictor" />
 
             <ScrollView
                 android:id="@+id/scrollView2"
@@ -38,12 +40,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="#fed39f"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_text">
+                app:layout_constraintTop_toBottomOf="@id/profile_post">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,12 +65,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                tools:text="Why dog walking is important?"
+                android:fontFamily="@font/raleway_semibold"
                 android:inputType="textLongMessage|textMultiLine"
-                android:textSize="18sp"
+                android:textAlignment="center"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_post" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Why dog walking is important?" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/floatingActionButton"
@@ -106,7 +110,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Komen"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Komentar"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

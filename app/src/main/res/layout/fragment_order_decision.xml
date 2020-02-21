@@ -13,17 +13,18 @@
         android:id="@+id/description_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_image"
-        tools:text="Edward choose you!"/>
+        tools:text="Edward choose you!" />
 
     <ImageView
         android:id="@+id/user_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="36dp"
+        android:background="@drawable/border"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,9 +42,10 @@
 
     <Button
         android:id="@+id/ok_button"
+        style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:text="Terima"
         app:layout_constraintEnd_toStartOf="@+id/view4"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +53,7 @@
 
     <Button
         android:id="@+id/no_button"
+        style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tolak"

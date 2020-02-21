@@ -5,12 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="300dp">
 
+    <View
+        android:id="@+id/view11"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#af460f"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/profile_order_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="180dp"
+        android:background="@drawable/border"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profile_picture" />
@@ -20,9 +31,11 @@
         style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:isIndicator="true"
         android:numStars="5"
+        android:progressTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -33,6 +46,8 @@
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#fed39f"
         app:layout_constraintBottom_toTopOf="@+id/rating_bar_order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -52,10 +67,10 @@
         android:id="@+id/name_order_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="40dp"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/profile_order_image"
         app:layout_constraintStart_toEndOf="@+id/profile_order_image"
         app:layout_constraintTop_toTopOf="@+id/profile_order_image"
         tools:text="Kevin Tigravictor" />
@@ -69,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="@+id/name_order_text"
         app:layout_constraintStart_toStartOf="@+id/name_order_text"
         app:layout_constraintTop_toBottomOf="@+id/name_order_text"
-        tools:text="+6281290001998"/>
+        tools:text="+6281290001998" />
 
     <ImageView
         android:id="@+id/next_button"

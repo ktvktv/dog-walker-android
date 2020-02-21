@@ -53,7 +53,7 @@ class DashboardActivity: AppCompatActivity() {
         tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewPager))
 
         //If user type is customer then there're 4 page, including order a walker
-        tabLayout.getTabAt(0)?.setIcon(R.drawable.man_user)
+        tabLayout.getTabAt(0)?.setIcon(R.drawable.profile_picture)
         tabLayout.getTabAt(1)?.setIcon(R.drawable.man_carry_dog)
         tabLayout.getTabAt(2)?.setIcon(R.drawable.order)
         tabLayout.getTabAt(3)?.setIcon(R.drawable.post_it)

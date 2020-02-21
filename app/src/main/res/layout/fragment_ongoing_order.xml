@@ -20,7 +20,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ongoing_order_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="550dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -29,8 +29,9 @@
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:fontFamily="@font/raleway_semibold"
                     android:text="Daftar Pesanan Belum Selesai"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toTopOf="@+id/ongoing_order_recycler"

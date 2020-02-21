@@ -10,41 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
-        android:background="#df8543">
-
-        <ImageView
-            android:id="@+id/image_post"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile_picture" />
+        android:background="#D2691E">
 
         <TextView
-            android:id="@+id/name_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:textColor="@android:color/background_light"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/image_post"
-            app:layout_constraintEnd_toStartOf="@+id/imageView4"
-            app:layout_constraintStart_toEndOf="@+id/image_post"
-            app:layout_constraintTop_toTopOf="@+id/image_post"
-            tools:text="Kevin Tigravictor" />
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="41dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="16dp"
+            android:id="@+id/title_view"
+            android:layout_width="359dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/raleway_bold"
+            android:gravity="center_horizontal|center_vertical"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/paw_print_64"
-            tools:srcCompat="@drawable/paw_print_64" />
+            tools:text="Why dog walking is healthy?" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,21 +35,22 @@
         android:layout_weight="9">
 
         <TextView
-            android:id="@+id/title_view"
+            android:id="@+id/name_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Why dog walking is healthy?" />
+            android:layout_marginStart="24dp"
+            android:fontFamily="@font/raleway_semibold"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/image_post"
+            app:layout_constraintStart_toEndOf="@id/image_post"
+            app:layout_constraintTop_toTopOf="@id/image_post"
+            tools:text="Kevin Tigravictor" />
 
         <ScrollView
             android:id="@+id/description_scroll"
             android:layout_width="359dp"
-            android:layout_height="100dp"
+            android:layout_height="122dp"
+            android:background="#fed39f"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,9 +71,21 @@
                     app:autoSizeTextType="uniform"
                     app:layout_constraintHorizontal_bias="0.0"
                     tools:layout_editor_absoluteY="74dp"
-                    tools:text="Dog walking is healty...." />
+                    tools:text="Dog walking is healthy...." />
             </LinearLayout>
         </ScrollView>
+
+        <ImageView
+            android:id="@+id/image_post"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="150dp"
+            android:background="@drawable/border"
+            app:layout_constraintBottom_toTopOf="@id/description_scroll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile_picture" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

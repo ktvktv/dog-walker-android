@@ -32,6 +32,7 @@
 
         <Button
             android:id="@+id/dog_dashboard_image"
+            style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/female_icon"

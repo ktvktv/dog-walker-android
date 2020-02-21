@@ -89,6 +89,7 @@
 
         <Button
             android:id="@+id/order_detail_button"
+            style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -103,6 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
+            android:fontFamily="@font/raleway_semibold"
             android:text="Detail Pesanan"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"

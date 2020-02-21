@@ -24,16 +24,18 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="24dp"
+                android:background="@drawable/border"
+                android:tint="#3C3C3C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/profile_picture" />
+                app:srcCompat="@drawable/dog_profile" />
 
             <EditText
                 android:id="@+id/name_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="32dp"
                 android:ems="10"
                 android:hint="@string/name"
                 android:inputType="textPersonName"
@@ -102,6 +104,7 @@
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="@+id/radioGroup4"
                 app:layout_constraintStart_toStartOf="@+id/radioGroup4"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup4" />
@@ -111,6 +114,7 @@
                 android:layout_width="250dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="16dp"
+                android:background="#fed39f"
                 app:layout_constraintEnd_toEndOf="@+id/spinner"
                 app:layout_constraintStart_toStartOf="@+id/spinner"
                 app:layout_constraintTop_toBottomOf="@+id/spinner">
@@ -151,24 +155,24 @@
 
             <Button
                 android:id="@+id/update_button"
+                style="@style/Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
                 android:text="perbarui"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/view10"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/scrollView6"
                 app:layout_constraintTop_toBottomOf="@+id/scrollView6" />
 
             <Button
                 android:id="@+id/delete_button"
+                style="@style/Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hapus"
                 app:layout_constraintBottom_toBottomOf="@+id/update_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/view10"
+                app:layout_constraintEnd_toEndOf="@id/scrollView6"
                 app:layout_constraintTop_toTopOf="@+id/update_button" />
 
             <TextView
@@ -193,27 +197,28 @@
                 app:layout_constraintStart_toEndOf="@+id/month_age"
                 app:layout_constraintTop_toTopOf="@+id/month_age" />
 
-            <EditText
-                android:id="@+id/weight_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:inputType="number"
-                app:layout_constraintEnd_toEndOf="@+id/name_text"
-                app:layout_constraintStart_toStartOf="@+id/name_text"
-                app:layout_constraintTop_toBottomOf="@+id/year_age" />
-
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/kg"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/weight_text"
-                app:layout_constraintStart_toEndOf="@+id/weight_text"
-                app:layout_constraintTop_toTopOf="@+id/view10" />
+                app:layout_constraintBottom_toBottomOf="@id/textView35"
+                app:layout_constraintStart_toEndOf="@+id/month_age"
+                app:layout_constraintTop_toTopOf="@id/weight_text" />
+
+            <EditText
+                android:id="@+id/weight_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Berat(Kg)"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="@id/month_age"
+                app:layout_constraintStart_toStartOf="@+id/name_text"
+                app:layout_constraintTop_toBottomOf="@+id/year_age" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
