@@ -170,12 +170,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp"
                 android:progressTint="@color/colorAccent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/max_dog_weight_walker_text" />
+                app:layout_constraintTop_toBottomOf="@+id/scrollView7" />
 
             <TextView
                 android:id="@+id/pricing_walker_text"
@@ -209,6 +207,23 @@
                 app:layout_constraintEnd_toEndOf="@+id/rating_walker"
                 app:layout_constraintStart_toStartOf="@+id/rating_walker"
                 app:layout_constraintTop_toBottomOf="@+id/rating_walker" />
+
+            <ScrollView
+                android:id="@+id/scrollView7"
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/max_dog_weight_walker_text">
+
+                <TextView
+                    android:id="@+id/description_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+            </ScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

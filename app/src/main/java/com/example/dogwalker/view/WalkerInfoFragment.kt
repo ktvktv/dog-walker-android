@@ -119,6 +119,7 @@ class WalkerInfoFragment : Fragment() {
                 binding.maxDogWeightWalkerText.text = "Berat anjing maksimal: ${it.maxDogSize} kg"
                 binding.maxDurationWalkerText.text = "Maksimal durasi jalan: ${it.walkDuration} jam"
                 binding.pricingWalkerText.text = "Harga: Rp. ${it.pricing}/jam"
+                binding.descriptionText.text = it.description
 
                 binding.ratingWalker.rating = rating.toFloat()
             }

@@ -20,8 +20,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/WalkerUpdateInfoActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/WalkerUpdateInfoActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/WalkerInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/WalkerInfoFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_walker_info.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_walker_info.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,20 +78,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/DogUpdateFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1965">
-              <caret line="170" column="35" selection-start-line="170" selection-start-column="35" selection-end-line="170" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/WalkerInfoFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="143" column="50" selection-start-line="143" selection-start-column="50" selection-end-line="143" selection-end-column="50" />
+            <state relative-caret-position="216">
+              <caret line="95" column="49" lean-forward="true" selection-start-line="95" selection-start-column="49" selection-end-line="95" selection-end-column="49" />
+              <folding>
+                <element signature="e#36#1063#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -119,8 +114,14 @@
           <provider editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_single_post.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+          <provider editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_walker_info.xml">
           <provider selected="true" editor-type-id="android-designer2" />
           <provider editor-type-id="text-editor" />
         </entry>
@@ -169,7 +170,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>binding</find>
       <find>walker/get</find>
       <find>weightView</find>
       <find>weight</find>
@@ -199,6 +199,7 @@
       <find>session</find>
       <find>transaction/find</find>
       <find>ageView</find>
+      <find>fragmentWalkerInfoB</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -207,7 +208,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_post_update.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_new_post.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/data/Post.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/PostFragment.kt" />
@@ -227,7 +227,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/adapter/PostViewAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/adapter/ListOrderAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/SinglePostActivity.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/WalkerInfoFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/OrderDetailActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/RatingFragment.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/UserUpdateFragment.kt" />
@@ -258,6 +257,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/menu/walker_info.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/WalkerUpdateInfoActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_single_post.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_walker_info.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/WalkerInfoFragment.kt" />
       </list>
     </option>
   </component>
@@ -273,8 +274,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -291,6 +290,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -394,6 +394,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -548,9 +549,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" sideWeight="0.5048309" side_tool="true" weight="0.24177396" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49516907" visible="true" weight="0.19241774" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49516907" visible="true" weight="0.2360515" />
       <window_info id="Structure" order="2" sideWeight="0.5048309" side_tool="true" weight="0.24177396" />
       <window_info id="Favorites" order="3" sideWeight="0.5048309" side_tool="true" weight="0.24177396" />
       <window_info id="Build Variants" order="4" sideWeight="0.5048309" side_tool="true" weight="0.24177396" />
@@ -633,12 +635,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml">
       <provider selected="true" editor-type-id="android-designer2" />
@@ -853,10 +855,6 @@
       <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_walker_info.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_walker_order.xml">
       <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
@@ -881,13 +879,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1965">
           <caret line="170" column="35" selection-start-line="170" selection-start-column="35" selection-end-line="170" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/WalkerInfoFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="143" column="50" selection-start-line="143" selection-start-column="50" selection-end-line="143" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -931,6 +922,20 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_single_post.xml">
       <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_walker_info.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/dogwalker/view/WalkerInfoFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="95" column="49" lean-forward="true" selection-start-line="95" selection-start-column="49" selection-end-line="95" selection-end-column="49" />
+          <folding>
+            <element signature="e#36#1063#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
