@@ -22,10 +22,9 @@
         android:id="@+id/dog_name_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dog_image_info"
         app:layout_constraintTop_toTopOf="@+id/dog_image_info"
         tools:text="Darren Cavell" />
@@ -34,23 +33,20 @@
         android:id="@+id/dog_age_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/view9"
+        app:layout_constraintStart_toStartOf="@+id/dog_name_info"
         app:layout_constraintTop_toBottomOf="@+id/dog_name_info"
-        tools:text="20" />
+        tools:text="20 bulan" />
 
     <ImageView
         android:id="@+id/gender_info"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dog_age_info"
-        app:layout_constraintStart_toEndOf="@+id/view9"
-        app:layout_constraintTop_toTopOf="@+id/dog_age_info"
-        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/breed_info"
+        app:layout_constraintTop_toBottomOf="@+id/breed_info"
         tools:srcCompat="@tools:sample/avatars" />
 
     <View
@@ -64,11 +60,19 @@
         android:id="@+id/breed_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Akita"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/dog_name_info"
-        app:layout_constraintStart_toStartOf="@+id/dog_name_info"
+        app:layout_constraintStart_toStartOf="@+id/weight_text"
+        app:layout_constraintTop_toBottomOf="@+id/weight_text" />
+
+    <TextView
+        android:id="@+id/weight_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/dog_age_info"
         app:layout_constraintTop_toBottomOf="@+id/dog_age_info" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

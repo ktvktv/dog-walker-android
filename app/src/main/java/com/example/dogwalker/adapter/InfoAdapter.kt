@@ -43,7 +43,8 @@ class InfoAdapter(var listData: List<Dog>, val context: Context) : RecyclerView.
         }
 
         holder.itemView.dog_name_info.text = listData[position].name
-        holder.itemView.dog_age_info.text = listData[position].age.toString()
+        holder.itemView.dog_age_info.text = "${listData[position].age} bulan"
+        holder.itemView.weight_text.text = "${listData[position].weight} Kilogram"
         holder.itemView.breed_info.text = listData[position].breedName
 
         if(listData[position].gender.toLowerCase() == "male") {
