@@ -174,7 +174,7 @@ class DogUpdateFragment : Fragment() {
 
             var weight = 0
             try {
-               weight = Integer.parseInt(binding.weightText.text.toString())
+               weight = Integer.parseInt(binding.dogWeightText.text.toString())
             } catch(e: Exception) {
                 Log.e(TAG, "Parsing error: ${e.message}")
                 Toast.makeText(context, "Masukkan berat dalam angka", Toast.LENGTH_SHORT).show()

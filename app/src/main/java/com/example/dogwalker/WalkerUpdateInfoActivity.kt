@@ -53,7 +53,7 @@ class WalkerUpdateInfoActivity : AppCompatActivity() {
                 walkerUpdateBinding.maxDistanceText.setText(data.travelDistance.toString())
                 walkerUpdateBinding.maxDurationText.setText(data.walkDuration.toString())
                 walkerUpdateBinding.pricingText.setText(data.pricing.toString())
-                walkerUpdateBinding.weightText.setText(data.maxDogSize.toString())
+                walkerUpdateBinding.dogWeightText.setText(data.maxDogSize.toString())
             }
         })
 
@@ -136,7 +136,7 @@ class WalkerUpdateInfoActivity : AppCompatActivity() {
         walkerUpdateBinding.registerButton.setOnClickListener {
             var maxDogSize: Int
             try {
-                maxDogSize = Integer.parseInt(walkerUpdateBinding.weightText.text.toString())
+                maxDogSize = Integer.parseInt(walkerUpdateBinding.dogWeightText.text.toString())
             } catch(e: Exception) {
                 Log.e(TAG, "Parse error, err: ${e.message}")
                 e.printStackTrace()

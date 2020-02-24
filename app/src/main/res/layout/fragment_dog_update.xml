@@ -82,7 +82,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/name_text"
                 app:layout_constraintStart_toStartOf="@+id/name_text"
-                app:layout_constraintTop_toBottomOf="@+id/weight_text">
+                app:layout_constraintTop_toBottomOf="@+id/dog_weight_text">
 
                 <RadioButton
                     android:id="@+id/female_radio"
@@ -202,12 +202,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/kg"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@id/weight_text"
+                app:layout_constraintBottom_toBottomOf="@id/dog_weight_text"
                 app:layout_constraintStart_toStartOf="@id/textView35"
-                app:layout_constraintTop_toTopOf="@id/weight_text" />
+                app:layout_constraintTop_toTopOf="@id/dog_weight_text" />
 
             <EditText
-                android:id="@+id/weight_text"
+                android:id="@+id/dog_weight_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

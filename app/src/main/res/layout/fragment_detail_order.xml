@@ -3,122 +3,175 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/walker_picture_detail"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="36dp"
-            app:layout_constraintEnd_toStartOf="@+id/view8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView32"
-            tools:srcCompat="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/dog_picture_detail"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            app:layout_constraintBottom_toBottomOf="@+id/walker_picture_detail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/view8"
-            app:layout_constraintTop_toTopOf="@+id/walker_picture_detail"
-            tools:srcCompat="@tools:sample/avatars" />
+            <ImageView
+                android:id="@+id/walker_picture_detail"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="36dp"
+                app:layout_constraintEnd_toStartOf="@+id/view8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView32"
+                tools:srcCompat="@tools:sample/avatars" />
 
-        <View
-            android:id="@+id/view8"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/dog_picture_detail"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                app:layout_constraintBottom_toBottomOf="@+id/walker_picture_detail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view8"
+                app:layout_constraintTop_toTopOf="@+id/walker_picture_detail"
+                tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/walker_name_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/walker_picture_detail"
-            app:layout_constraintStart_toStartOf="@+id/walker_picture_detail"
-            app:layout_constraintTop_toBottomOf="@+id/walker_picture_detail" />
+            <View
+                android:id="@+id/view8"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/dog_name_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/dog_picture_detail"
-            app:layout_constraintStart_toStartOf="@+id/dog_picture_detail"
-            app:layout_constraintTop_toBottomOf="@+id/dog_picture_detail" />
+            <TextView
+                android:id="@+id/walker_name_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/walker_picture_detail"
+                app:layout_constraintStart_toStartOf="@+id/walker_picture_detail"
+                app:layout_constraintTop_toBottomOf="@+id/walker_picture_detail" />
 
-        <TextView
-            android:id="@+id/address_detail_order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/walker_name_detail" />
+            <TextView
+                android:id="@+id/dog_name_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/dog_picture_detail"
+                app:layout_constraintStart_toStartOf="@+id/dog_picture_detail"
+                app:layout_constraintTop_toBottomOf="@+id/dog_picture_detail" />
 
-        <TextView
-            android:id="@+id/date_order_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/address_detail_order"
-            app:layout_constraintStart_toStartOf="@+id/address_detail_order"
-            app:layout_constraintTop_toBottomOf="@+id/address_detail_order" />
+            <TextView
+                android:id="@+id/address_detail_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dog_special_need_text" />
 
-        <TextView
-            android:id="@+id/total_price_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/date_order_text"
-            app:layout_constraintStart_toStartOf="@+id/date_order_text"
-            app:layout_constraintTop_toBottomOf="@+id/date_order_text" />
+            <TextView
+                android:id="@+id/date_order_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/address_detail_order"
+                app:layout_constraintStart_toStartOf="@+id/address_detail_order"
+                app:layout_constraintTop_toBottomOf="@+id/address_detail_order" />
 
-        <Button
-            android:id="@+id/order_detail_button"
-            style="@style/Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Pesan Sekarang"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/total_price_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/date_order_text"
+                app:layout_constraintStart_toStartOf="@+id/date_order_text"
+                app:layout_constraintTop_toBottomOf="@+id/date_order_text" />
 
-        <TextView
-            android:id="@+id/textView32"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:fontFamily="@font/raleway_semibold"
-            android:text="Detail Pesanan"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/order_detail_button"
+                style="@style/Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="16dp"
+                android:text="Pesan Sekarang"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/hour_text" />
 
-        <TextView
-            android:id="@+id/hour_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/total_price_text"
-            app:layout_constraintStart_toStartOf="@+id/total_price_text"
-            app:layout_constraintTop_toBottomOf="@+id/total_price_text" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="Detail Pesanan"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/hour_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/total_price_text"
+                app:layout_constraintStart_toStartOf="@+id/total_price_text"
+                app:layout_constraintTop_toBottomOf="@+id/total_price_text" />
+
+            <TextView
+                android:id="@+id/dog_age_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/dog_name_detail"
+                app:layout_constraintStart_toStartOf="@+id/dog_name_detail"
+                app:layout_constraintTop_toBottomOf="@+id/dog_name_detail" />
+
+            <TextView
+                android:id="@+id/dog_weight_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/dog_age_text"
+                app:layout_constraintStart_toStartOf="@+id/dog_age_text"
+                app:layout_constraintTop_toBottomOf="@+id/dog_age_text" />
+
+            <TextView
+                android:id="@+id/dog_special_need_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/dog_weight_text"
+                app:layout_constraintStart_toStartOf="@+id/dog_weight_text"
+                app:layout_constraintTop_toBottomOf="@+id/dog_weight_text" />
+
+            <TextView
+                android:id="@+id/walker_phone_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/walker_name_detail"
+                app:layout_constraintStart_toStartOf="@+id/walker_name_detail"
+                app:layout_constraintTop_toBottomOf="@+id/walker_name_detail" />
+
+            <TextView
+                android:id="@+id/walker_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/walker_phone_text"
+                app:layout_constraintStart_toStartOf="@+id/walker_phone_text"
+                app:layout_constraintTop_toBottomOf="@+id/walker_phone_text" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

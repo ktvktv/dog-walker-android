@@ -77,6 +77,12 @@ class OrderDetailActivity : AppCompatActivity() {
                         .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                         .into(imageView)
                 }
+
+                binding.dogAgeText.text = "${data.age} bulan"
+                binding.dogWeightText.text = "${data.weight} kilogram"
+                if(data.specialNeeds != null) {
+                    binding.dogSpecialNeedText.text = "Kebutuhan khusus: ${data.specialNeeds}"
+                }
             }
         })
 
@@ -97,7 +103,9 @@ class OrderDetailActivity : AppCompatActivity() {
                     }
 
                     binding.addressDetailOrder.text = it.address
-                    binding.totalPriceText.text = "Rp. ${it.pricing * hours}"
+                    binding.totalPriceText.text = "Harga: Rp. ${it.pricing * hours}"
+                    binding.walkerPhoneText.text = "Telepon: ${it.phoneNumber}"
+                    binding.walkerPrice.text = "Harga/Jam: ${it.pricing}"
                 }
             })
         } else {
@@ -115,6 +123,8 @@ class OrderDetailActivity : AppCompatActivity() {
                             .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                             .into(imageView)
                     }
+
+                    binding.walkerPhoneText.text = "Telepon: ${it.body?.phoneNumber}"
 
                     binding.addressDetailOrder.text = it.body?.address
                 }

@@ -23,7 +23,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/weight_text"
+                android:id="@+id/dog_weight_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -44,9 +44,9 @@
                 android:hint="Maksimal Jarak"
                 android:inputType="textPersonName"
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@+id/weight_text"
-                app:layout_constraintStart_toStartOf="@+id/weight_text"
-                app:layout_constraintTop_toBottomOf="@+id/weight_text" />
+                app:layout_constraintEnd_toEndOf="@+id/dog_weight_text"
+                app:layout_constraintStart_toStartOf="@+id/dog_weight_text"
+                app:layout_constraintTop_toBottomOf="@+id/dog_weight_text" />
 
             <EditText
                 android:id="@+id/max_duration_text"
@@ -122,9 +122,9 @@
                 android:layout_marginStart="8dp"
                 android:text="@string/kg"
                 android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/weight_text"
-                app:layout_constraintStart_toEndOf="@+id/weight_text"
-                app:layout_constraintTop_toTopOf="@+id/weight_text" />
+                app:layout_constraintBottom_toBottomOf="@+id/dog_weight_text"
+                app:layout_constraintStart_toEndOf="@+id/dog_weight_text"
+                app:layout_constraintTop_toTopOf="@+id/dog_weight_text" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -167,9 +167,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:tint="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/weight_text"
+                app:layout_constraintBottom_toBottomOf="@+id/dog_weight_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/weight_text"
+                app:layout_constraintTop_toTopOf="@+id/dog_weight_text"
                 app:srcCompat="@drawable/ic_info" />
 
             <ImageView

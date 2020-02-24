@@ -128,7 +128,7 @@ class RegisterWalkerActivity : AppCompatActivity() {
 
         var maxDogSize: Int
         try {
-            maxDogSize = binding.weightText.text.toString().toInt()
+            maxDogSize = binding.dogWeightText.text.toString().toInt()
         } catch(e: Exception) {
             Toast.makeText(this, "Berat anjing harus angka!", Toast.LENGTH_SHORT).show()
             return null

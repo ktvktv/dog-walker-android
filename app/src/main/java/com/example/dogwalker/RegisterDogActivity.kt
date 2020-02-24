@@ -136,7 +136,7 @@ class RegisterDogActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
                             weight = weight,
                             gender = gender,
                             name = binding.nameView.text.toString(),
-                            specialNeeds = binding.specialNeedText.text.toString(),
+                            specialNeeds = binding.dogSpecialNeedText.text.toString(),
                             photo = null
                         ), file!!, session
                     )
