@@ -42,7 +42,6 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:numeric="integer"
-                android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="@+id/name_view"
                 app:layout_constraintTop_toBottomOf="@+id/name_view" />
 
@@ -64,7 +63,6 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/border"
-                android:tint="#3C3C3C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/breed_spinner_view"
@@ -137,8 +135,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/colorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/name_view"
+                app:layout_constraintStart_toStartOf="@id/name_view"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
             <View
