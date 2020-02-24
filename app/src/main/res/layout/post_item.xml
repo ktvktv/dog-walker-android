@@ -32,7 +32,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9">
+        android:layout_weight="9"
+        android:background="#f6eec9">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/description_scroll"
+            app:layout_constraintEnd_toEndOf="@id/description_scroll"
+            app:layout_constraintStart_toStartOf="@id/description_scroll"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/name_view"
@@ -50,7 +61,6 @@
             android:id="@+id/description_scroll"
             android:layout_width="359dp"
             android:layout_height="122dp"
-            android:background="#fed39f"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

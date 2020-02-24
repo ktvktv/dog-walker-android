@@ -78,10 +78,10 @@ class OrderDetailActivity : AppCompatActivity() {
                         .into(imageView)
                 }
 
-                binding.dogAgeText.text = "${data.age} bulan"
+                binding.dogAgeText.text = "${data.age} Bulan"
                 binding.dogWeightText.text = "${data.weight} kilogram"
                 if(data.specialNeeds != null) {
-                    binding.dogSpecialNeedText.text = "Kebutuhan khusus: ${data.specialNeeds}"
+                    binding.dogSpecialNeedText.text = "${data.specialNeeds}"
                 }
             }
         })
@@ -104,14 +104,20 @@ class OrderDetailActivity : AppCompatActivity() {
 
                     binding.addressDetailOrder.text = it.address
                     binding.totalPriceText.text = "Harga: Rp. ${it.pricing * hours}"
-                    binding.walkerPhoneText.text = "Telepon: ${it.phoneNumber}"
-                    binding.walkerPrice.text = "Harga/Jam: ${it.pricing}"
+                    binding.walkerPhoneText.text = "${it.phoneNumber}"
+                    binding.walkerPrice.text = "${it.pricing}/ Jam"
+                    binding.walkerEmailText.text = "${it.email}"
                 }
             })
         } else {
             orderDetailView.customerResponse.observe(this, Observer{
                 if(it != null && it.message == SUCCESSFUL) {
+                    Log.d(TAG, "Message: ${it.body}")
+                    Log.d(TAG, "Phone Number: ${it.body?.phoneNumber}")
                     binding.walkerNameDetail.text = it.body?.name
+                    binding.walkerPhoneText.text = it.body?.phoneNumber
+                    binding.addressDetailOrder.text = it.body?.address
+                    binding.walkerEmailText.text = it.body?.email
 
                     if (it.body?.userImageUrl != null) {
                         val imgUri = it.body?.userImageUrl!!.toUri().buildUpon().scheme("https").build()
@@ -123,10 +129,6 @@ class OrderDetailActivity : AppCompatActivity() {
                             .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                             .into(imageView)
                     }
-
-                    binding.walkerPhoneText.text = "Telepon: ${it.body?.phoneNumber}"
-
-                    binding.addressDetailOrder.text = it.body?.address
                 }
             })
 
